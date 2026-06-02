@@ -66,8 +66,8 @@ export default function Footer() {
 
       <style>{`
         .footer-section {
-          background-color: #f8fafc;
-          border-top: 1px solid var(--border-color);
+          background-color: var(--bg-dark);
+          border-top: 2px solid var(--border-dark);
           padding: 4.5rem 1.5rem 2rem 1.5rem;
           width: 100%;
         }
@@ -91,13 +91,13 @@ export default function Footer() {
           font-family: var(--font-display);
           font-size: 1.25rem;
           font-weight: 800;
-          color: var(--text-primary);
+          color: var(--text-white);
           letter-spacing: -0.02em;
         }
 
         .footer-summary {
           font-size: 0.9rem;
-          color: var(--text-secondary);
+          color: rgba(254, 252, 248, 0.75);
           line-height: 1.6;
         }
 
@@ -112,19 +112,19 @@ export default function Footer() {
           width: 2rem;
           height: 2rem;
           border-radius: var(--radius-sm);
-          border: 1px solid var(--border-heavy);
+          border: 1px solid rgba(254, 252, 248, 0.35);
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--text-secondary);
+          color: rgba(254, 252, 248, 0.75);
           transition: all 0.2s ease;
-          background-color: var(--bg-secondary);
+          background-color: transparent;
         }
 
         .social-btn:hover {
-          color: var(--text-primary);
-          border-color: var(--text-primary);
-          background-color: var(--bg-primary);
+          color: var(--text-white);
+          border-color: var(--text-white);
+          background-color: rgba(254, 252, 248, 0.08);
         }
 
         .footer-links-grid {
@@ -145,7 +145,7 @@ export default function Footer() {
           font-weight: 700;
           text-transform: uppercase;
           letter-spacing: 0.08em;
-          color: var(--text-primary);
+          color: var(--text-white);
         }
 
         .group-list {
@@ -157,16 +157,16 @@ export default function Footer() {
         }
 
         .group-list a {
-          color: var(--text-secondary);
+          color: rgba(254, 252, 248, 0.7);
           transition: color 0.15s ease;
         }
 
         .group-list a:hover {
-          color: var(--text-primary);
+          color: var(--text-white);
         }
 
         .footer-copyright-bar {
-          border-top: 1px solid var(--border-color);
+          border-top: 1px solid rgba(254, 252, 248, 0.15);
           padding-top: 1.5rem;
           width: 100%;
         }
@@ -178,7 +178,7 @@ export default function Footer() {
           align-items: center;
           justify-content: space-between;
           font-size: 0.75rem;
-          color: var(--text-muted);
+          color: rgba(254, 252, 248, 0.6);
         }
 
         .system-status-indicators {
@@ -190,12 +190,12 @@ export default function Footer() {
         }
 
         .status-val {
-          color: var(--brand-secondary);
+          color: var(--brand-accent);
           font-weight: 700;
         }
 
         .refresh-val {
-          color: var(--text-secondary);
+          color: rgba(254, 252, 248, 0.7);
           font-weight: 600;
         }
 

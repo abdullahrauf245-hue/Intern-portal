@@ -83,7 +83,7 @@ export default function Profile() {
           </div>
 
           <Link to={`/submit-review?company=${company.id}`} className="write-review-hero-btn">
-            Write a Review
+            Submit Review
           </Link>
         </div>
 
@@ -92,10 +92,10 @@ export default function Profile() {
       {/* QUICK ACTIONS */}
       <div className="quick-actions-strip">
         <button className="strip-action-btn">
-          <Save size={16} /> Save Company
+          <Save size={16} /> Save Dossier
         </button>
         <button className="strip-action-btn">
-          <BarChart2 size={16} /> Compare Stats
+          <BarChart2 size={16} /> Compare Signals
         </button>
       </div>
 
@@ -209,7 +209,7 @@ export default function Profile() {
           {/* Intern Feedback Reviews List */}
           <div className="reviews-section-block">
             <div className="reviews-header-row">
-              <h3 className="details-card-title">Intern Feedback</h3>
+              <h3 className="details-card-title">Intern Reports</h3>
               <div className="reviews-sorting">
                 <select className="reviews-sorting-dropdown">
                   <option>Most Recent</option>
@@ -276,7 +276,7 @@ export default function Profile() {
                   <HelpCircle size={32} className="empty-feedback-icon" />
                   <p>No feedback reports have been submitted for {company.name} yet.</p>
                   <Link to={`/submit-review?company=${company.id}`} className="btn btn-primary" style={{ marginTop: "1rem" }}>
-                    Be the First to Review
+                    Be the First to Submit
                   </Link>
                 </div>
               )}
@@ -284,7 +284,7 @@ export default function Profile() {
 
             {company.reviews.length > 0 && (
               <button className="load-more-reviews-btn">
-                Load More Reviews
+                Load More Reports
               </button>
             )}
 
@@ -353,7 +353,7 @@ export default function Profile() {
 
           {/* Rating Pulse Graph widget */}
           <div className="widget-card">
-            <h4 className="widget-card-title">Rating Pulse (12mo)</h4>
+            <h4 className="widget-card-title">12-Month Pulse</h4>
             
             <div className="pulse-graph-box">
               <ResponsiveContainer width="100%" height={120}>
@@ -1063,6 +1063,153 @@ export default function Profile() {
             gap: 1.25rem;
             padding: 1.5rem;
           }
+        }
+
+        /* Editorial + brutalist overrides */
+        .profile-hero-header {
+          border-bottom: 2px solid var(--text-primary);
+          padding-bottom: 1.5rem;
+        }
+
+        .company-profile-logo-avatar {
+          border: 1px solid var(--text-primary);
+        }
+
+        .overall-pulse-score-box {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .pulse-label {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          color: var(--text-muted);
+        }
+
+        .write-review-hero-btn {
+          background-color: var(--brand-primary);
+          border: 1px solid var(--brand-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          font-size: 0.7rem;
+        }
+
+        .write-review-hero-btn:hover {
+          background-color: var(--brand-secondary);
+        }
+
+        .strip-action-btn {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 0.7rem;
+        }
+
+        .core-stats-deck {
+          background-color: var(--bg-secondary);
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-lg);
+          color: var(--text-primary);
+        }
+
+        .deck-card-header {
+          color: var(--text-muted);
+        }
+
+        .deck-card-context-badge {
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 0.6rem;
+        }
+
+        .details-card-block,
+        .reviews-section-block {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .smart-insight-callout {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          background-color: var(--bg-primary);
+        }
+
+        .reviews-sorting-dropdown {
+          color: var(--brand-primary);
+        }
+
+        .reviewer-avatar {
+          border: 1px solid var(--text-primary);
+          background-color: var(--bg-primary);
+        }
+
+        .skill-badge-tag {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .load-more-reviews-btn {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          font-size: 0.7rem;
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .widget-card {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .bg-emerald-light-card {
+          background-color: var(--brand-light-green);
+          border-color: var(--text-primary);
+        }
+
+        .status-pulsing-indicator {
+          background-color: var(--brand-accent);
+          box-shadow: 0 0 0 4px rgba(27, 124, 90, 0.2);
+        }
+
+        .hiring-status-label {
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          color: var(--brand-primary);
+        }
+
+        .apply-company-site-btn {
+          background-color: var(--brand-primary);
+          border: 1px solid var(--brand-primary);
+          border-radius: var(--radius-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          font-size: 0.7rem;
+        }
+
+        .apply-company-site-btn:hover {
+          background-color: var(--brand-secondary);
+        }
+
+        .widget-card-title {
+          border-bottom: 2px solid var(--text-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 0.75rem;
+        }
+
+        .peer-compare-item {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .peer-compare-item:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: var(--shadow-sm);
         }
       `}</style>
     </div>

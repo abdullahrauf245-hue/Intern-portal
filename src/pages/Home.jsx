@@ -20,43 +20,68 @@ export default function Home() {
       
       {/* HERO SECTION */}
       <section className="hero-section">
-        <div className="hero-content">
-          <div className="live-status-capsule">
-            <span className="pulse-dot"></span>
-            LIVE DATA FROM 2,400+ COMPANIES
-          </div>
-          
-          <h1 className="hero-headline">
-            Precision Analytics for <br />
-            <span className="highlight-text">Next-Gen Careers</span>
-          </h1>
-          
-          <p className="hero-subheadline">
-            Transparent, data-driven insights into the world's leading internship programs. 
-            Make your next move with total confidence.
-          </p>
-
-          <form onSubmit={handleSearchSubmit} className="search-form-wrapper">
-            <div className="search-input-box">
-              <Search className="search-input-icon" size={18} />
-              <input 
-                type="text" 
-                placeholder="Search by company, role, or location"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="hero-search-input"
-              />
+        <div className="hero-grid">
+          <div className="hero-left">
+            <div className="hero-stamp">
+              <span className="stamp-dot"></span>
+              VERIFIED REPORTS FROM 2,400+ COMPANIES
             </div>
-            <button type="submit" className="hero-search-btn">
-              SEARCH DATA
-            </button>
-          </form>
+            
+            <h1 className="hero-headline">
+              The Internship Index for <span className="highlight-text">Modern Careers</span>
+            </h1>
+            
+            <p className="hero-subheadline">
+              Verified compensation, culture signals, and return-offer patterns. Built for students who want receipts, not slogans.
+            </p>
 
-          <div className="trending-queries-bar">
-            <span className="trending-label">TRENDING:</span>
-            <Link to="/browse?q=Quant" className="trend-tag">Quant Research</Link>
-            <Link to="/browse?q=Product" className="trend-tag">Product Design</Link>
-            <Link to="/browse?q=AI" className="trend-tag">AI Ethics</Link>
+            <form onSubmit={handleSearchSubmit} className="search-form-wrapper">
+              <div className="search-input-box">
+                <Search className="search-input-icon" size={18} />
+                <input 
+                  type="text" 
+                  placeholder="Search by company, role, or location"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="hero-search-input"
+                />
+              </div>
+              <button type="submit" className="hero-search-btn">
+                SEARCH INDEX
+              </button>
+            </form>
+
+            <div className="trending-queries-bar">
+              <span className="trending-label">POPULAR QUERIES</span>
+              <Link to="/browse?q=Quant" className="trend-tag">Quant Research</Link>
+              <Link to="/browse?q=Product" className="trend-tag">Product Design</Link>
+              <Link to="/browse?q=AI" className="trend-tag">AI Ethics</Link>
+            </div>
+          </div>
+
+          <div className="hero-right">
+            <div className="hero-ledger-card">
+              <div className="ledger-kicker">INDEX BRIEF</div>
+              <div className="ledger-row">
+                <span className="ledger-label">Median stipend</span>
+                <span className="ledger-value">$6.4k/mo</span>
+              </div>
+              <div className="ledger-row">
+                <span className="ledger-label">Return offer median</span>
+                <span className="ledger-value">81%</span>
+              </div>
+              <div className="ledger-row">
+                <span className="ledger-label">Reports per year</span>
+                <span className="ledger-value">15k+</span>
+              </div>
+              <div className="ledger-footnote">Updated 2 minutes ago</div>
+            </div>
+
+            <div className="hero-cutout-card">
+              <div className="cutout-title">Sector focus</div>
+              <div className="cutout-tags">Tech, Finance, Design</div>
+              <Link to="/browse" className="cutout-cta">Browse the directory</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -65,8 +90,8 @@ export default function Home() {
       <section className="intelligence-hub-section">
         <div className="section-header">
           <div>
-            <h2 className="section-title">Intelligence Hub</h2>
-            <p className="section-subtitle">Curated segments based on high-fidelity user reports.</p>
+            <h2 className="section-title">Curated Index</h2>
+            <p className="section-subtitle">Editorial groupings based on verified intern reports.</p>
           </div>
           <Link to="/browse" className="view-sectors-link">
             VIEW ALL SECTORS <ArrowRight size={16} />
@@ -79,9 +104,9 @@ export default function Home() {
             <div className="card-icon-box bg-blue">
               <Star size={20} className="icon-blue" />
             </div>
-            <h3 className="card-title">Top Rated</h3>
+            <h3 className="card-title">Highest Rated</h3>
             <p className="card-desc">
-              Programs with 4.8+ satisfaction scores from verifiable participants.
+              Programs with 4.8+ satisfaction scores from verified participants.
             </p>
             <div className="card-footer-visual">
               <div className="avatars-group">
@@ -98,9 +123,9 @@ export default function Home() {
             <div className="card-icon-box bg-emerald-dark">
               <DollarSign size={20} className="icon-emerald" />
             </div>
-            <h3 className="card-title text-white">High Stipend</h3>
+            <h3 className="card-title text-white">Top Compensation</h3>
             <p className="card-desc text-muted">
-              Competitive packages exceeding industry standards for top talent.
+              Packages that clear the upper quartile across major sectors.
             </p>
             <div className="card-footer-visual">
               <span className="stipend-pill">AVG $9,500 / MO</span>
@@ -112,7 +137,7 @@ export default function Home() {
             <div className="card-icon-box bg-purple">
               <Globe size={20} className="icon-purple" />
             </div>
-            <h3 className="card-title">Remote Friendly</h3>
+            <h3 className="card-title">Remote Ready</h3>
             <p className="card-desc">
               Global opportunities offering full flexibility and digital-first cultures.
             </p>
@@ -130,9 +155,9 @@ export default function Home() {
         <div className="methodology-container">
           
           <div className="methodology-text-column">
-            <h2 className="methodology-title">The InternPulse Methodology</h2>
+            <h2 className="methodology-title">Methodology and Verification</h2>
             <p className="methodology-desc">
-              We don't just aggregate listings. We verify, analyze, and benchmark every data point to provide the most precise internship index available today.
+              We do not just aggregate listings. We verify, analyze, and benchmark every data point to keep the index precise and honest.
             </p>
             
             <div className="methodology-points">
@@ -185,7 +210,7 @@ export default function Home() {
             <div className="real-time-pulse-widget">
               <span className="live-pulse-ring"></span>
               <div className="pulse-widget-content">
-                <div className="widget-label">Real-time Pulse</div>
+                <div className="widget-label">Recent Update</div>
                 <div className="widget-value">Updated 2 minutes ago</div>
               </div>
             </div>
@@ -196,7 +221,7 @@ export default function Home() {
 
       {/* PARTNERSHIP GRADES */}
       <section className="partnerships-section">
-        <span className="partnership-intro">DATA TRUSTED BY STUDENTS FROM</span>
+        <span className="partnership-intro">TRUSTED BY STUDENTS FROM</span>
         <div className="partnerships-logos-row">
           <span className="uni-logo">Stanford</span>
           <span className="uni-logo">MIT</span>
@@ -758,6 +783,444 @@ export default function Home() {
           .partnerships-logos-row {
             flex-wrap: wrap;
             gap: 1.5rem;
+          }
+        }
+
+        /* Editorial + brutalist overrides */
+        .hero-section {
+          padding: 0 1rem;
+        }
+
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1.1fr 0.9fr;
+          gap: 2.5rem;
+          background-color: var(--bg-secondary);
+          border: 1px solid var(--text-primary);
+          box-shadow: var(--shadow-lg);
+          padding: 2.75rem;
+          position: relative;
+          overflow: hidden;
+          animation: riseIn 0.6s ease both;
+        }
+
+        .hero-grid::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: repeating-linear-gradient(
+            135deg,
+            rgba(11, 19, 43, 0.05) 0,
+            rgba(11, 19, 43, 0.05) 1px,
+            transparent 1px,
+            transparent 10px
+          );
+          opacity: 0.5;
+          pointer-events: none;
+        }
+
+        .hero-left,
+        .hero-right {
+          position: relative;
+          z-index: 1;
+        }
+
+        .hero-left {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .hero-stamp {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          border: 1px solid var(--text-primary);
+          background-color: var(--brand-light-green);
+          padding: 0.35rem 0.7rem;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          width: fit-content;
+        }
+
+        .stamp-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: var(--radius-full);
+          background-color: var(--brand-accent);
+          box-shadow: 0 0 0 4px rgba(27, 124, 90, 0.12);
+        }
+
+        .hero-headline {
+          font-size: 3.15rem;
+          font-weight: 800;
+          line-height: 1.05;
+          letter-spacing: -0.03em;
+          max-width: 28rem;
+        }
+
+        .highlight-text {
+          font-style: italic;
+          color: var(--brand-primary);
+        }
+
+        .hero-subheadline {
+          font-size: 1rem;
+          color: var(--text-secondary);
+          line-height: 1.6;
+          max-width: 32rem;
+          margin-bottom: 0;
+        }
+
+        .search-form-wrapper {
+          display: flex;
+          align-items: center;
+          background-color: var(--bg-secondary);
+          border: 2px solid var(--text-primary);
+          box-shadow: var(--shadow-md);
+          border-radius: var(--radius-sm);
+          overflow: hidden;
+          width: 100%;
+          max-width: 36rem;
+          height: 3.25rem;
+          margin-bottom: 0;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .search-form-wrapper:focus-within {
+          transform: translate(-2px, -2px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .search-input-box {
+          display: flex;
+          align-items: center;
+          flex: 1;
+          padding: 0 1rem;
+          gap: 0.65rem;
+          height: 100%;
+        }
+
+        .search-input-icon {
+          color: var(--text-muted);
+          margin-right: 0;
+        }
+
+        .hero-search-input {
+          border: none;
+          outline: none;
+          width: 100%;
+          font-size: 0.95rem;
+          color: var(--text-primary);
+          background-color: transparent;
+        }
+
+        .hero-search-btn {
+          background-color: var(--brand-primary);
+          color: var(--text-white);
+          font-weight: 700;
+          font-size: 0.7rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          padding: 0 1.5rem;
+          height: 100%;
+          border-left: 2px solid var(--text-primary);
+        }
+
+        .hero-search-btn:hover {
+          background-color: var(--brand-secondary);
+        }
+
+        .trending-queries-bar {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          font-size: 0.7rem;
+        }
+
+        .trending-label {
+          color: var(--text-muted);
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          font-size: 0.65rem;
+          text-transform: uppercase;
+        }
+
+        .trend-tag {
+          color: var(--text-primary);
+          border: 1px solid var(--text-primary);
+          background-color: var(--bg-secondary);
+          padding: 0.2rem 0.6rem;
+          border-radius: var(--radius-sm);
+          font-weight: 600;
+          font-size: 0.7rem;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          box-shadow: var(--shadow-sm);
+          transition: all 0.2s ease;
+        }
+
+        .trend-tag:hover {
+          background-color: var(--brand-primary);
+          color: var(--text-white);
+        }
+
+        .hero-right {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .hero-ledger-card {
+          background-color: var(--bg-dark);
+          color: var(--text-white);
+          border: 1px solid var(--border-dark);
+          border-radius: var(--radius-sm);
+          padding: 1.75rem;
+          box-shadow: var(--shadow-lg);
+        }
+
+        .ledger-kicker {
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(254, 252, 248, 0.65);
+          margin-bottom: 0.75rem;
+        }
+
+        .ledger-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-top: 1px dashed rgba(254, 252, 248, 0.2);
+          padding: 0.75rem 0;
+          font-size: 0.9rem;
+        }
+
+        .ledger-label {
+          color: rgba(254, 252, 248, 0.65);
+        }
+
+        .ledger-value {
+          font-weight: 700;
+          color: var(--text-white);
+        }
+
+        .ledger-footnote {
+          font-size: 0.7rem;
+          color: rgba(254, 252, 248, 0.6);
+          margin-top: 0.5rem;
+        }
+
+        .hero-cutout-card {
+          background-color: var(--bg-secondary);
+          border: 2px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          padding: 1.5rem;
+          box-shadow: var(--shadow-md);
+        }
+
+        .cutout-title {
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--text-muted);
+        }
+
+        .cutout-tags {
+          font-size: 1.1rem;
+          font-family: var(--font-display);
+          margin-top: 0.35rem;
+        }
+
+        .cutout-cta {
+          margin-top: 0.75rem;
+          font-size: 0.7rem;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          display: inline-flex;
+          border-bottom: 2px solid var(--text-primary);
+        }
+
+        .section-header {
+          border-bottom: 2px solid var(--text-primary);
+        }
+
+        .view-sectors-link {
+          font-size: 0.7rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          border-bottom: 2px solid var(--text-primary);
+          padding-bottom: 0.25rem;
+        }
+
+        .view-sectors-link:hover {
+          color: var(--brand-primary);
+          border-color: var(--brand-primary);
+        }
+
+        .hub-card {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .hub-card:hover {
+          transform: translate(-3px, -3px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon-box {
+          border: 1px solid var(--text-primary);
+        }
+
+        .bg-blue { background-color: var(--brand-light-blue); }
+        .icon-blue { color: var(--text-primary); }
+        .bg-emerald-dark { background-color: rgba(27, 124, 90, 0.1); }
+        .icon-emerald { color: var(--brand-accent); }
+        .bg-purple { background-color: rgba(75, 15, 31, 0.12); }
+        .icon-purple { color: var(--brand-primary); }
+
+        .program-count-badge {
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--text-primary);
+        }
+
+        .dark-hub-card {
+          background-color: var(--bg-dark);
+          border-color: var(--border-dark);
+        }
+
+        .stipend-pill {
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          background-color: rgba(254, 252, 248, 0.08);
+          color: rgba(254, 252, 248, 0.8);
+          padding: 0.35rem 0.7rem;
+          border-radius: var(--radius-sm);
+          border: 1px solid rgba(254, 252, 248, 0.2);
+        }
+
+        .remote-status-indicator {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          border: 1px solid var(--text-primary);
+          padding: 0.2rem 0.45rem;
+          border-radius: var(--radius-sm);
+          color: var(--text-primary);
+        }
+
+        .globe-inline-icon {
+          color: var(--brand-primary);
+        }
+
+        .methodology-container {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+          background-color: var(--bg-secondary);
+        }
+
+        .methodology-text-column {
+          background-color: var(--bg-secondary);
+          border: 1px solid var(--text-primary);
+          padding: 2rem;
+          box-shadow: var(--shadow-sm);
+        }
+
+        .methodology-point {
+          padding-top: 1rem;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .point-icon-wrapper {
+          background-color: var(--brand-light-blue);
+          color: var(--text-primary);
+          border: 1px solid var(--text-primary);
+        }
+
+        .point-title {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .stats-cards-wrapper {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          background-color: var(--bg-primary);
+        }
+
+        .stat-label {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .real-time-pulse-widget {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .live-pulse-ring {
+          background-color: var(--brand-accent);
+          box-shadow: 0 0 0 6px rgba(27, 124, 90, 0.12);
+        }
+
+        .widget-label {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .partnerships-section {
+          border-top: 2px solid var(--text-primary);
+          border-bottom: none;
+          align-items: flex-start;
+        }
+
+        .partnership-intro {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .partnerships-logos-row {
+          gap: 1rem;
+        }
+
+        .uni-logo {
+          font-size: 0.7rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--text-primary);
+          border: 1px solid var(--text-primary);
+          padding: 0.35rem 0.75rem;
+          background-color: var(--bg-secondary);
+        }
+
+        @keyframes riseIn {
+          from {
+            opacity: 0;
+            transform: translateY(12px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @media (max-width: 980px) {
+          .hero-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

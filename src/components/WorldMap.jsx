@@ -24,7 +24,7 @@ export default function WorldMap({ isGlobal, hotspots }) {
           xmlns="http://www.w3.org/2000/svg"
         >
           {/* Custom Stylized Landmass Paths (Vector Representation of World Continents) */}
-          <g fill="#1e293b" opacity="0.15" stroke="#334155" strokeWidth="0.5">
+          <g fill="#0b132b" opacity="0.08" stroke="#0b132b" strokeWidth="0.5">
             {/* North America */}
             <path d="M 80,100 L 150,80 L 220,120 L 280,140 L 250,220 L 180,240 L 140,210 L 120,220 L 100,160 Z" />
             {/* Greenland */}
@@ -46,7 +46,7 @@ export default function WorldMap({ isGlobal, hotspots }) {
           </g>
 
           {/* Grid lines to make it look technical and high-fidelity */}
-          <g stroke="#ffffff" strokeWidth="0.25" opacity="0.08" strokeDasharray="3,3">
+          <g stroke="#0b132b" strokeWidth="0.25" opacity="0.12" strokeDasharray="3,3">
             <line x1="0" y1="125" x2="1000" y2="125" />
             <line x1="0" y1="250" x2="1000" y2="250" />
             <line x1="0" y1="375" x2="1000" y2="375" />
@@ -115,11 +115,12 @@ export default function WorldMap({ isGlobal, hotspots }) {
           width: 100%;
           height: 100%;
           min-height: 320px;
-          background-color: var(--bg-dark);
-          border-radius: var(--radius-md);
+          background-color: var(--bg-primary);
+          border-radius: var(--radius-sm);
           overflow: hidden;
           position: relative;
-          border: 1px solid var(--border-dark);
+          border: 1px solid var(--text-primary);
+          box-shadow: var(--shadow-lg);
         }
 
         .map-svg-container {
@@ -167,10 +168,10 @@ export default function WorldMap({ isGlobal, hotspots }) {
           position: absolute;
           transform: translate(-50%, -115%);
           background-color: var(--bg-secondary);
-          border: 1px solid var(--border-heavy);
+          border: 1px solid var(--text-primary);
           box-shadow: var(--shadow-lg);
           padding: 0.75rem 1rem;
-          border-radius: var(--radius-md);
+          border-radius: var(--radius-sm);
           z-index: 10;
           width: 160px;
           pointer-events: none;
@@ -211,8 +212,9 @@ export default function WorldMap({ isGlobal, hotspots }) {
           display: inline-block;
           font-size: 0.65rem;
           font-weight: 700;
-          background-color: var(--brand-light-green);
-          color: var(--brand-secondary);
+          background-color: var(--bg-primary);
+          color: var(--text-primary);
+          border: 1px solid var(--text-primary);
           padding: 0.15rem 0.4rem;
           border-radius: var(--radius-full);
           text-transform: uppercase;

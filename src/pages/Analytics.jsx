@@ -16,9 +16,9 @@ export default function Analytics() {
       
       {/* HEADER SECTION */}
       <section className="analytics-header">
-        <h1 className="analytics-title">Market Intelligence</h1>
+        <h1 className="analytics-title">Market Ledger</h1>
         <p className="analytics-subtitle">
-          Real-time intelligence on internship saturation, stipend volatility, and qualitative satisfaction across global markets.
+          High-trust signals on internship saturation, stipend volatility, and qualitative satisfaction across global markets.
         </p>
       </section>
 
@@ -48,7 +48,7 @@ export default function Analytics() {
           <div className="map-wrapper-box">
             <WorldMap isGlobal={isGlobal} hotspots={analytics.hotspots} />
             <div className="live-badge-overlay">
-              <span className="live-glow-dot"></span> LIVE SATURATION MAP
+              <span className="live-glow-dot"></span> SATURATION FEED
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function Analytics() {
           
           {/* Health Score Card */}
           <div className="health-score-card">
-            <span className="health-tag">MARKET HEALTH SCORE</span>
+            <span className="health-tag">MARKET HEALTH INDEX</span>
             <div className="health-value-block">
               <span className="health-score-num">{analytics.marketHealthScore}</span>
               <span className="health-score-denominator">/100</span>
@@ -622,6 +622,118 @@ export default function Analytics() {
           .charts-trends-grid {
             grid-template-columns: 1fr;
           }
+        }
+
+        /* Editorial + brutalist overrides */
+        .analytics-page-layout {
+          gap: 4rem;
+        }
+
+        .analytics-header {
+          border-bottom: 2px solid var(--text-primary);
+        }
+
+        .analytics-title {
+          font-size: 2.5rem;
+          letter-spacing: -0.04em;
+        }
+
+        .map-visualizer-container {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .map-toggle-buttons {
+          border: 1px solid var(--text-primary);
+          background-color: var(--bg-secondary);
+          border-radius: var(--radius-sm);
+        }
+
+        .toggle-btn {
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          font-size: 0.65rem;
+        }
+
+        .toggle-btn-active {
+          background-color: var(--brand-primary);
+          color: var(--text-white);
+          box-shadow: none;
+        }
+
+        .live-badge-overlay {
+          background-color: rgba(11, 19, 43, 0.85);
+          color: var(--text-white);
+          border: 1px solid var(--border-dark);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .live-glow-dot {
+          background-color: var(--brand-accent);
+          box-shadow: 0 0 0 4px rgba(27, 124, 90, 0.2);
+        }
+
+        .health-score-card {
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .health-tag {
+          color: rgba(255, 255, 255, 0.7);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .health-progress-bar-track {
+          background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .health-progress-bar-fill {
+          background-color: var(--brand-primary);
+        }
+
+        .industry-leaders-card,
+        .trend-chart-card,
+        .satisfaction-index-card {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .leaders-card-title {
+          border-bottom: 2px solid var(--text-primary);
+        }
+
+        .leader-icon-marker {
+          border: 1px solid var(--text-primary);
+        }
+
+        .leader-stipend-val {
+          color: var(--brand-primary);
+        }
+
+        .download-report-btn {
+          border: 1px solid var(--text-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          border-radius: var(--radius-sm);
+        }
+
+        .yoy-badge {
+          background-color: var(--bg-primary);
+          color: var(--text-primary);
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--text-primary);
+        }
+
+        .bar-score-val {
+          color: var(--brand-primary);
+        }
+
+        .bar-fill-current {
+          background-color: var(--brand-primary);
         }
       `}</style>
     </div>

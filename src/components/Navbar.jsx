@@ -7,7 +7,8 @@ export default function Navbar() {
     <header className="navbar-header">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          InternPulse
+          <span className="logo-title">InternPulse</span>
+          <span className="logo-caption">Internship Index</span>
         </Link>
         
         <nav className="navbar-links">
@@ -56,7 +57,7 @@ export default function Navbar() {
       <style>{`
         .navbar-header {
           background-color: var(--bg-secondary);
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 2px solid var(--text-primary);
           position: sticky;
           top: 0;
           z-index: 100;
@@ -75,12 +76,30 @@ export default function Navbar() {
 
         .navbar-logo {
           font-family: var(--font-display);
-          font-size: 1.35rem;
+          font-size: 1.45rem;
           font-weight: 800;
           color: var(--text-primary);
           letter-spacing: -0.02em;
           display: flex;
-          align-items: center;
+          flex-direction: column;
+          align-items: flex-start;
+          line-height: 1.1;
+        }
+
+        .logo-title {
+          font-family: var(--font-display);
+          font-size: 1.4rem;
+          letter-spacing: -0.02em;
+        }
+
+        .logo-caption {
+          font-family: var(--font-sans);
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--text-muted);
+          margin-top: 0.1rem;
         }
 
         .navbar-links {
@@ -90,15 +109,19 @@ export default function Navbar() {
         }
 
         .nav-link {
-          font-size: 0.95rem;
+          font-size: 0.75rem;
           color: var(--text-secondary);
-          font-weight: 500;
-          transition: color 0.2s ease;
-          padding: 0.25rem 0;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          transition: color 0.2s ease, border-color 0.2s ease;
+          padding: 0.35rem 0;
+          border-bottom: 2px solid transparent;
         }
 
         .nav-link:hover {
           color: var(--text-primary);
+          border-bottom-color: var(--text-primary);
         }
 
         .navbar-actions {
@@ -114,13 +137,15 @@ export default function Navbar() {
           align-items: center;
           justify-content: center;
           padding: 0.25rem;
-          border-radius: var(--radius-full);
-          transition: color 0.2s ease, background-color 0.2s ease;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--text-primary);
+          transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
         }
 
         .notification-btn:hover {
           color: var(--text-primary);
           background-color: var(--bg-primary);
+          transform: translate(-2px, -2px);
         }
 
         .notification-dot {
@@ -136,9 +161,9 @@ export default function Navbar() {
         .profile-wrapper {
           width: 2.25rem;
           height: 2.25rem;
-          border-radius: var(--radius-full);
+          border-radius: var(--radius-sm);
           overflow: hidden;
-          border: 1px solid var(--border-heavy);
+          border: 1px solid var(--text-primary);
           display: flex;
           align-items: center;
           justify-content: center;

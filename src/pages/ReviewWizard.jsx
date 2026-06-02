@@ -97,7 +97,7 @@ export default function ReviewWizard() {
       
       {/* progress monitor bar */}
       <div className="progress-monitor">
-        <span className="wizard-category-label">INTERNSHIP REVIEW</span>
+        <span className="wizard-category-label">REVIEW DOSSIER</span>
         <div className="progress-title-row">
           <h1 className="progress-step-headline">
             {step === 1 && "The Basics"}
@@ -297,7 +297,7 @@ export default function ReviewWizard() {
             
             <div className="auth-central-graphic">
               <Mail size={42} className="auth-mail-icon" />
-              <h3 className="auth-main-headline">Authenticity Check</h3>
+              <h3 className="auth-main-headline">Verification</h3>
               <p className="auth-sub-narrative">
                 To keep InternPulse reports 100% verified and maintain data integrity, we recommend adding your professional email.
               </p>
@@ -625,6 +625,86 @@ export default function ReviewWizard() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+
+        /* Editorial + brutalist overrides */
+        .wizard-layout-container {
+          max-width: 38rem;
+        }
+
+        .wizard-category-label {
+          color: var(--brand-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+        }
+
+        .progress-step-headline {
+          font-family: var(--font-display);
+          font-size: 2rem;
+        }
+
+        .progress-track-bar {
+          background-color: var(--border-color);
+          border-radius: var(--radius-sm);
+        }
+
+        .progress-track-fill {
+          background-color: var(--brand-primary);
+        }
+
+        .form-wizard-card {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .suggestion-dropdown {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .verification-warning-box {
+          background-color: var(--brand-light-green);
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .warning-shield-icon {
+          color: var(--brand-primary);
+        }
+
+        .warning-text {
+          color: var(--text-primary);
+        }
+
+        .star-icon-filled {
+          color: #b0852f;
+          fill: #b0852f;
+        }
+
+        .skill-tag-check-btn {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 0.7rem;
+        }
+
+        .skill-tag-active {
+          background-color: var(--brand-primary);
+          color: var(--text-white);
+          border-color: var(--brand-primary);
+        }
+
+        .auth-mail-icon {
+          background-color: var(--bg-primary);
+          color: var(--brand-primary);
+          border: 1px solid var(--text-primary);
+        }
+
+        .security-notice-callout {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
         }
       `}</style>
     </div>

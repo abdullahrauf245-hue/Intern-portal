@@ -185,9 +185,9 @@ export default function Browse() {
       <main className="results-directory">
         <div className="directory-header-row">
           <div>
-            <h1 className="directory-heading">Technology Internships</h1>
+            <h1 className="directory-heading">Internship Directory</h1>
             <p className="directory-count-summary">
-              Showing {filteredCompanies.length} companies found
+              Showing {filteredCompanies.length} results
             </p>
           </div>
           
@@ -253,7 +253,7 @@ export default function Browse() {
 
                 {/* Direct Action Link */}
                 <Link to={`/profile/${company.id}`} className="view-profile-btn">
-                  VIEW PROFILE
+                  OPEN DOSSIER
                 </Link>
 
               </div>
@@ -261,9 +261,9 @@ export default function Browse() {
           ) : (
             <div className="empty-results-box">
               <h3>No companies match the current filters.</h3>
-              <p>Try resetting the sidebar inputs or searching for another query.</p>
+              <p>Try resetting the filters or searching with a different query.</p>
               <button onClick={handleClearAll} className="btn btn-primary" style={{ marginTop: "1rem" }}>
-                Reset All Filters
+                Reset Filters
               </button>
             </div>
           )}
@@ -773,6 +773,132 @@ export default function Browse() {
           .view-profile-btn {
             width: 100%;
           }
+        }
+
+        /* Editorial + brutalist overrides */
+        .browse-layout {
+          gap: 3rem;
+        }
+
+        .filters-sidebar {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .sidebar-header {
+          border-bottom: 2px solid var(--text-primary);
+        }
+
+        .filters-title {
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+        }
+
+        .clear-filters-btn {
+          color: var(--brand-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+        }
+
+        .filter-group-label {
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 0.7rem;
+        }
+
+        .checkbox-custom {
+          border: 1px solid var(--text-primary);
+          border-radius: 2px;
+        }
+
+        .filter-checkbox:checked ~ .checkbox-custom {
+          background-color: var(--brand-primary);
+          border-color: var(--brand-primary);
+        }
+
+        .score-btn {
+          border: 1px solid var(--text-primary);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: 0.7rem;
+        }
+
+        .score-btn-active {
+          background-color: var(--brand-primary);
+          border-color: var(--brand-primary);
+          color: var(--text-white);
+        }
+
+        .directory-header-row {
+          border-bottom: 2px solid var(--text-primary);
+        }
+
+        .directory-heading {
+          font-size: 1.8rem;
+        }
+
+        .sorting-dropdown {
+          color: var(--brand-primary);
+        }
+
+        .company-result-card {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-md);
+        }
+
+        .company-result-card:hover {
+          transform: translate(-3px, -3px);
+          box-shadow: var(--shadow-lg);
+        }
+
+        .company-logo-avatar {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .capsule-tag {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: var(--text-primary);
+        }
+
+        .capsule-accent {
+          background-color: var(--brand-light-green);
+          color: var(--brand-primary);
+          border-color: var(--brand-primary);
+        }
+
+        .view-profile-btn {
+          border: 1px solid var(--brand-primary);
+          background-color: var(--brand-primary);
+          color: var(--text-white);
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          border-radius: var(--radius-sm);
+        }
+
+        .view-profile-btn:hover {
+          background-color: var(--brand-secondary);
+          border-color: var(--brand-secondary);
+        }
+
+        .pagination-wrapper {
+          margin-top: 2.5rem;
+        }
+
+        .pag-nav-btn, .pag-num-btn {
+          border: 1px solid var(--text-primary);
+          border-radius: var(--radius-sm);
+        }
+
+        .pag-num-active {
+          background-color: var(--brand-primary);
+          border-color: var(--brand-primary);
+          color: var(--text-white) !important;
         }
       `}</style>
     </div>
