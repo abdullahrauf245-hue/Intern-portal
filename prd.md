@@ -148,7 +148,7 @@ A 3-step structured wizard form that maximizes user conversions while maintainin
 ### 3.2 State Management & Routing
 - **Routing**: **React Router DOM** or a custom state-based router.
   *   *Recommendation*: A clean React-based single-page router for instant transition animations and clean URLs.
-- **Global State**: React Context API to manage user reviews list, compare metrics list, saved companies, notification system, and search states.
+- **Global State**: React Context API to manage user reviews list, compare metrics list, saved companies, notification system, and search states.   
 
 ---
 
