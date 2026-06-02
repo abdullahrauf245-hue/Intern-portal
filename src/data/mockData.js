@@ -1,0 +1,261 @@
+// Mock Data Engine for InternPulse pre-seeded with Google Stitch specifications
+
+export const INITIAL_COMPANIES = [
+  {
+    id: "stripe",
+    name: "Stripe",
+    category: "Fintech",
+    tags: ["FINTECH", "REMOTE FRIENDLY"],
+    pulseScore: 4.9,
+    stipend: 8500,
+    stipendTier: "Top 5% of industry",
+    hours: 42,
+    hoursTier: "Moderate Intensity",
+    returnOfferRate: 85,
+    returnOfferTier: "Highly reliable path",
+    satisfaction: 4.8,
+    satisfactionCount: 142,
+    supportiveness: 92,
+    autonomy: 78,
+    learningCurve: 85,
+    workLifeBalance: 64,
+    pulseInsight: "Stripe excels in mentorship infrastructure. 88% of interns reported having weekly 1-on-1s with their senior leads, which is 15% higher than the industry average for companies of this size.",
+    location: "San Francisco, CA",
+    locations: ["San Francisco, CA", "Seattle, WA", "Remote"],
+    hiringStatus: "Now Hiring for Summer 2024",
+    deadline: "November 15, 2023",
+    website: "https://stripe.com",
+    logoColor: "#635bff",
+    peers: ["techstream", "figma", "anthropic"],
+    monthlyRatingPulse: [4.4, 4.5, 4.6, 4.5, 4.7, 4.8, 4.8, 4.9, 4.8, 4.9, 4.9, 4.9],
+    reviews: [
+      {
+        id: "stripe-r1",
+        role: "Software Engineering Intern",
+        term: "Summer 2023",
+        verified: true,
+        rating: 5.0,
+        pros: "Incredible tech stack. You get to work on actual production code from week 2. The mentor assigned to me was actually interested in my growth, not just my output.",
+        cons: "The onboarding process was a bit of a firehose. If you're not comfortable learning on the fly, the first few weeks will be stressful.",
+        tags: ["PYTHON", "KUBERNETES", "REST", "REMOTE-FRIENDLY"],
+        date: "August 24, 2023"
+      },
+      {
+        id: "stripe-r2",
+        role: "Product Management Intern",
+        term: "Fall 2023",
+        verified: true,
+        rating: 4.0,
+        pros: "Direct access to the C-suite for product reviews. It was empowering to see how decisions are made at the top level.",
+        cons: "Lots of meetings. Sometimes it felt like I spent more time talking about work than doing it.",
+        tags: ["PRODUCT STRATEGY", "AGILE", "JIRA"],
+        date: "December 12, 2023"
+      }
+    ]
+  },
+  {
+    id: "airbnb",
+    name: "Airbnb",
+    category: "Travel",
+    tags: ["TRAVEL", "LUXURY PERKS"],
+    pulseScore: 4.7,
+    stipend: 7200,
+    stipendTier: "Top 10% of industry",
+    hours: 38,
+    hoursTier: "Great Balance",
+    returnOfferRate: 75,
+    returnOfferTier: "Moderately reliable",
+    satisfaction: 4.6,
+    satisfactionCount: 98,
+    supportiveness: 90,
+    autonomy: 82,
+    learningCurve: 80,
+    workLifeBalance: 88,
+    pulseInsight: "Airbnb stands out for work-life integration. 94% of interns cited strong support for personal pacing, which is 20% higher than typical technology workplaces.",
+    location: "Los Angeles, CA",
+    locations: ["Los Angeles, CA", "San Francisco, CA", "Remote"],
+    hiringStatus: "Now Hiring for Summer 2024",
+    deadline: "November 30, 2023",
+    website: "https://airbnb.com",
+    logoColor: "#ff5a5f",
+    peers: ["stripe", "figma"],
+    monthlyRatingPulse: [4.5, 4.6, 4.5, 4.6, 4.6, 4.7, 4.7, 4.7, 4.8, 4.7, 4.7, 4.7],
+    reviews: [
+      {
+        id: "airbnb-r1",
+        role: "Frontend Engineering Intern",
+        term: "Summer 2023",
+        verified: true,
+        rating: 5.0,
+        pros: "Unbelievable culture and travel credits. The workspace in SF is gorgeous, and teammates treated me like a full-time peer.",
+        cons: "Return offer pipeline was slow this year due to macroeconomic planning. Took 2 months to get results.",
+        tags: ["REACT", "TYPESCRIPT", "DESIGN SYSTEM"],
+        date: "September 02, 2023"
+      }
+    ]
+  },
+  {
+    id: "anthropic",
+    name: "Anthropic",
+    category: "AI Research",
+    tags: ["AI RESEARCH", "RAPID GROWTH"],
+    pulseScore: 4.8,
+    stipend: 9000,
+    stipendTier: "Top 1% of industry",
+    hours: 45,
+    hoursTier: "High Intensity",
+    returnOfferRate: 80,
+    returnOfferTier: "Highly reliable path",
+    satisfaction: 4.7,
+    satisfactionCount: 64,
+    supportiveness: 88,
+    autonomy: 85,
+    learningCurve: 95,
+    workLifeBalance: 55,
+    pulseInsight: "Anthropic exhibits an extreme learning curve. Interns work directly alongside premier ML research scientists on safety alignment, resulting in immense growth.",
+    location: "San Francisco, CA",
+    locations: ["San Francisco, CA"],
+    hiringStatus: "Now Hiring for Summer 2024",
+    deadline: "October 15, 2023",
+    website: "https://anthropic.com",
+    logoColor: "#191919",
+    peers: ["stripe", "techstream"],
+    monthlyRatingPulse: [4.6, 4.6, 4.7, 4.7, 4.8, 4.8, 4.8, 4.8, 4.9, 4.9, 4.8, 4.8],
+    reviews: [
+      {
+        id: "anthropic-r1",
+        role: "ML Research Intern",
+        term: "Summer 2023",
+        verified: true,
+        rating: 5.0,
+        pros: "Directly helping build Claude. Mind-blowing computational resources and deep intellectual rigor from everyone in the office.",
+        cons: "Work hours are definitely long. Be prepared for late night discussions and tight scaling milestones.",
+        tags: ["PYTORCH", "LLM", "INTERPRETABILITY"],
+        date: "September 10, 2023"
+      }
+    ]
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    category: "Design Tech",
+    tags: ["DESIGN TECH", "TOP CULTURE"],
+    pulseScore: 4.9,
+    stipend: 8000,
+    stipendTier: "Top 5% of industry",
+    hours: 40,
+    hoursTier: "Balanced Intensity",
+    returnOfferRate: 90,
+    returnOfferTier: "Highly reliable path",
+    satisfaction: 4.9,
+    satisfactionCount: 110,
+    supportiveness: 95,
+    autonomy: 80,
+    learningCurve: 88,
+    workLifeBalance: 78,
+    pulseInsight: "Figma scores exceptionally high on design alignment. 96% of participants felt their assignments had high creative leverage and strong cross-functional exposure.",
+    location: "New York, NY",
+    locations: ["New York, NY", "San Francisco, CA", "Remote"],
+    hiringStatus: "Now Hiring for Summer 2024",
+    deadline: "November 01, 2023",
+    website: "https://figma.com",
+    logoColor: "#f24e1e",
+    peers: ["stripe", "airbnb"],
+    monthlyRatingPulse: [4.7, 4.8, 4.8, 4.7, 4.9, 4.9, 4.9, 4.9, 4.9, 4.8, 4.9, 4.9],
+    reviews: [
+      {
+        id: "figma-r1",
+        role: "Design Engineer Intern",
+        term: "Summer 2023",
+        verified: true,
+        rating: 5.0,
+        pros: "Figma has the most collaborative environment I've ever experienced. Great alignment between product designers and engineers.",
+        cons: "Highly competitive landscape. Sometimes hard to get your specific features prioritized in the main branch.",
+        tags: ["WEBGL", "WASM", "PRODUCT-DESIGN"],
+        date: "August 30, 2023"
+      }
+    ]
+  },
+  {
+    id: "techstream",
+    name: "TechStream Systems",
+    category: "Enterprise SaaS",
+    tags: ["TOP RATED", "ENTERPRISE SAAS"],
+    pulseScore: 4.2,
+    stipend: 4500,
+    stipendTier: "Top 25% of industry",
+    hours: 42,
+    hoursTier: "Moderate Intensity",
+    returnOfferRate: 85,
+    returnOfferTier: "Highly reliable path",
+    satisfaction: 4.8,
+    satisfactionCount: 142,
+    supportiveness: 92,
+    autonomy: 78,
+    learningCurve: 85,
+    workLifeBalance: 64,
+    pulseInsight: "TechStream excels in mentorship infrastructure. 88% of interns reported having weekly 1-on-1s with their senior leads, which is 15% higher than the industry average for companies of this size.",
+    location: "Palo Alto, CA",
+    locations: ["Palo Alto, CA", "New York, NY", "Toronto, ON"],
+    hiringStatus: "Now Hiring for Summer 2024",
+    deadline: "November 15, 2023",
+    website: "https://techstream.example.com",
+    logoColor: "#10b981",
+    peers: ["stripe", "anthropic"],
+    monthlyRatingPulse: [3.8, 3.9, 4.0, 3.9, 4.1, 4.1, 4.2, 4.2, 4.2, 4.2, 4.2, 4.2],
+    reviews: [
+      {
+        id: "techstream-r1",
+        role: "Software Engineering Intern",
+        term: "Summer 2023",
+        verified: true,
+        rating: 5.0,
+        pros: "Incredible tech stack. You get to work on actual production code from week 2. The mentor assigned to me was actually interested in my growth, not just my output.",
+        cons: "The onboarding process was a bit of a firehose. If you're not comfortable learning on the fly, the first few weeks will be stressful.",
+        tags: ["PYTHON", "KUBERNETES", "REST", "REMOTE-FRIENDLY"],
+        date: "August 20, 2023"
+      },
+      {
+        id: "techstream-r2",
+        role: "Product Management Intern",
+        term: "Fall 2023",
+        verified: true,
+        rating: 4.0,
+        pros: "Direct access to the C-suite for product reviews. It was empowering to see how decisions are made at the top level.",
+        cons: "Lots of meetings. Sometimes it felt like I spent more time talking about work than doing it.",
+        tags: ["PRODUCT STRATEGY", "AGILE", "JIRA"],
+        date: "November 10, 2023"
+      }
+    ]
+  }
+];
+
+export const INITIAL_ANALYTICS = {
+  marketHealthScore: 88.4,
+  industryLeaders: [
+    { name: "Tech & Software", stipend: "$6.4k/mo" },
+    { name: "Finance", stipend: "$5.8k/mo" },
+    { name: "Legal Services", stipend: "$4.2k/mo" }
+  ],
+  stipendTrends: [
+    { month: "Jan", stipend: 6800 },
+    { month: "Mar", stipend: 6700 },
+    { month: "May", stipend: 7100 },
+    { month: "Jul", stipend: 6900 },
+    { month: "Sep", stipend: 7500 },
+    { month: "Nov", stipend: 7800 }
+  ],
+  satisfactionByIndustry: [
+    { industry: "DESIGN & CREATIVE", score: 4.8, lastYear: 4.5 },
+    { industry: "SOFTWARE ENGINEERING", score: 4.5, lastYear: 4.3 },
+    { industry: "MARKETING & PR", score: 4.2, lastYear: 4.0 },
+    { industry: "FINANCIAL SERVICES", score: 3.9, lastYear: 3.8 }
+  ],
+  hotspots: [
+    { id: "sf", name: "San Francisco, CA", coords: [37.7749, -122.4194], type: "Tech", count: 42, active: true },
+    { id: "ny", name: "New York, NY", coords: [40.7128, -74.0060], type: "Finance", count: 28, active: true },
+    { id: "lon", name: "London, UK", coords: [51.5074, -0.1278], type: "Global", count: 18, active: false },
+    { id: "sg", name: "Singapore", coords: [1.3521, 103.8198], type: "Global", count: 12, active: false },
+    { id: "blr", name: "Bengaluru, IN", coords: [12.9716, 77.5946], type: "Global", count: 15, active: false }
+  ]
+};
