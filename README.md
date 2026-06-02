@@ -54,6 +54,13 @@ InternPulse helps students explore verified internship programs, compare compani
 - Runtime updates are stored in localStorage under `internpulse_companies` and `internpulse_analytics`.
 - Clearing localStorage resets the app to the seeded dataset.
 
+## Data Model
+The core schema mirrors the PRD/TRD and focuses on companies, reviews, and analytics.
+
+- Company: identity, category tags, pulse score, stipend stats, culture scores, locations, and review list.
+- Review: role, term, verified flag, rating, pros/cons, tags, and submission date.
+- Analytics: market health score, industry leaders, stipend trend series, satisfaction by industry, and hotspot metadata.
+
 ## Project Structure
 ```text
 src/
