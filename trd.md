@@ -6,7 +6,7 @@ This Technical Requirements Document (TRD) outlines the architectural layout, co
 
 ## 1. System Architecture Overview
 
-InternPulse is structured as a client-side, highly interactive Single Page Application (SPA) built using **React** and powered by **Vite**. The design focuses on high performance, local persistence, premium visual rendering (using Recharts and custom inline vector SVGs), and modular custom styling.
+InternPulse is structured as a client-side, highly interactive Single Page Application (SPA) built using **React** and powered by **Vite**. The design focuses on high performance, local persistence, premium visual rendering (using Recharts and custom inline vector SVGs), and modular custom styling.makung it but it will take a lot of time yet.
 
 ```mermaid
 graph TD
