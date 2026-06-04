@@ -338,25 +338,25 @@ export default function ReviewWizard() {
         .wizard-layout-container {
           width: 100%;
           max-width: 34rem;
-          margin: 3rem auto 6rem auto;
+          margin: 1.5rem auto 4rem auto;
           display: flex;
           flex-direction: column;
-          gap: 2.25rem;
-          padding: 0 1rem;
+          gap: 1.5rem;
         }
 
         /* PROGRESS TRACKING */
         .progress-monitor {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .wizard-category-label {
-          font-size: 0.65rem;
-          font-weight: 800;
-          color: var(--brand-secondary);
-          letter-spacing: 0.08em;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--secondary);
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .progress-title-row {
@@ -366,23 +366,23 @@ export default function ReviewWizard() {
         }
 
         .progress-step-headline {
-          font-size: 1.75rem;
-          font-weight: 800;
+          font-size: 1.5rem;
+          font-weight: 600;
           letter-spacing: -0.02em;
-          color: var(--text-primary);
+          color: var(--primary);
           line-height: 1.1;
         }
 
         .step-fraction {
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: var(--text-secondary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--secondary);
         }
 
         .progress-track-bar {
           width: 100%;
           height: 4px;
-          background-color: var(--border-heavy);
+          background-color: var(--surface-container);
           border-radius: var(--radius-full);
           overflow: hidden;
           margin-top: 0.25rem;
@@ -390,24 +390,23 @@ export default function ReviewWizard() {
 
         .progress-track-fill {
           height: 100%;
-          background-color: var(--brand-primary);
+          background-color: var(--primary);
           border-radius: var(--radius-full);
           transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* CARD STYLING */
         .form-wizard-card {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          box-shadow: var(--shadow-lg);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 3rem 2.5rem;
+          padding: 2.25rem 2rem;
         }
 
         .wizard-step-body {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         /* AUTOCOMPLETE SUGGESTIONS */
@@ -416,9 +415,8 @@ export default function ReviewWizard() {
           top: 100%;
           left: 0;
           right: 0;
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-heavy);
-          box-shadow: var(--shadow-md);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-sm);
           z-index: 10;
           margin-top: 0.25rem;
@@ -429,16 +427,16 @@ export default function ReviewWizard() {
         .suggestion-item {
           width: 100%;
           text-align: left;
-          padding: 0.6rem 1rem;
-          font-size: 0.85rem;
-          color: var(--text-secondary);
-          font-weight: 550;
-          transition: all 0.15s ease;
+          padding: 0.5rem 0.875rem;
+          font-size: 0.8125rem;
+          color: var(--secondary);
+          font-weight: 400;
+          transition: all 0.1s ease;
         }
 
         .suggestion-item:hover {
-          background-color: var(--bg-primary);
-          color: var(--text-primary);
+          background-color: var(--surface-container-low);
+          color: var(--primary);
         }
 
         /* CURRENCY VISUAL */
@@ -450,37 +448,36 @@ export default function ReviewWizard() {
 
         .currency-symbol {
           position: absolute;
-          left: 1rem;
-          font-size: 0.95rem;
-          font-weight: 600;
-          color: var(--text-muted);
+          left: 0.875rem;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--secondary);
         }
 
         .currency-input {
-          padding-left: 2rem !important;
+          padding-left: 1.75rem !important;
         }
 
         /* WARNING BOX */
         .verification-warning-box {
-          background-color: var(--brand-light-green);
-          border: 1px solid rgba(16, 185, 129, 0.15);
-          border-radius: var(--radius-md);
-          padding: 1.25rem 1.5rem;
+          background-color: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
+          border-radius: var(--radius-sm);
+          padding: 1rem 1.25rem;
           display: flex;
           align-items: flex-start;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .warning-shield-icon {
-          color: var(--brand-secondary);
+          color: var(--secondary);
           flex-shrink: 0;
-          margin-top: 0.15rem;
+          margin-top: 0.125rem;
         }
 
         .warning-text {
-          font-size: 0.85rem;
-          color: var(--brand-secondary);
-          font-weight: 550;
+          font-size: 0.8125rem;
+          color: var(--secondary);
           line-height: 1.5;
         }
 
@@ -488,8 +485,8 @@ export default function ReviewWizard() {
         .stars-selector-row {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          margin-top: 0.25rem;
+          gap: 0.375rem;
+          margin-top: 0.125rem;
         }
 
         .star-selection-btn {
@@ -500,7 +497,7 @@ export default function ReviewWizard() {
         }
 
         .star-selection-btn:hover {
-          transform: scale(1.15);
+          transform: scale(1.1);
         }
 
         .star-icon-filled {
@@ -509,41 +506,44 @@ export default function ReviewWizard() {
         }
 
         .star-icon-empty {
-          color: var(--border-heavy);
+          color: var(--surface-container-highest);
         }
 
         .text-area-input {
           resize: none;
+          min-height: 5.5rem;
+          padding: 0.625rem 0.875rem;
         }
 
         .skills-checklist-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 0.65rem;
+          gap: 0.5rem;
         }
 
         .skill-tag-check-btn {
-          border: 1px solid var(--border-heavy);
-          background-color: var(--bg-secondary);
-          color: var(--text-secondary);
-          font-size: 0.725rem;
-          font-weight: 750;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
+          color: var(--secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
           letter-spacing: 0.05em;
-          padding: 0.5rem 0.75rem;
+          padding: 0.4rem 0.75rem;
           border-radius: var(--radius-sm);
           text-align: left;
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
+          text-transform: uppercase;
         }
 
         .skill-tag-check-btn:hover {
-          border-color: var(--text-primary);
-          color: var(--text-primary);
+          border-color: var(--outline);
+          color: var(--primary);
         }
 
         .skill-tag-active {
-          background-color: var(--brand-light-green);
-          border-color: var(--brand-primary);
-          color: var(--brand-secondary);
+          background-color: var(--primary);
+          border-color: var(--primary);
+          color: var(--on-primary);
         }
 
         /* STEP 3 GRAPHIC */
@@ -552,16 +552,17 @@ export default function ReviewWizard() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 0.75rem;
-          margin-bottom: 1.5rem;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
         }
 
         .auth-mail-icon {
-          color: var(--brand-secondary);
-          background-color: var(--brand-light-green);
-          padding: 0.75rem;
-          width: 3.5rem;
-          height: 3.5rem;
+          color: var(--secondary);
+          background-color: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
+          padding: 0.5rem;
+          width: 2.75rem;
+          height: 2.75rem;
           border-radius: var(--radius-full);
           display: flex;
           align-items: center;
@@ -569,142 +570,61 @@ export default function ReviewWizard() {
         }
 
         .auth-main-headline {
-          font-size: 1.15rem;
-          font-weight: 700;
-          color: var(--text-primary);
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .auth-sub-narrative {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
+          font-size: 0.8125rem;
+          color: var(--secondary);
           line-height: 1.5;
-          max-width: 20rem;
+          max-width: 22rem;
         }
 
         .security-notice-callout {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.725rem;
-          color: var(--text-secondary);
-          font-weight: 600;
-          background-color: var(--bg-primary);
-          border: 1px solid var(--border-heavy);
-          padding: 0.5rem 1rem;
+          gap: 0.375rem;
+          font-size: 0.75rem;
+          color: var(--secondary);
+          background-color: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
+          padding: 0.5rem 0.875rem;
           border-radius: var(--radius-sm);
         }
 
         .security-sparkle {
-          color: var(--brand-secondary);
+          color: var(--tertiary);
         }
 
         /* HELPERS */
         .wizard-actions-row {
           display: flex;
           align-items: center;
-          margin-top: 1.5rem;
+          margin-top: 1rem;
         }
 
         .justify-end { justify-content: flex-end; }
         .justify-between { justify-content: space-between; }
 
         .btn-icon-right {
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .animate-fade {
-          animation: fadeTransition 0.3s ease;
+          animation: fadeTransition 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeTransition {
           from {
             opacity: 0;
-            transform: translateY(6px);
+            transform: translateY(4px);
           }
           to {
             opacity: 1;
             transform: translateY(0);
           }
-        }
-
-        /* Editorial + brutalist overrides */
-        .wizard-layout-container {
-          max-width: 38rem;
-        }
-
-        .wizard-category-label {
-          color: var(--brand-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-        }
-
-        .progress-step-headline {
-          font-family: var(--font-display);
-          font-size: 2rem;
-        }
-
-        .progress-track-bar {
-          background-color: var(--border-color);
-          border-radius: var(--radius-sm);
-        }
-
-        .progress-track-fill {
-          background-color: var(--brand-primary);
-        }
-
-        .form-wizard-card {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .suggestion-dropdown {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .verification-warning-box {
-          background-color: var(--brand-light-green);
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .warning-shield-icon {
-          color: var(--brand-primary);
-        }
-
-        .warning-text {
-          color: var(--text-primary);
-        }
-
-        .star-icon-filled {
-          color: #b0852f;
-          fill: #b0852f;
-        }
-
-        .skill-tag-check-btn {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.7rem;
-        }
-
-        .skill-tag-active {
-          background-color: var(--brand-primary);
-          color: var(--text-white);
-          border-color: var(--brand-primary);
-        }
-
-        .auth-mail-icon {
-          background-color: var(--bg-primary);
-          color: var(--brand-primary);
-          border: 1px solid var(--text-primary);
-        }
-
-        .security-notice-callout {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
         }
       `}</style>
     </div>

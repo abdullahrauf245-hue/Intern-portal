@@ -392,7 +392,7 @@ export default function Profile() {
         .profile-layout-container {
           display: flex;
           flex-direction: column;
-          gap: 2.25rem;
+          gap: 2rem;
           width: 100%;
         }
 
@@ -401,7 +401,8 @@ export default function Profile() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding-top: 1.5rem;
+          border-bottom: 1px solid var(--outline-variant);
+          padding-bottom: 1.5rem;
           gap: 3rem;
           flex-wrap: wrap;
         }
@@ -409,31 +410,30 @@ export default function Profile() {
         .profile-identity-block {
           display: flex;
           align-items: center;
-          gap: 1.75rem;
+          gap: 1.5rem;
           flex: 1;
         }
 
         .company-profile-logo-avatar {
-          width: 4.5rem;
-          height: 4.5rem;
+          width: 4rem;
+          height: 4rem;
           border-radius: var(--radius-md);
+          border: 1px solid var(--outline-variant);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          box-shadow: var(--shadow-sm);
         }
 
         .profile-logo-letter {
-          font-family: var(--font-display);
-          font-size: 2rem;
-          font-weight: 800;
+          font-size: 1.75rem;
+          font-weight: 600;
         }
 
         .profile-text-identity {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .identity-tags-row {
@@ -443,29 +443,28 @@ export default function Profile() {
         }
 
         .profile-company-name {
-          font-size: 2.25rem;
-          font-weight: 800;
-          letter-spacing: -0.03em;
-          color: var(--text-primary);
-          line-height: 1;
+          font-size: 1.75rem;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          color: var(--primary);
+          line-height: 1.1;
         }
 
         .profile-site-link {
-          font-size: 0.95rem;
-          color: var(--text-secondary);
+          font-size: 0.875rem;
+          color: var(--secondary);
         }
 
         /* Pulse Rating Score Box */
         .overall-pulse-score-box {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          box-shadow: var(--shadow-sm);
-          padding: 1.5rem;
+          padding: 1.25rem;
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
-          width: 18rem;
+          gap: 0.5rem;
+          width: 16rem;
           align-items: center;
         }
 
@@ -473,14 +472,15 @@ export default function Profile() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 0.25rem;
+          gap: 0.125rem;
         }
 
         .pulse-label {
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          color: var(--brand-secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          color: var(--secondary);
+          text-transform: uppercase;
         }
 
         .pulse-score-value-block {
@@ -490,24 +490,22 @@ export default function Profile() {
         }
 
         .score-num {
-          font-family: var(--font-display);
-          font-size: 2rem;
-          font-weight: 800;
-          color: var(--text-primary);
+          font-size: 1.75rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .score-denom {
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          font-weight: 600;
-          margin-bottom: 0.2rem;
+          font-size: 0.8125rem;
+          color: var(--secondary);
+          margin-bottom: 0.15rem;
           margin-left: 0.1rem;
         }
 
         .stars-row {
           display: flex;
           align-items: center;
-          gap: 0.25rem;
+          gap: 0.125rem;
         }
 
         .star-icon-filled {
@@ -516,48 +514,52 @@ export default function Profile() {
         }
 
         .star-icon-empty {
-          color: var(--border-heavy);
+          color: var(--surface-container-highest);
         }
 
         .write-review-hero-btn {
           width: 100%;
-          background-color: var(--brand-primary);
-          color: var(--text-white);
-          font-size: 0.8rem;
-          font-weight: 750;
-          letter-spacing: 0.05em;
-          padding: 0.6rem 0;
-          border-radius: var(--radius-md);
+          background-color: var(--primary);
+          color: var(--on-primary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          padding: 0.5rem 0;
+          border-radius: var(--radius-sm);
           text-align: center;
-          transition: background-color 0.2s ease;
+          transition: all 0.15s ease;
         }
 
         .write-review-hero-btn:hover {
-          background-color: var(--brand-secondary);
+          background-color: #1f2937;
         }
 
         /* ACTIONS STRIP */
         .quick-actions-strip {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .strip-action-btn {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-secondary);
-          display: flex;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--secondary);
+          display: inline-flex;
           align-items: center;
-          gap: 0.4rem;
-          padding: 0.4rem 0.75rem;
+          gap: 0.375rem;
+          padding: 0.375rem 0.75rem;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
           border-radius: var(--radius-sm);
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .strip-action-btn:hover {
-          color: var(--text-primary);
-          background-color: var(--bg-secondary);
+          color: var(--primary);
+          background-color: var(--surface-container-low);
+          border-color: var(--outline);
         }
 
         /* STATS deck */
@@ -565,123 +567,126 @@ export default function Profile() {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 1.5rem;
-          background-color: var(--bg-dark);
-          border: 1px solid var(--border-dark);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 2.25rem 2rem;
-          color: var(--text-white);
+          padding: 1.5rem;
+          color: var(--primary);
         }
 
         .deck-card {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .deck-card-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          color: var(--text-muted);
+          color: var(--secondary);
         }
 
         .deck-card-label {
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
+          font-size: 0.75rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .deck-card-icon {
-          color: var(--text-muted);
-          opacity: 0.6;
+          color: var(--secondary);
+          opacity: 0.7;
         }
 
         .deck-card-val {
-          font-family: var(--font-display);
-          font-size: 1.75rem;
-          font-weight: 800;
-          letter-spacing: -0.02em;
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: -0.01em;
         }
 
         .val-mo {
-          font-size: 0.85rem;
-          color: var(--text-muted);
-          font-weight: 500;
-          margin-left: 0.2rem;
+          font-size: 0.8125rem;
+          color: var(--secondary);
+          font-weight: 400;
+          margin-left: 0.125rem;
         }
 
         .deck-card-context-badge {
-          font-size: 0.675rem;
-          font-weight: 700;
+          font-size: 0.75rem;
+          font-weight: 500;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
-        .text-green { color: var(--brand-primary); }
-        .text-amber { color: #fbbf24; }
-        .text-blue { color: var(--brand-accent); }
+        .text-green { color: var(--success); }
+        .text-amber { color: #d97706; }
+        .text-blue { color: var(--tertiary); }
+        .text-muted { color: var(--secondary); }
 
         /* GRID MAIN */
         .profile-main-grid {
           display: grid;
-          grid-template-columns: 1.7fr 1fr;
+          grid-template-columns: 1.6fr 1fr;
           gap: 2rem;
         }
 
         .profile-details-column {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
-        }
-
-        .details-card-block {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          border-radius: var(--radius-md);
-          padding: 2rem;
-          box-shadow: var(--shadow-sm);
-          display: flex;
-          flex-direction: column;
           gap: 1.5rem;
         }
 
+        .details-card-block {
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
+          border-radius: var(--radius-md);
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+
         .details-card-title {
-          font-size: 1.15rem;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-          color: var(--text-primary);
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .culture-stats-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .culture-bar-row {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .culture-labels {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.8rem;
-          font-weight: 700;
+          font-size: 0.8125rem;
+          font-weight: 500;
         }
 
         .culture-name {
-          color: var(--text-primary);
+          color: var(--primary);
         }
 
         .culture-val {
-          color: var(--brand-secondary);
+          color: var(--primary);
+          font-weight: 600;
         }
 
         .culture-track {
           width: 100%;
           height: 6px;
-          background-color: var(--bg-primary);
+          background-color: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-full);
           overflow: hidden;
         }
@@ -691,73 +696,73 @@ export default function Profile() {
           border-radius: var(--radius-full);
         }
 
-        .bg-green-fill { background-color: var(--brand-primary); }
-        .bg-blue-fill { background-color: var(--brand-accent); }
+        .bg-green-fill { background-color: var(--success); }
+        .bg-blue-fill { background-color: var(--tertiary); }
         .bg-amber-fill { background-color: #fbbf24; }
 
         .culture-desc-text {
-          font-size: 0.775rem;
-          color: var(--text-secondary);
+          font-size: 0.75rem;
+          color: var(--secondary);
           line-height: 1.4;
         }
 
         /* Smart insight card */
         .smart-insight-callout {
-          background-color: var(--bg-primary);
-          border: 1px solid var(--border-heavy);
-          border-radius: var(--radius-md);
-          padding: 1.25rem 1.5rem;
+          background-color: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
+          border-radius: var(--radius-sm);
+          padding: 1rem 1.25rem;
           display: flex;
           align-items: flex-start;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .insight-sparkle-icon {
-          color: var(--brand-secondary);
+          color: var(--tertiary);
           flex-shrink: 0;
-          margin-top: 0.15rem;
+          margin-top: 0.125rem;
         }
 
         .insight-title {
-          font-size: 0.725rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          color: var(--text-primary);
-          margin-bottom: 0.25rem;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          color: var(--primary);
+          margin-bottom: 0.125rem;
+          text-transform: uppercase;
         }
 
         .insight-text-body {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
+          font-size: 0.8125rem;
+          color: var(--secondary);
           line-height: 1.5;
         }
 
         /* REVIEWS TIMELINE */
         .reviews-section-block {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 2rem;
-          box-shadow: var(--shadow-sm);
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         .reviews-header-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 0.75rem;
+          border-bottom: 1px solid var(--outline-variant);
+          padding-bottom: 0.5rem;
         }
 
         .reviews-sorting-dropdown {
           border: none;
           background: none;
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: var(--brand-secondary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--tertiary);
           outline: none;
           cursor: pointer;
         }
@@ -765,15 +770,15 @@ export default function Profile() {
         .reviews-feed-list {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         .review-feed-card {
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 1.5rem;
+          border-bottom: 1px solid var(--outline-variant);
+          padding-bottom: 1.25rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.875rem;
         }
 
         .review-feed-card:last-child {
@@ -784,17 +789,18 @@ export default function Profile() {
         .review-card-header {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .reviewer-avatar {
-          width: 2.25rem;
-          height: 2.25rem;
+          width: 2rem;
+          height: 2rem;
           border-radius: var(--radius-full);
-          background-color: #e2e8f0;
-          color: var(--text-secondary);
-          font-weight: 700;
-          font-size: 0.85rem;
+          background-color: var(--surface-container);
+          border: 1px solid var(--outline-variant);
+          color: var(--secondary);
+          font-weight: 600;
+          font-size: 0.75rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -804,7 +810,7 @@ export default function Profile() {
           flex: 1;
           display: flex;
           flex-direction: column;
-          gap: 0.15rem;
+          gap: 0.125rem;
         }
 
         .reviewer-role-row {
@@ -814,98 +820,100 @@ export default function Profile() {
         }
 
         .reviewer-role-title {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: var(--text-primary);
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .review-rating-label {
-          font-size: 0.8rem;
-          font-weight: 800;
-          color: var(--brand-secondary);
+          font-size: 0.8125rem;
+          font-weight: 600;
+          color: var(--primary);
           display: flex;
           align-items: center;
-          gap: 0.15rem;
+          gap: 0.125rem;
         }
 
         .inline-star {
-          fill: var(--brand-primary);
-          color: var(--brand-primary);
+          fill: #fbbf24;
+          color: #fbbf24;
         }
 
         .reviewer-details-row {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.775rem;
-          color: var(--text-muted);
-          font-weight: 600;
+          gap: 0.375rem;
+          font-size: 0.75rem;
+          color: var(--secondary);
         }
 
         .verified-badge {
-          color: var(--brand-secondary);
+          color: var(--success);
           display: inline-flex;
           align-items: center;
           gap: 0.25rem;
-          font-weight: 700;
+          font-weight: 500;
         }
 
         .review-pros-cons-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .block-label {
           display: block;
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          margin-bottom: 0.35rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          margin-bottom: 0.25rem;
         }
 
-        .pros-color-label { color: var(--brand-secondary); }
+        .pros-color-label { color: var(--success); }
         .cons-color-label { color: #d97706; }
 
         .block-body {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
+          font-size: 0.8125rem;
+          color: var(--secondary);
           line-height: 1.5;
         }
 
         .review-skill-tags {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.375rem;
           flex-wrap: wrap;
         }
 
         .skill-badge-tag {
-          font-size: 0.625rem;
-          font-weight: 750;
-          background-color: var(--bg-primary);
-          color: var(--text-secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          background-color: var(--surface-container);
+          color: var(--secondary);
+          border: 1px solid var(--outline-variant);
           padding: 0.15rem 0.5rem;
           border-radius: var(--radius-sm);
         }
 
         .load-more-reviews-btn {
           width: 100%;
-          border: 1px solid var(--border-heavy);
-          background-color: var(--bg-secondary);
-          color: var(--text-secondary);
-          font-size: 0.8rem;
-          font-weight: 750;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
+          color: var(--secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
           letter-spacing: 0.05em;
-          padding: 0.75rem 0;
-          border-radius: var(--radius-md);
-          transition: all 0.2s ease;
+          padding: 0.5rem 0;
+          border-radius: var(--radius-sm);
+          transition: all 0.15s ease;
+          text-transform: uppercase;
+          height: 2.25rem;
         }
 
         .load-more-reviews-btn:hover {
-          background-color: var(--bg-primary);
-          color: var(--text-primary);
-          border-color: var(--text-primary);
+          background-color: var(--surface-container-low);
+          color: var(--primary);
+          border-color: var(--outline);
         }
 
         /* RIGHT WIDGETS COLUMN */
@@ -916,18 +924,17 @@ export default function Profile() {
         }
 
         .widget-card {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          box-shadow: var(--shadow-sm);
-          padding: 1.75rem;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 1.25rem;
         }
 
         .bg-emerald-light-card {
-          background-color: var(--brand-light-green);
+          background-color: rgba(16, 185, 129, 0.05);
           border-color: rgba(16, 185, 129, 0.15);
         }
 
@@ -940,118 +947,126 @@ export default function Profile() {
         .status-pulsing-indicator {
           width: 6px;
           height: 6px;
-          background-color: var(--brand-primary);
+          background-color: var(--success);
           border-radius: var(--radius-full);
-          box-shadow: 0 0 6px var(--brand-primary);
+          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
         }
 
         .hiring-status-label {
           font-size: 0.75rem;
-          font-weight: 750;
-          color: var(--brand-secondary);
+          font-weight: 600;
+          color: var(--success);
           letter-spacing: 0.05em;
+          text-transform: uppercase;
         }
 
         .hiring-details {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .detail-item {
           display: flex;
           align-items: flex-start;
-          gap: 0.75rem;
+          gap: 0.5rem;
         }
 
         .detail-icon {
-          color: var(--text-muted);
-          margin-top: 0.15rem;
+          color: var(--secondary);
+          margin-top: 0.125rem;
         }
 
         .detail-label {
-          font-size: 0.65rem;
-          font-weight: 700;
-          color: var(--text-muted);
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--secondary);
           text-transform: uppercase;
         }
 
         .detail-val {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-primary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--primary);
           line-height: 1.4;
         }
 
         .apply-company-site-btn {
           width: 100%;
-          background-color: var(--bg-dark);
-          color: var(--text-white);
-          font-size: 0.8rem;
-          font-weight: 750;
+          background-color: var(--primary);
+          color: var(--on-primary);
+          font-size: 0.8125rem;
+          font-weight: 500;
           letter-spacing: 0.05em;
-          padding: 0.75rem 0;
-          border-radius: var(--radius-md);
+          padding: 0.5rem 0;
+          border-radius: var(--radius-sm);
           text-align: center;
-          transition: background-color 0.2s ease;
+          transition: all 0.15s ease;
+          text-transform: uppercase;
+          height: 2.25rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .apply-company-site-btn:hover {
-          background-color: var(--bg-dark-hover);
+          background-color: #1f2937;
         }
 
         .widget-card-title {
-          font-size: 0.95rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          border-bottom: 1px solid var(--border-color);
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: var(--primary);
+          border-bottom: 1px solid var(--outline-variant);
           padding-bottom: 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .peers-comparison-list {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 0.5rem;
         }
 
         .peer-compare-item {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.65rem 0.85rem;
-          border: 1px solid var(--border-color);
+          padding: 0.5rem 0.75rem;
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-sm);
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
         }
 
         .peer-compare-item:hover {
-          border-color: var(--text-primary);
-          background-color: var(--bg-primary);
+          border-color: var(--outline);
+          background-color: var(--surface-container-low);
         }
 
         .peer-details {
           display: flex;
           flex-direction: column;
-          gap: 0.15rem;
+          gap: 0.125rem;
         }
 
         .peer-name {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-primary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--primary);
         }
 
         .peer-meta {
-          font-size: 0.725rem;
-          color: var(--text-muted);
+          font-size: 0.75rem;
+          color: var(--secondary);
         }
 
         .peer-arrow {
-          color: var(--text-muted);
+          color: var(--secondary);
         }
 
         .pulse-graph-box {
-          padding-top: 0.5rem;
+          padding-top: 0.25rem;
         }
 
         @media (max-width: 900px) {
@@ -1063,153 +1078,6 @@ export default function Profile() {
             gap: 1.25rem;
             padding: 1.5rem;
           }
-        }
-
-        /* Editorial + brutalist overrides */
-        .profile-hero-header {
-          border-bottom: 2px solid var(--text-primary);
-          padding-bottom: 1.5rem;
-        }
-
-        .company-profile-logo-avatar {
-          border: 1px solid var(--text-primary);
-        }
-
-        .overall-pulse-score-box {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-md);
-        }
-
-        .pulse-label {
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          color: var(--text-muted);
-        }
-
-        .write-review-hero-btn {
-          background-color: var(--brand-primary);
-          border: 1px solid var(--brand-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-size: 0.7rem;
-        }
-
-        .write-review-hero-btn:hover {
-          background-color: var(--brand-secondary);
-        }
-
-        .strip-action-btn {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.7rem;
-        }
-
-        .core-stats-deck {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-lg);
-          color: var(--text-primary);
-        }
-
-        .deck-card-header {
-          color: var(--text-muted);
-        }
-
-        .deck-card-context-badge {
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.6rem;
-        }
-
-        .details-card-block,
-        .reviews-section-block {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-md);
-        }
-
-        .smart-insight-callout {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          background-color: var(--bg-primary);
-        }
-
-        .reviews-sorting-dropdown {
-          color: var(--brand-primary);
-        }
-
-        .reviewer-avatar {
-          border: 1px solid var(--text-primary);
-          background-color: var(--bg-primary);
-        }
-
-        .skill-badge-tag {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .load-more-reviews-btn {
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-size: 0.7rem;
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .widget-card {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-md);
-        }
-
-        .bg-emerald-light-card {
-          background-color: var(--brand-light-green);
-          border-color: var(--text-primary);
-        }
-
-        .status-pulsing-indicator {
-          background-color: var(--brand-accent);
-          box-shadow: 0 0 0 4px rgba(27, 124, 90, 0.2);
-        }
-
-        .hiring-status-label {
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--brand-primary);
-        }
-
-        .apply-company-site-btn {
-          background-color: var(--brand-primary);
-          border: 1px solid var(--brand-primary);
-          border-radius: var(--radius-sm);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-size: 0.7rem;
-        }
-
-        .apply-company-site-btn:hover {
-          background-color: var(--brand-secondary);
-        }
-
-        .widget-card-title {
-          border-bottom: 2px solid var(--text-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.75rem;
-        }
-
-        .peer-compare-item {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .peer-compare-item:hover {
-          transform: translate(-2px, -2px);
-          box-shadow: var(--shadow-sm);
         }
       `}</style>
     </div>

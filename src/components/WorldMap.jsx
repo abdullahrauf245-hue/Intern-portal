@@ -23,8 +23,8 @@ export default function WorldMap({ isGlobal, hotspots }) {
           className="world-map-svg"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Custom Stylized Landmass Paths (Vector Representation of World Continents) */}
-          <g fill="#0b132b" opacity="0.08" stroke="#0b132b" strokeWidth="0.5">
+          {/* Custom Stylized Landmass Paths */}
+          <g fill="var(--secondary)" opacity="0.12" stroke="var(--secondary)" strokeWidth="0.5">
             {/* North America */}
             <path d="M 80,100 L 150,80 L 220,120 L 280,140 L 250,220 L 180,240 L 140,210 L 120,220 L 100,160 Z" />
             {/* Greenland */}
@@ -46,7 +46,7 @@ export default function WorldMap({ isGlobal, hotspots }) {
           </g>
 
           {/* Grid lines to make it look technical and high-fidelity */}
-          <g stroke="#0b132b" strokeWidth="0.25" opacity="0.12" strokeDasharray="3,3">
+          <g stroke="var(--outline-variant)" strokeWidth="0.5" opacity="0.4" strokeDasharray="3,3">
             <line x1="0" y1="125" x2="1000" y2="125" />
             <line x1="0" y1="250" x2="1000" y2="250" />
             <line x1="0" y1="375" x2="1000" y2="375" />
@@ -74,16 +74,16 @@ export default function WorldMap({ isGlobal, hotspots }) {
                   cx={px} 
                   cy={py} 
                   r="14" 
-                  fill="var(--brand-primary)" 
+                  fill="var(--tertiary)" 
                   className="marker-ripple" 
                 />
                 {/* Inner steady pulse */}
                 <circle 
                   cx={px} 
                   cy={py} 
-                  r="6" 
-                  fill="var(--brand-primary)" 
-                  stroke="#ffffff"
+                  r="5" 
+                  fill="var(--tertiary)" 
+                  stroke="var(--surface)"
                   strokeWidth="1.5"
                   className="marker-dot"
                 />
@@ -115,12 +115,11 @@ export default function WorldMap({ isGlobal, hotspots }) {
           width: 100%;
           height: 100%;
           min-height: 320px;
-          background-color: var(--bg-primary);
-          border-radius: var(--radius-sm);
+          background-color: var(--surface-container-low);
+          border-radius: var(--radius-md);
           overflow: hidden;
           position: relative;
-          border: 1px solid var(--text-primary);
-          box-shadow: var(--shadow-lg);
+          border: 1px solid var(--outline-variant);
         }
 
         .map-svg-container {
@@ -141,13 +140,13 @@ export default function WorldMap({ isGlobal, hotspots }) {
         .marker-ripple {
           transform-origin: center;
           animation: rippleEffect 2s infinite ease-out;
-          opacity: 0.4;
+          opacity: 0.3;
         }
 
         @keyframes rippleEffect {
           0% {
             r: 4px;
-            opacity: 0.8;
+            opacity: 0.7;
           }
           100% {
             r: 20px;
@@ -156,26 +155,25 @@ export default function WorldMap({ isGlobal, hotspots }) {
         }
 
         .marker-dot {
-          transition: transform 0.2s ease;
+          transition: transform 0.15s ease;
         }
 
         .map-marker-group:hover .marker-dot {
-          transform: scale(1.3);
-          fill: var(--brand-secondary);
+          transform: scale(1.2);
         }
 
         .map-tooltip {
           position: absolute;
           transform: translate(-50%, -115%);
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--text-primary);
-          box-shadow: var(--shadow-lg);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
           padding: 0.75rem 1rem;
           border-radius: var(--radius-sm);
           z-index: 10;
           width: 160px;
           pointer-events: none;
-          animation: tooltipFadeIn 0.2s ease;
+          animation: tooltipFadeIn 0.15s ease;
         }
 
         @keyframes tooltipFadeIn {
@@ -190,33 +188,32 @@ export default function WorldMap({ isGlobal, hotspots }) {
         }
 
         .tooltip-title {
-          font-family: var(--font-display);
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: var(--text-primary);
+          font-size: 0.8125rem;
+          font-weight: 600;
+          color: var(--primary);
           margin-bottom: 0.25rem;
         }
 
         .tooltip-stat {
           font-size: 0.75rem;
-          color: var(--text-secondary);
+          color: var(--secondary);
           margin-bottom: 0.5rem;
         }
 
         .tooltip-num {
-          font-weight: 700;
-          color: var(--brand-secondary);
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .tooltip-badge {
           display: inline-block;
-          font-size: 0.65rem;
-          font-weight: 700;
-          background-color: var(--bg-primary);
-          color: var(--text-primary);
-          border: 1px solid var(--text-primary);
+          font-size: 0.6875rem;
+          font-weight: 500;
+          background-color: var(--surface-container);
+          color: var(--secondary);
+          border: 1px solid var(--outline-variant);
           padding: 0.15rem 0.4rem;
-          border-radius: var(--radius-full);
+          border-radius: var(--radius-sm);
           text-transform: uppercase;
         }
       `}</style>

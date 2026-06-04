@@ -293,42 +293,39 @@ export default function Browse() {
           grid-template-columns: 240px 1fr;
           gap: 2.5rem;
           width: 100%;
-          max-width: var(--max-width);
-          margin: 0 auto;
-          padding: 2rem 1.5rem 5rem 1.5rem;
         }
 
         /* SIDEBAR FILTERS */
         .filters-sidebar {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
           padding: 1.5rem;
           height: fit-content;
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.75rem;
         }
 
         .sidebar-header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-bottom: 1px solid var(--border-color);
+          border-bottom: 1px solid var(--outline-variant);
           padding-bottom: 0.75rem;
         }
 
         .filters-title {
-          font-size: 0.725rem;
-          font-weight: 750;
-          letter-spacing: 0.08em;
-          color: var(--text-primary);
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          color: var(--primary);
         }
 
         .clear-filters-btn {
-          font-size: 0.725rem;
-          font-weight: 700;
-          color: var(--brand-secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--tertiary);
           display: flex;
           align-items: center;
           gap: 0.25rem;
@@ -337,19 +334,21 @@ export default function Browse() {
         .filter-group {
           display: flex;
           flex-direction: column;
-          gap: 0.85rem;
+          gap: 0.75rem;
         }
 
         .filter-group-label {
-          font-size: 0.8rem;
-          font-weight: 700;
-          color: var(--text-primary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--primary);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .checkboxes-wrapper {
           display: flex;
           flex-direction: column;
-          gap: 0.65rem;
+          gap: 0.5rem;
         }
 
         .checkbox-container {
@@ -357,10 +356,10 @@ export default function Browse() {
           align-items: center;
           position: relative;
           cursor: pointer;
-          font-size: 0.85rem;
-          color: var(--text-secondary);
+          font-size: 0.875rem;
+          color: var(--on-surface-variant);
           user-select: none;
-          padding-left: 1.65rem;
+          padding-left: 1.5rem;
         }
 
         .filter-checkbox {
@@ -373,23 +372,23 @@ export default function Browse() {
 
         .checkbox-custom {
           position: absolute;
-          top: 2px;
+          top: 3px;
           left: 0;
           height: 14px;
           width: 14px;
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-heavy);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: 3px;
-          transition: all 0.15s ease;
+          transition: all 0.1s ease;
         }
 
         .checkbox-container:hover .checkbox-custom {
-          border-color: var(--text-primary);
+          border-color: var(--outline);
         }
 
         .filter-checkbox:checked ~ .checkbox-custom {
-          background-color: var(--brand-primary);
-          border-color: var(--brand-primary);
+          background-color: var(--primary);
+          border-color: var(--primary);
         }
 
         .checkbox-custom:after {
@@ -399,7 +398,7 @@ export default function Browse() {
           left: 4px;
           top: 1px;
           width: 3px;
-          height: 7px;
+          height: 6px;
           border: solid white;
           border-width: 0 1.5px 1.5px 0;
           transform: rotate(45deg);
@@ -410,7 +409,7 @@ export default function Browse() {
         }
 
         .checkbox-label {
-          font-weight: 500;
+          font-weight: 400;
         }
 
         /* Stipend range slider */
@@ -419,7 +418,7 @@ export default function Browse() {
           width: 100%;
           height: 4px;
           border-radius: var(--radius-full);
-          background: var(--border-heavy);
+          background: var(--surface-container-highest);
           outline: none;
         }
 
@@ -429,15 +428,14 @@ export default function Browse() {
           width: 14px;
           height: 14px;
           border-radius: var(--radius-full);
-          background: var(--brand-primary);
+          background: var(--primary);
           cursor: pointer;
-          border: 2px solid var(--bg-secondary);
-          box-shadow: var(--shadow-sm);
+          border: 1px solid var(--outline-variant);
           transition: transform 0.1s ease;
         }
 
         .stipend-slider::-webkit-slider-thumb:hover {
-          transform: scale(1.25);
+          transform: scale(1.15);
         }
 
         .slider-limits-row {
@@ -445,36 +443,41 @@ export default function Browse() {
           align-items: center;
           justify-content: space-between;
           font-size: 0.75rem;
-          color: var(--text-muted);
-          font-weight: 600;
+          color: var(--secondary);
         }
 
         .active-slider-val {
-          color: var(--brand-secondary);
-          font-weight: 700;
+          color: var(--primary);
+          font-weight: 500;
         }
 
         /* Location Box */
         .sidebar-input-box {
           display: flex;
           align-items: center;
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-heavy);
-          border-radius: var(--radius-md);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
+          border-radius: var(--radius-sm);
           padding: 0.5rem 0.75rem;
           gap: 0.5rem;
+          height: 2.25rem;
+        }
+
+        .sidebar-input-box:focus-within {
+          border-color: var(--primary);
         }
 
         .sidebar-input-icon {
-          color: var(--text-muted);
+          color: var(--secondary);
         }
 
         .sidebar-input {
           border: none;
           outline: none;
           width: 100%;
-          font-size: 0.85rem;
-          color: var(--text-primary);
+          font-size: 0.8125rem;
+          color: var(--primary);
+          background-color: transparent;
         }
 
         /* Score filters buttons */
@@ -485,52 +488,51 @@ export default function Browse() {
         }
 
         .score-btn {
-          border: 1px solid var(--border-heavy);
-          background-color: var(--bg-secondary);
-          color: var(--text-secondary);
-          font-size: 0.8rem;
-          font-weight: 600;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
+          color: var(--secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
           padding: 0.4rem 0;
           border-radius: var(--radius-sm);
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
         }
 
         .score-btn:hover {
-          border-color: var(--text-primary);
-          color: var(--text-primary);
+          border-color: var(--outline);
+          color: var(--primary);
         }
 
         .score-btn-active {
-          background-color: var(--brand-light-green);
-          border-color: var(--brand-primary);
-          color: var(--brand-secondary);
+          background-color: var(--primary);
+          border-color: var(--primary);
+          color: var(--on-primary);
         }
 
         /* MAIN RESULTS */
         .results-directory {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .directory-header-row {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 1rem;
+          border-bottom: 1px solid var(--outline-variant);
+          padding-bottom: 0.75rem;
         }
 
         .directory-heading {
           font-size: 1.5rem;
-          font-weight: 700;
+          font-weight: 600;
           letter-spacing: -0.02em;
-          margin-bottom: 0.25rem;
         }
 
         .directory-count-summary {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
+          font-size: 0.875rem;
+          color: var(--secondary);
         }
 
         .directory-sorting-controls {
@@ -540,17 +542,17 @@ export default function Browse() {
         }
 
         .sort-label {
-          font-size: 0.8rem;
-          color: var(--text-muted);
-          font-weight: 700;
+          font-size: 0.75rem;
+          color: var(--secondary);
+          font-weight: 500;
         }
 
         .sorting-dropdown {
           border: none;
           background: none;
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: var(--brand-secondary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--tertiary);
           outline: none;
           cursor: pointer;
         }
@@ -562,26 +564,26 @@ export default function Browse() {
         }
 
         .company-result-card {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
           padding: 1.5rem;
           display: flex;
           align-items: center;
           gap: 1.5rem;
-          box-shadow: var(--shadow-sm);
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
         }
 
         .company-result-card:hover {
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-md);
+          background-color: var(--surface-container-low);
+          border-color: var(--outline);
         }
 
         .company-logo-avatar {
-          width: 3.5rem;
-          height: 3.5rem;
-          border-radius: var(--radius-md);
+          width: 3rem;
+          height: 3rem;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--outline-variant);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -589,68 +591,68 @@ export default function Browse() {
         }
 
         .logo-letter {
-          font-family: var(--font-display);
-          font-size: 1.5rem;
-          font-weight: 800;
+          font-size: 1.25rem;
+          font-weight: 600;
         }
 
         .company-details-block {
           flex: 1;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .company-name-row {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.75rem;
           flex-wrap: wrap;
         }
 
         .company-card-name {
-          font-size: 1.15rem;
-          font-weight: 700;
-          letter-spacing: -0.01em;
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .company-category-capsules {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.375rem;
           flex-wrap: wrap;
         }
 
         .capsule-tag {
-          font-size: 0.625rem;
-          font-weight: 750;
-          background-color: var(--bg-primary);
-          color: var(--text-secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          background-color: var(--surface-container);
+          color: var(--secondary);
           padding: 0.15rem 0.5rem;
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-sm);
-          letter-spacing: 0.05em;
         }
 
         .capsule-accent {
-          background-color: #fef3c7;
-          color: #d97706;
+          background-color: rgba(0, 142, 191, 0.08);
+          color: var(--tertiary);
+          border-color: rgba(0, 142, 191, 0.15);
         }
 
         .company-metrics-summary-row {
           display: flex;
           align-items: center;
-          gap: 2.25rem;
-          font-size: 0.8rem;
-          color: var(--text-secondary);
+          gap: 2rem;
+          font-size: 0.8125rem;
+          color: var(--secondary);
           flex-wrap: wrap;
         }
 
         .card-metric-rating {
-          font-weight: 700;
-          color: var(--text-primary);
+          font-weight: 500;
+          color: var(--primary);
           display: flex;
           align-items: center;
-          gap: 0.35rem;
+          gap: 0.25rem;
         }
 
         .star-filled-icon {
@@ -659,62 +661,62 @@ export default function Browse() {
         }
 
         .score-denominator, .stipend-denominator {
-          color: var(--text-muted);
-          font-size: 0.65rem;
-          font-weight: 700;
-          letter-spacing: 0.03em;
+          color: var(--secondary);
+          font-size: 0.75rem;
+          font-weight: 400;
+          margin-left: 0.25rem;
         }
 
         .card-metric-stipend {
-          color: var(--text-primary);
+          color: var(--primary);
           display: flex;
           align-items: center;
           gap: 0.25rem;
         }
 
         .stipend-icon {
-          color: var(--text-muted);
+          color: var(--secondary);
         }
 
         .card-metric-location {
           display: flex;
           align-items: center;
-          gap: 0.35rem;
-          font-weight: 500;
+          gap: 0.25rem;
+          font-weight: 400;
         }
 
         .location-icon {
-          color: var(--text-muted);
+          color: var(--secondary);
         }
 
         .view-profile-btn {
-          border: 1px solid var(--border-heavy);
-          background-color: var(--bg-secondary);
-          color: var(--text-primary);
-          font-size: 0.75rem;
-          font-weight: 700;
-          padding: 0.6rem 1.25rem;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
+          color: var(--primary);
+          font-size: 0.8125rem;
+          font-weight: 500;
+          padding: 0.5rem 1rem;
           border-radius: var(--radius-sm);
-          letter-spacing: 0.05em;
           flex-shrink: 0;
-          transition: all 0.2s ease;
+          transition: all 0.15s ease;
           display: flex;
           align-items: center;
           justify-content: center;
+          height: 2.25rem;
         }
 
         .view-profile-btn:hover {
-          background-color: var(--bg-dark);
-          color: var(--text-white);
-          border-color: var(--bg-dark);
+          background-color: var(--primary);
+          color: var(--on-primary);
+          border-color: var(--primary);
         }
 
         .empty-results-box {
           text-align: center;
           padding: 3rem 1.5rem;
-          border: 1px dashed var(--border-heavy);
+          border: 1px dashed var(--outline-variant);
           border-radius: var(--radius-md);
-          background-color: var(--bg-secondary);
+          background-color: var(--surface);
         }
 
         /* PAGINATION */
@@ -733,28 +735,28 @@ export default function Browse() {
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-secondary);
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
-          transition: all 0.2s ease;
+          font-size: 0.8125rem;
+          font-weight: 500;
+          color: var(--secondary);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
+          transition: all 0.15s ease;
         }
 
         .pag-nav-btn:hover, .pag-num-btn:hover {
-          border-color: var(--text-primary);
-          color: var(--text-primary);
+          border-color: var(--outline);
+          color: var(--primary);
         }
 
         .pag-num-active {
-          background-color: var(--bg-dark);
-          border-color: var(--bg-dark);
-          color: var(--text-white) !important;
+          background-color: var(--primary);
+          border-color: var(--primary);
+          color: var(--on-primary) !important;
         }
 
         .pag-ellipsis {
-          font-size: 0.85rem;
-          color: var(--text-muted);
+          font-size: 0.8125rem;
+          color: var(--secondary);
           width: 2rem;
           text-align: center;
         }
@@ -762,6 +764,7 @@ export default function Browse() {
         @media (max-width: 900px) {
           .browse-layout {
             grid-template-columns: 1fr;
+            gap: 1.5rem;
           }
           
           .company-result-card {
@@ -773,132 +776,6 @@ export default function Browse() {
           .view-profile-btn {
             width: 100%;
           }
-        }
-
-        /* Editorial + brutalist overrides */
-        .browse-layout {
-          gap: 3rem;
-        }
-
-        .filters-sidebar {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-md);
-        }
-
-        .sidebar-header {
-          border-bottom: 2px solid var(--text-primary);
-        }
-
-        .filters-title {
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
-
-        .clear-filters-btn {
-          color: var(--brand-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-        }
-
-        .filter-group-label {
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.7rem;
-        }
-
-        .checkbox-custom {
-          border: 1px solid var(--text-primary);
-          border-radius: 2px;
-        }
-
-        .filter-checkbox:checked ~ .checkbox-custom {
-          background-color: var(--brand-primary);
-          border-color: var(--brand-primary);
-        }
-
-        .score-btn {
-          border: 1px solid var(--text-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-size: 0.7rem;
-        }
-
-        .score-btn-active {
-          background-color: var(--brand-primary);
-          border-color: var(--brand-primary);
-          color: var(--text-white);
-        }
-
-        .directory-header-row {
-          border-bottom: 2px solid var(--text-primary);
-        }
-
-        .directory-heading {
-          font-size: 1.8rem;
-        }
-
-        .sorting-dropdown {
-          color: var(--brand-primary);
-        }
-
-        .company-result-card {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-md);
-        }
-
-        .company-result-card:hover {
-          transform: translate(-3px, -3px);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .company-logo-avatar {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .capsule-tag {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: var(--text-primary);
-        }
-
-        .capsule-accent {
-          background-color: var(--brand-light-green);
-          color: var(--brand-primary);
-          border-color: var(--brand-primary);
-        }
-
-        .view-profile-btn {
-          border: 1px solid var(--brand-primary);
-          background-color: var(--brand-primary);
-          color: var(--text-white);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          border-radius: var(--radius-sm);
-        }
-
-        .view-profile-btn:hover {
-          background-color: var(--brand-secondary);
-          border-color: var(--brand-secondary);
-        }
-
-        .pagination-wrapper {
-          margin-top: 2.5rem;
-        }
-
-        .pag-nav-btn, .pag-num-btn {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-        }
-
-        .pag-num-active {
-          background-color: var(--brand-primary);
-          border-color: var(--brand-primary);
-          color: var(--text-white) !important;
         }
       `}</style>
     </div>

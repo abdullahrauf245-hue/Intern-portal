@@ -216,45 +216,43 @@ export default function Analytics() {
         .analytics-page-layout {
           display: flex;
           flex-direction: column;
-          gap: 3.5rem;
+          gap: 2.5rem;
           width: 100%;
         }
 
         /* HEADER */
         .analytics-header {
-          padding-top: 1.5rem;
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 1.5rem;
+          border-bottom: 1px solid var(--outline-variant);
+          padding-bottom: 1rem;
         }
 
         .analytics-title {
-          font-size: 2.25rem;
-          font-weight: 800;
-          letter-spacing: -0.03em;
-          margin-bottom: 0.5rem;
-          color: var(--text-primary);
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          margin-bottom: 0.25rem;
+          color: var(--primary);
         }
 
         .analytics-subtitle {
-          font-size: 1rem;
-          color: var(--text-secondary);
+          font-size: 0.875rem;
+          color: var(--secondary);
           max-width: 38rem;
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
         /* MAP SECTION */
         .map-analytics-section {
           display: grid;
-          grid-template-columns: 1.7fr 1fr;
+          grid-template-columns: 1.6fr 1fr;
           gap: 2rem;
         }
 
         .map-visualizer-container {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 2rem;
-          box-shadow: var(--shadow-sm);
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
@@ -267,33 +265,33 @@ export default function Analytics() {
         }
 
         .container-card-title {
-          font-size: 1.15rem;
-          font-weight: 700;
-          letter-spacing: -0.01em;
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .map-toggle-buttons {
           display: flex;
           align-items: center;
-          background-color: var(--bg-primary);
-          padding: 0.25rem;
+          background-color: var(--surface-container-low);
+          padding: 0.1875rem;
           border-radius: var(--radius-sm);
-          border: 1px solid var(--border-heavy);
+          border: 1px solid var(--outline-variant);
         }
 
         .toggle-btn {
           font-size: 0.75rem;
-          font-weight: 700;
-          color: var(--text-secondary);
-          padding: 0.3rem 0.85rem;
-          border-radius: 4px;
-          transition: all 0.15s ease;
+          font-weight: 500;
+          color: var(--secondary);
+          padding: 0.25rem 0.75rem;
+          border-radius: var(--radius-sm);
+          transition: all 0.1s ease;
         }
 
         .toggle-btn-active {
-          background-color: var(--bg-secondary);
-          color: var(--text-primary);
-          box-shadow: var(--shadow-sm);
+          background-color: var(--surface);
+          color: var(--primary);
+          border: 1px solid var(--outline-variant);
         }
 
         .map-wrapper-box {
@@ -305,26 +303,24 @@ export default function Analytics() {
           position: absolute;
           top: 1rem;
           left: 1rem;
-          background-color: rgba(15, 23, 42, 0.65);
-          backdrop-filter: blur(4px);
-          border: 1px solid var(--border-dark);
-          color: var(--brand-primary);
-          font-size: 0.65rem;
-          font-weight: 750;
-          letter-spacing: 0.08em;
-          padding: 0.35rem 0.65rem;
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
+          color: var(--secondary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          padding: 0.25rem 0.5rem;
           border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
-          gap: 0.4rem;
+          gap: 0.375rem;
         }
 
         .live-glow-dot {
           width: 6px;
           height: 6px;
-          background-color: var(--brand-primary);
+          background-color: var(--success);
           border-radius: var(--radius-full);
-          box-shadow: 0 0 8px var(--brand-primary);
+          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
         }
 
         /* SIDE PANEL */
@@ -335,21 +331,21 @@ export default function Analytics() {
         }
 
         .health-score-card {
-          background-color: var(--bg-dark);
-          color: var(--text-white);
+          background-color: var(--primary);
+          color: var(--on-primary);
           border-radius: var(--radius-md);
-          padding: 2.25rem 2rem;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-          border: 1px solid var(--border-dark);
+          gap: 1rem;
         }
 
         .health-tag {
-          font-size: 0.65rem;
-          font-weight: 800;
-          letter-spacing: 0.08em;
-          color: var(--brand-primary);
+          font-size: 0.75rem;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+          color: var(--on-primary-container);
+          text-transform: uppercase;
         }
 
         .health-value-block {
@@ -359,64 +355,63 @@ export default function Analytics() {
         }
 
         .health-score-num {
-          font-family: var(--font-display);
-          font-size: 3.5rem;
-          font-weight: 800;
+          font-size: 3rem;
+          font-weight: 600;
           letter-spacing: -0.03em;
         }
 
         .health-score-denominator {
-          font-size: 0.95rem;
-          color: var(--text-muted);
-          margin-bottom: 0.5rem;
+          font-size: 0.875rem;
+          color: var(--on-primary-container);
+          margin-bottom: 0.375rem;
           margin-left: 0.25rem;
-          font-weight: 600;
         }
 
         .health-progress-bar-track {
           width: 100%;
-          height: 6px;
-          background-color: #1e293b;
+          height: 4px;
+          background-color: rgba(255, 255, 255, 0.2);
           border-radius: var(--radius-full);
           overflow: hidden;
         }
 
         .health-progress-bar-fill {
           height: 100%;
-          background-color: var(--brand-primary);
+          background-color: var(--on-primary);
           border-radius: var(--radius-full);
         }
 
         .health-narrative-text {
-          font-size: 0.825rem;
-          color: var(--text-muted);
+          font-size: 0.8125rem;
+          color: rgba(255, 255, 255, 0.7);
           line-height: 1.5;
         }
 
         .industry-leaders-card {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          box-shadow: var(--shadow-sm);
-          padding: 2rem;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
           flex: 1;
         }
 
         .leaders-card-title {
-          font-size: 1rem;
-          font-weight: 700;
-          color: var(--text-primary);
-          border-bottom: 1px solid var(--border-color);
-          padding-bottom: 0.75rem;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--primary);
+          border-bottom: 1px solid var(--outline-variant);
+          padding-bottom: 0.5rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .leaders-list {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
         .leader-item {
@@ -428,57 +423,58 @@ export default function Analytics() {
         .leader-left-block {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 0.5rem;
         }
 
         .leader-icon-marker {
           width: 1.5rem;
           height: 1.5rem;
           border-radius: var(--radius-sm);
-          background-color: var(--bg-primary);
-          color: var(--text-secondary);
+          background-color: var(--surface-container-low);
+          border: 1px solid var(--outline-variant);
+          color: var(--secondary);
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .leader-name {
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-primary);
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--primary);
         }
 
         .leader-stipend-val {
-          font-size: 0.85rem;
-          font-weight: 700;
-          color: var(--brand-secondary);
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: var(--primary);
         }
 
         .mo-label {
-          font-size: 0.7rem;
-          color: var(--text-muted);
-          font-weight: 500;
+          font-size: 0.75rem;
+          color: var(--secondary);
+          font-weight: 400;
         }
 
         .download-report-btn {
-          border: 1px solid var(--border-heavy);
-          background-color: var(--bg-secondary);
-          color: var(--text-primary);
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
+          color: var(--primary);
           font-size: 0.75rem;
-          font-weight: 750;
-          letter-spacing: 0.05em;
-          padding: 0.75rem 0;
-          border-radius: var(--radius-md);
+          font-weight: 500;
+          padding: 0.5rem 0;
+          border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.5rem;
-          transition: all 0.2s ease;
+          gap: 0.375rem;
+          transition: all 0.15s ease;
+          height: 2.25rem;
         }
 
         .download-report-btn:hover {
-          background-color: var(--bg-primary);
-          border-color: var(--text-primary);
+          background-color: var(--surface-container-low);
+          border-color: var(--outline);
         }
 
         /* CHARTS GRID */
@@ -489,14 +485,13 @@ export default function Analytics() {
         }
 
         .trend-chart-card, .satisfaction-index-card {
-          background-color: var(--bg-secondary);
-          border: 1px solid var(--border-color);
+          background-color: var(--surface);
+          border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          box-shadow: var(--shadow-sm);
-          padding: 2rem;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.25rem;
         }
 
         .chart-header-row {
@@ -506,18 +501,19 @@ export default function Analytics() {
         }
 
         .chart-card-subtitle {
-          font-size: 0.85rem;
-          color: var(--text-secondary);
-          margin-top: 0.25rem;
+          font-size: 0.8125rem;
+          color: var(--secondary);
+          margin-top: 0.125rem;
         }
 
         .yoy-badge {
-          font-size: 0.7rem;
-          font-weight: 750;
-          background-color: var(--brand-light-green);
-          color: var(--brand-secondary);
-          padding: 0.25rem 0.6rem;
-          border-radius: var(--radius-full);
+          font-size: 0.75rem;
+          font-weight: 500;
+          background-color: rgba(16, 185, 129, 0.08);
+          color: var(--success);
+          border: 1px solid rgba(16, 185, 129, 0.15);
+          padding: 0.25rem 0.5rem;
+          border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
           gap: 0.25rem;
@@ -532,45 +528,45 @@ export default function Analytics() {
         .satisfaction-bars-list {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1rem;
         }
 
         .satisfaction-bar-row {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .bar-labels-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.725rem;
-          font-weight: 750;
-          letter-spacing: 0.05em;
+          font-size: 0.8125rem;
+          font-weight: 500;
         }
 
         .bar-industry-name {
-          color: var(--text-primary);
+          color: var(--primary);
         }
 
         .bar-score-val {
-          color: var(--brand-secondary);
-          font-weight: 800;
+          color: var(--primary);
+          font-weight: 600;
         }
 
         .bar-track-visual {
           width: 100%;
-          height: 14px;
-          background-color: var(--bg-primary);
+          height: 8px;
+          background-color: var(--surface-container-low);
           border-radius: var(--radius-full);
           position: relative;
           overflow: hidden;
+          border: 1px solid var(--outline-variant);
         }
 
         .bar-fill-current {
           height: 100%;
-          background-color: var(--brand-primary);
+          background-color: var(--primary);
           border-radius: var(--radius-full);
           position: absolute;
           top: 0;
@@ -580,13 +576,13 @@ export default function Analytics() {
 
         .bar-fill-baseline {
           height: 100%;
-          background-color: var(--border-heavy);
+          background-color: var(--outline-variant);
           border-radius: var(--radius-full);
           position: absolute;
           top: 0;
           left: 0;
           z-index: 1;
-          opacity: 0.45;
+          opacity: 0.5;
         }
 
         .charts-legend-row {
@@ -595,24 +591,24 @@ export default function Analytics() {
           gap: 1.5rem;
           margin-top: auto;
           font-size: 0.75rem;
-          color: var(--text-secondary);
-          font-weight: 600;
+          color: var(--secondary);
+          font-weight: 500;
         }
 
         .legend-item {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.375rem;
         }
 
         .legend-color-box {
           width: 8px;
           height: 8px;
-          border-radius: 2px;
+          border-radius: var(--radius-sm);
         }
 
-        .current-color { background-color: var(--brand-primary); }
-        .lastyear-color { background-color: var(--border-heavy); }
+        .current-color { background-color: var(--primary); }
+        .lastyear-color { background-color: var(--outline-variant); }
 
         @media (max-width: 900px) {
           .map-analytics-section {
@@ -622,118 +618,6 @@ export default function Analytics() {
           .charts-trends-grid {
             grid-template-columns: 1fr;
           }
-        }
-
-        /* Editorial + brutalist overrides */
-        .analytics-page-layout {
-          gap: 4rem;
-        }
-
-        .analytics-header {
-          border-bottom: 2px solid var(--text-primary);
-        }
-
-        .analytics-title {
-          font-size: 2.5rem;
-          letter-spacing: -0.04em;
-        }
-
-        .map-visualizer-container {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .map-toggle-buttons {
-          border: 1px solid var(--text-primary);
-          background-color: var(--bg-secondary);
-          border-radius: var(--radius-sm);
-        }
-
-        .toggle-btn {
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-          font-size: 0.65rem;
-        }
-
-        .toggle-btn-active {
-          background-color: var(--brand-primary);
-          color: var(--text-white);
-          box-shadow: none;
-        }
-
-        .live-badge-overlay {
-          background-color: rgba(11, 19, 43, 0.85);
-          color: var(--text-white);
-          border: 1px solid var(--border-dark);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-        }
-
-        .live-glow-dot {
-          background-color: var(--brand-accent);
-          box-shadow: 0 0 0 4px rgba(27, 124, 90, 0.2);
-        }
-
-        .health-score-card {
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .health-tag {
-          color: rgba(255, 255, 255, 0.7);
-          text-transform: uppercase;
-          letter-spacing: 0.12em;
-        }
-
-        .health-progress-bar-track {
-          background-color: rgba(255, 255, 255, 0.12);
-        }
-
-        .health-progress-bar-fill {
-          background-color: var(--brand-primary);
-        }
-
-        .industry-leaders-card,
-        .trend-chart-card,
-        .satisfaction-index-card {
-          border: 1px solid var(--text-primary);
-          border-radius: var(--radius-sm);
-          box-shadow: var(--shadow-md);
-        }
-
-        .leaders-card-title {
-          border-bottom: 2px solid var(--text-primary);
-        }
-
-        .leader-icon-marker {
-          border: 1px solid var(--text-primary);
-        }
-
-        .leader-stipend-val {
-          color: var(--brand-primary);
-        }
-
-        .download-report-btn {
-          border: 1px solid var(--text-primary);
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          border-radius: var(--radius-sm);
-        }
-
-        .yoy-badge {
-          background-color: var(--bg-primary);
-          color: var(--text-primary);
-          border-radius: var(--radius-sm);
-          border: 1px solid var(--text-primary);
-        }
-
-        .bar-score-val {
-          color: var(--brand-primary);
-        }
-
-        .bar-fill-current {
-          background-color: var(--brand-primary);
         }
       `}</style>
     </div>
