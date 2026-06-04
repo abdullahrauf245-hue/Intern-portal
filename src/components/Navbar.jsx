@@ -40,7 +40,7 @@ export default function Navbar() {
 
         <div className="navbar-actions">
           <button className="notification-btn" aria-label="Notifications">
-            <Bell size={20} className="bell-icon" />
+            <Bell size={18} className="bell-icon" />
             <span className="notification-dot"></span>
           </button>
           
@@ -56,12 +56,12 @@ export default function Navbar() {
       
       <style>{`
         .navbar-header {
-          background-color: var(--bg-secondary);
-          border-bottom: 2px solid var(--text-primary);
+          background-color: var(--surface);
+          border-bottom: 1px solid var(--outline-variant);
           position: sticky;
           top: 0;
           z-index: 100;
-          padding: 1.25rem 1.5rem;
+          padding: 0.875rem 1.5rem;
           width: 100%;
         }
 
@@ -75,11 +75,10 @@ export default function Navbar() {
         }
 
         .navbar-logo {
-          font-family: var(--font-display);
-          font-size: 1.45rem;
-          font-weight: 800;
-          color: var(--text-primary);
-          letter-spacing: -0.02em;
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--primary);
+          letter-spacing: -0.03em;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -87,74 +86,70 @@ export default function Navbar() {
         }
 
         .logo-title {
-          font-family: var(--font-display);
-          font-size: 1.4rem;
-          letter-spacing: -0.02em;
+          font-weight: 700;
+          font-size: 1.3rem;
+          letter-spacing: -0.03em;
         }
 
         .logo-caption {
-          font-family: var(--font-sans);
           font-size: 0.6rem;
-          font-weight: 700;
-          letter-spacing: 0.2em;
+          font-weight: 500;
+          letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: var(--text-muted);
+          color: var(--secondary);
           margin-top: 0.1rem;
         }
 
         .navbar-links {
           display: flex;
           align-items: center;
-          gap: 2.25rem;
+          gap: 2rem;
         }
 
         .nav-link {
-          font-size: 0.75rem;
-          color: var(--text-secondary);
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          transition: color 0.2s ease, border-color 0.2s ease;
-          padding: 0.35rem 0;
-          border-bottom: 2px solid transparent;
+          font-size: 0.8125rem;
+          color: var(--secondary);
+          font-weight: 500;
+          transition: color 0.15s ease;
+          padding: 0.5rem 0;
         }
 
         .nav-link:hover {
-          color: var(--text-primary);
-          border-bottom-color: var(--text-primary);
+          color: var(--primary);
         }
 
         .navbar-actions {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
+          gap: 1rem;
         }
 
         .notification-btn {
           position: relative;
-          color: var(--text-secondary);
+          color: var(--secondary);
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0.25rem;
+          padding: 0.5rem;
           border-radius: var(--radius-sm);
-          border: 1px solid var(--text-primary);
-          transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+          border: 1px solid var(--outline-variant);
+          transition: all 0.15s ease;
+          background-color: var(--surface);
         }
 
         .notification-btn:hover {
-          color: var(--text-primary);
-          background-color: var(--bg-primary);
-          transform: translate(-2px, -2px);
+          color: var(--primary);
+          background-color: var(--surface-container-low);
+          border-color: var(--outline);
         }
 
         .notification-dot {
           position: absolute;
-          top: 3px;
-          right: 4px;
-          width: 6px;
-          height: 6px;
-          background-color: var(--brand-accent);
+          top: 6px;
+          right: 6px;
+          width: 5px;
+          height: 5px;
+          background-color: var(--tertiary);
           border-radius: var(--radius-full);
         }
 
@@ -163,7 +158,7 @@ export default function Navbar() {
           height: 2.25rem;
           border-radius: var(--radius-sm);
           overflow: hidden;
-          border: 1px solid var(--text-primary);
+          border: 1px solid var(--outline-variant);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -177,7 +172,7 @@ export default function Navbar() {
 
         @media (max-width: 768px) {
           .navbar-links {
-            display: none; /* simple responsive handling */
+            display: none;
           }
         }
       `}</style>
