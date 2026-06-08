@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Supabase Configuration loaded from environment variables (prefixed with VITE_ for Vite dev/build pipelines)
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Load either VITE_ prefixed local keys or Vercel's auto-injected SUPABASE_ keys
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || import.meta.env.SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.SUPABASE_ANON_KEY;
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
