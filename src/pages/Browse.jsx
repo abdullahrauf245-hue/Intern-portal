@@ -3,6 +3,48 @@ import { Link, useSearchParams } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import { Search, Star, MapPin, DollarSign, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
 
+const CompanyLogo = ({ company, className, letterClassName }) => {
+  const [imgError, setImgError] = React.useState(false);
+  
+  if (company.name.toLowerCase().includes("seecs")) {
+    return (
+      <img 
+        src="/src/assets/seecs_logo.png" 
+        alt="SEECS Logo" 
+        className={className} 
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
+    );
+  }
+  
+  let logoUrl = null;
+  if (company.website) {
+    try {
+      const url = new URL(company.website);
+      const domain = url.hostname.replace("www.", "");
+      logoUrl = `https://logo.clearbit.com/${domain}`;
+    } catch (e) {}
+  }
+  
+  if (logoUrl && !imgError) {
+    return (
+      <img 
+        src={logoUrl} 
+        alt={`${company.name} Logo`} 
+        className={className}
+        onError={() => setImgError(true)}
+        style={{ width: "100%", height: "100%", objectFit: "contain", padding: "4px", backgroundColor: "#ffffff" }}
+      />
+    );
+  }
+  
+  return (
+    <span className={letterClassName} style={{ color: company.logoColor }}>
+      {company.name.charAt(0)}
+    </span>
+  );
+};
+
 export default function Browse() {
   const { companies } = useContext(StoreContext);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -244,17 +286,11 @@ export default function Browse() {
                     overflow: "hidden"
                   }}
                 >
-                  {company.name.toLowerCase().includes("seecs") ? (
-                    <img 
-                      src="/src/assets/seecs_logo.png" 
-                      alt="SEECS Logo" 
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  ) : (
-                    <span className="logo-letter" style={{ color: company.logoColor }}>
-                      {company.name.charAt(0)}
-                    </span>
-                  )}
+                  <CompanyLogo 
+                    company={company} 
+                    className="w-full h-full" 
+                    letterClassName="logo-letter" 
+                  />
                 </div>
 
                 {/* Company Specs */}

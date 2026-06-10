@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from "recharts";
@@ -6,6 +6,48 @@ import {
   Star, DollarSign, Clock, CheckCircle2, ChevronRight, 
   Sparkles, Calendar, MapPin, Send, HelpCircle, Save, BarChart2 
 } from "lucide-react";
+
+const CompanyLogo = ({ company, className, letterClassName }) => {
+  const [imgError, setImgError] = useState(false);
+  
+  if (company.name.toLowerCase().includes("seecs")) {
+    return (
+      <img 
+        src="/src/assets/seecs_logo.png" 
+        alt="SEECS Logo" 
+        className={className} 
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
+    );
+  }
+  
+  let logoUrl = null;
+  if (company.website) {
+    try {
+      const url = new URL(company.website);
+      const domain = url.hostname.replace("www.", "");
+      logoUrl = `https://logo.clearbit.com/${domain}`;
+    } catch (e) {}
+  }
+  
+  if (logoUrl && !imgError) {
+    return (
+      <img 
+        src={logoUrl} 
+        alt={`${company.name} Logo`} 
+        className={className}
+        onError={() => setImgError(true)}
+        style={{ width: "100%", height: "100%", objectFit: "contain", padding: "8px", backgroundColor: "#ffffff" }}
+      />
+    );
+  }
+  
+  return (
+    <span className={letterClassName} style={{ color: company.logoColor }}>
+      {company.name.charAt(0)}
+    </span>
+  );
+};
 
 export default function Profile() {
   const { id } = useParams();
@@ -48,17 +90,11 @@ export default function Profile() {
               overflow: "hidden" 
             }}
           >
-            {company.name.toLowerCase().includes("seecs") ? (
-              <img 
-                src="/src/assets/seecs_logo.png" 
-                alt="SEECS Logo" 
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            ) : (
-              <span className="profile-logo-letter" style={{ color: company.logoColor }}>
-                {company.name.charAt(0)}
-              </span>
-            )}
+            <CompanyLogo 
+              company={company} 
+              className="w-full h-full" 
+              letterClassName="profile-logo-letter" 
+            />
           </div>
 
           <div className="profile-text-identity">
