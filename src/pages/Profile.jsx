@@ -362,21 +362,22 @@ export default function Profile() {
                     dataKey="month" 
                     tickLine={false} 
                     axisLine={false} 
-                    tick={{ fill: "var(--text-muted)", fontSize: 8, fontWeight: 700 }}
+                    tick={{ fill: "var(--secondary)", fontSize: 8, fontWeight: 700 }}
                   />
                   <YAxis hide domain={[3, 5]} />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: "var(--bg-secondary)", 
-                      border: "1px solid var(--border-heavy)",
+                      backgroundColor: "var(--surface)", 
+                      border: "1px solid var(--outline-variant)",
                       borderRadius: "var(--radius-sm)",
                       fontFamily: "var(--font-sans)",
-                      fontSize: 10
+                      fontSize: 10,
+                      boxShadow: "var(--card-shadow)"
                     }}
                   />
                   <Bar 
                     dataKey="rating" 
-                    fill="var(--brand-primary)" 
+                    fill="var(--primary)" 
                     radius={[2, 2, 0, 0]} 
                   />
                 </BarChart>

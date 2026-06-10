@@ -127,36 +127,37 @@ export default function Analytics() {
               >
                 <defs>
                   <linearGradient id="colorStipend" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--brand-primary)" stopOpacity={0.25}/>
-                    <stop offset="95%" stopColor="var(--brand-primary)" stopOpacity={0}/>
+                    <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.2}/>
+                    <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <XAxis 
                   dataKey="month" 
                   tickLine={false} 
                   axisLine={false} 
-                  tick={{ fill: "var(--text-muted)", fontSize: 11, fontWeight: 600 }} 
+                  tick={{ fill: "var(--secondary)", fontSize: 11, fontWeight: 500 }} 
                 />
                 <YAxis 
                   tickLine={false} 
                   axisLine={false} 
                   tickFormatter={formatCurrency}
-                  tick={{ fill: "var(--text-muted)", fontSize: 11, fontWeight: 600 }}
+                  tick={{ fill: "var(--secondary)", fontSize: 11, fontWeight: 500 }}
                 />
                 <Tooltip 
                   formatter={(value) => [formatCurrency(value), "Avg Stipend"]}
                   contentStyle={{ 
-                    backgroundColor: "var(--bg-secondary)", 
-                    border: "1px solid var(--border-heavy)",
+                    backgroundColor: "var(--surface)", 
+                    border: "1px solid var(--outline-variant)",
                     borderRadius: "var(--radius-sm)",
                     fontFamily: "var(--font-sans)",
-                    fontSize: 12
+                    fontSize: 12,
+                    boxShadow: "var(--card-shadow)"
                   }}
                 />
                 <Area 
                   type="monotone" 
                   dataKey="stipend" 
-                  stroke="var(--brand-secondary)" 
+                  stroke="var(--primary)" 
                   strokeWidth={2}
                   fillOpacity={1} 
                   fill="url(#colorStipend)" 
@@ -216,46 +217,48 @@ export default function Analytics() {
         .analytics-page-layout {
           display: flex;
           flex-direction: column;
-          gap: 2.5rem;
+          gap: 3rem;
           width: 100%;
         }
 
         /* HEADER */
         .analytics-header {
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 1rem;
+          padding-bottom: 1.25rem;
         }
 
         .analytics-title {
-          font-size: 1.5rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 2rem;
+          font-weight: 800;
           letter-spacing: -0.02em;
-          margin-bottom: 0.25rem;
-          color: var(--primary);
+          margin-bottom: 0.35rem;
+          color: var(--on-background);
         }
 
         .analytics-subtitle {
-          font-size: 0.875rem;
+          font-size: 1rem;
           color: var(--secondary);
-          max-width: 38rem;
-          line-height: 1.5;
+          max-width: 42rem;
+          line-height: 1.6;
         }
 
         /* MAP SECTION */
         .map-analytics-section {
           display: grid;
           grid-template-columns: 1.6fr 1fr;
-          gap: 2rem;
+          gap: 2.5rem;
         }
 
         .map-visualizer-container {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
+          box-shadow: var(--card-shadow);
         }
 
         .map-controls-row {
@@ -265,33 +268,35 @@ export default function Analytics() {
         }
 
         .container-card-title {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-family: var(--font-display);
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--on-background);
         }
 
         .map-toggle-buttons {
           display: flex;
           align-items: center;
           background-color: var(--surface-container-low);
-          padding: 0.1875rem;
+          padding: 0.25rem;
           border-radius: var(--radius-sm);
           border: 1px solid var(--outline-variant);
         }
 
         .toggle-btn {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           color: var(--secondary);
-          padding: 0.25rem 0.75rem;
+          padding: 0.3rem 0.85rem;
           border-radius: var(--radius-sm);
-          transition: all 0.1s ease;
+          transition: all 0.2s ease;
         }
 
         .toggle-btn-active {
           background-color: var(--surface);
           color: var(--primary);
           border: 1px solid var(--outline-variant);
+          box-shadow: var(--card-shadow);
         }
 
         .map-wrapper-box {
@@ -307,12 +312,13 @@ export default function Analytics() {
           border: 1px solid var(--outline-variant);
           color: var(--secondary);
           font-size: 0.75rem;
-          font-weight: 500;
-          padding: 0.25rem 0.5rem;
+          font-weight: 600;
+          padding: 0.3rem 0.6rem;
           border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
-          gap: 0.375rem;
+          gap: 0.5rem;
+          box-shadow: var(--card-shadow);
         }
 
         .live-glow-dot {
@@ -320,31 +326,32 @@ export default function Analytics() {
           height: 6px;
           background-color: var(--success);
           border-radius: var(--radius-full);
-          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
         }
 
         /* SIDE PANEL */
         .market-side-panel {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .health-score-card {
           background-color: var(--primary);
           color: var(--on-primary);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.25rem;
+          box-shadow: var(--card-shadow);
         }
 
         .health-tag {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           letter-spacing: 0.05em;
-          color: var(--on-primary-container);
+          color: rgba(255, 255, 255, 0.8);
           text-transform: uppercase;
         }
 
@@ -355,21 +362,23 @@ export default function Analytics() {
         }
 
         .health-score-num {
-          font-size: 3rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 3.5rem;
+          font-weight: 800;
           letter-spacing: -0.03em;
         }
 
         .health-score-denominator {
-          font-size: 0.875rem;
-          color: var(--on-primary-container);
-          margin-bottom: 0.375rem;
+          font-size: 1rem;
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 0.6rem;
           margin-left: 0.25rem;
+          font-weight: 500;
         }
 
         .health-progress-bar-track {
           width: 100%;
-          height: 4px;
+          height: 6px;
           background-color: rgba(255, 255, 255, 0.2);
           border-radius: var(--radius-full);
           overflow: hidden;
@@ -382,28 +391,30 @@ export default function Analytics() {
         }
 
         .health-narrative-text {
-          font-size: 0.8125rem;
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.5;
+          font-size: 0.875rem;
+          color: rgba(255, 255, 255, 0.8);
+          line-height: 1.6;
         }
 
         .industry-leaders-card {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
           flex: 1;
+          box-shadow: var(--card-shadow);
         }
 
         .leaders-card-title {
+          font-family: var(--font-display);
           font-size: 0.875rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-weight: 700;
+          color: var(--on-background);
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 0.5rem;
+          padding-bottom: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -411,7 +422,7 @@ export default function Analytics() {
         .leaders-list {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 1rem;
         }
 
         .leader-item {
@@ -423,16 +434,15 @@ export default function Analytics() {
         .leader-left-block {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
 
         .leader-icon-marker {
-          width: 1.5rem;
-          height: 1.5rem;
+          width: 1.75rem;
+          height: 1.75rem;
           border-radius: var(--radius-sm);
-          background-color: var(--surface-container-low);
-          border: 1px solid var(--outline-variant);
-          color: var(--secondary);
+          background-color: var(--primary-container);
+          color: var(--primary);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -440,58 +450,61 @@ export default function Analytics() {
 
         .leader-name {
           font-size: 0.875rem;
-          font-weight: 500;
-          color: var(--primary);
+          font-weight: 600;
+          color: var(--on-background);
         }
 
         .leader-stipend-val {
           font-size: 0.875rem;
-          font-weight: 500;
+          font-weight: 700;
           color: var(--primary);
         }
 
         .mo-label {
           font-size: 0.75rem;
           color: var(--secondary);
-          font-weight: 400;
+          font-weight: 500;
         }
 
         .download-report-btn {
-          border: 1px solid var(--outline-variant);
+          border: 1.5px solid var(--outline-variant);
           background-color: var(--surface);
-          color: var(--primary);
-          font-size: 0.75rem;
-          font-weight: 500;
+          color: var(--on-background);
+          font-size: 0.8125rem;
+          font-weight: 700;
           padding: 0.5rem 0;
           border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.375rem;
-          transition: all 0.15s ease;
-          height: 2.25rem;
+          gap: 0.5rem;
+          transition: all 0.2s ease;
+          height: 2.5rem;
         }
 
         .download-report-btn:hover {
-          background-color: var(--surface-container-low);
-          border-color: var(--outline);
+          background-color: var(--primary);
+          border-color: var(--primary);
+          color: var(--on-primary);
+          transform: translateY(-1px);
         }
 
         /* CHARTS GRID */
         .charts-trends-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 2rem;
+          gap: 2.5rem;
         }
 
         .trend-chart-card, .satisfaction-index-card {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
+          box-shadow: var(--card-shadow);
         }
 
         .chart-header-row {
@@ -501,18 +514,18 @@ export default function Analytics() {
         }
 
         .chart-card-subtitle {
-          font-size: 0.8125rem;
+          font-size: 0.875rem;
           color: var(--secondary);
-          margin-top: 0.125rem;
+          margin-top: 0.25rem;
         }
 
         .yoy-badge {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           background-color: rgba(16, 185, 129, 0.08);
           color: var(--success);
           border: 1px solid rgba(16, 185, 129, 0.15);
-          padding: 0.25rem 0.5rem;
+          padding: 0.3rem 0.6rem;
           border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
@@ -528,35 +541,35 @@ export default function Analytics() {
         .satisfaction-bars-list {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.25rem;
         }
 
         .satisfaction-bar-row {
           display: flex;
           flex-direction: column;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .bar-labels-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.8125rem;
-          font-weight: 500;
+          font-size: 0.875rem;
+          font-weight: 600;
         }
 
         .bar-industry-name {
-          color: var(--primary);
+          color: var(--on-background);
         }
 
         .bar-score-val {
           color: var(--primary);
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .bar-track-visual {
           width: 100%;
-          height: 8px;
+          height: 10px;
           background-color: var(--surface-container-low);
           border-radius: var(--radius-full);
           position: relative;
@@ -582,7 +595,7 @@ export default function Analytics() {
           top: 0;
           left: 0;
           z-index: 1;
-          opacity: 0.5;
+          opacity: 0.6;
         }
 
         .charts-legend-row {
@@ -590,21 +603,21 @@ export default function Analytics() {
           align-items: center;
           gap: 1.5rem;
           margin-top: auto;
-          font-size: 0.75rem;
+          font-size: 0.8125rem;
           color: var(--secondary);
-          font-weight: 500;
+          font-weight: 600;
         }
 
         .legend-item {
           display: flex;
           align-items: center;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .legend-color-box {
-          width: 8px;
-          height: 8px;
-          border-radius: var(--radius-sm);
+          width: 10px;
+          height: 10px;
+          border-radius: 3px;
         }
 
         .current-color { background-color: var(--primary); }

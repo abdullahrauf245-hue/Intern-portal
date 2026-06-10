@@ -290,8 +290,8 @@ export default function Browse() {
       <style>{`
         .browse-layout {
           display: grid;
-          grid-template-columns: 240px 1fr;
-          gap: 2.5rem;
+          grid-template-columns: 260px 1fr;
+          gap: 3rem;
           width: 100%;
         }
 
@@ -300,11 +300,12 @@ export default function Browse() {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem 1.5rem;
           height: fit-content;
           display: flex;
           flex-direction: column;
-          gap: 1.75rem;
+          gap: 2rem;
+          box-shadow: var(--card-shadow);
         }
 
         .sidebar-header {
@@ -312,35 +313,40 @@ export default function Browse() {
           align-items: center;
           justify-content: space-between;
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 0.75rem;
+          padding-bottom: 1rem;
         }
 
         .filters-title {
-          font-size: 0.75rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 0.8125rem;
+          font-weight: 700;
           letter-spacing: 0.05em;
-          color: var(--primary);
+          color: var(--on-background);
         }
 
         .clear-filters-btn {
           font-size: 0.75rem;
-          font-weight: 500;
-          color: var(--tertiary);
+          font-weight: 600;
+          color: var(--primary);
           display: flex;
           align-items: center;
           gap: 0.25rem;
+          transition: all 0.2s ease;
+        }
+        .clear-filters-btn:hover {
+          color: var(--primary-hover);
         }
 
         .filter-group {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 0.875rem;
         }
 
         .filter-group-label {
           font-size: 0.75rem;
-          font-weight: 500;
-          color: var(--primary);
+          font-weight: 700;
+          color: var(--on-background);
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -348,7 +354,7 @@ export default function Browse() {
         .checkboxes-wrapper {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.625rem;
         }
 
         .checkbox-container {
@@ -359,7 +365,8 @@ export default function Browse() {
           font-size: 0.875rem;
           color: var(--on-surface-variant);
           user-select: none;
-          padding-left: 1.5rem;
+          padding-left: 1.75rem;
+          font-weight: 500;
         }
 
         .filter-checkbox {
@@ -372,18 +379,18 @@ export default function Browse() {
 
         .checkbox-custom {
           position: absolute;
-          top: 3px;
+          top: 2px;
           left: 0;
-          height: 14px;
-          width: 14px;
+          height: 16px;
+          width: 16px;
           background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
-          border-radius: 3px;
-          transition: all 0.1s ease;
+          border: 1.5px solid var(--outline-variant);
+          border-radius: 4px;
+          transition: all 0.2s ease;
         }
 
         .checkbox-container:hover .checkbox-custom {
-          border-color: var(--outline);
+          border-color: var(--primary);
         }
 
         .filter-checkbox:checked ~ .checkbox-custom {
@@ -395,12 +402,12 @@ export default function Browse() {
           content: "";
           position: absolute;
           display: none;
-          left: 4px;
-          top: 1px;
+          left: 5px;
+          top: 1.5px;
           width: 3px;
-          height: 6px;
+          height: 7px;
           border: solid white;
-          border-width: 0 1.5px 1.5px 0;
+          border-width: 0 2px 2px 0;
           transform: rotate(45deg);
         }
 
@@ -408,15 +415,11 @@ export default function Browse() {
           display: block;
         }
 
-        .checkbox-label {
-          font-weight: 400;
-        }
-
         /* Stipend range slider */
         .stipend-slider {
           -webkit-appearance: none;
           width: 100%;
-          height: 4px;
+          height: 5px;
           border-radius: var(--radius-full);
           background: var(--surface-container-highest);
           outline: none;
@@ -425,17 +428,18 @@ export default function Browse() {
         .stipend-slider::-webkit-slider-thumb {
           -webkit-appearance: none;
           appearance: none;
-          width: 14px;
-          height: 14px;
+          width: 16px;
+          height: 16px;
           border-radius: var(--radius-full);
           background: var(--primary);
           cursor: pointer;
-          border: 1px solid var(--outline-variant);
-          transition: transform 0.1s ease;
+          border: 2px solid var(--surface);
+          box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+          transition: transform 0.2s ease;
         }
 
         .stipend-slider::-webkit-slider-thumb:hover {
-          transform: scale(1.15);
+          transform: scale(1.2);
         }
 
         .slider-limits-row {
@@ -444,11 +448,12 @@ export default function Browse() {
           justify-content: space-between;
           font-size: 0.75rem;
           color: var(--secondary);
+          margin-top: 0.25rem;
         }
 
         .active-slider-val {
           color: var(--primary);
-          font-weight: 500;
+          font-weight: 600;
         }
 
         /* Location Box */
@@ -460,11 +465,13 @@ export default function Browse() {
           border-radius: var(--radius-sm);
           padding: 0.5rem 0.75rem;
           gap: 0.5rem;
-          height: 2.25rem;
+          height: 2.5rem;
+          transition: all 0.2s ease;
         }
 
         .sidebar-input-box:focus-within {
           border-color: var(--primary);
+          box-shadow: var(--focus-ring);
         }
 
         .sidebar-input-icon {
@@ -475,8 +482,8 @@ export default function Browse() {
           border: none;
           outline: none;
           width: 100%;
-          font-size: 0.8125rem;
-          color: var(--primary);
+          font-size: 0.875rem;
+          color: var(--on-background);
           background-color: transparent;
         }
 
@@ -491,15 +498,15 @@ export default function Browse() {
           border: 1px solid var(--outline-variant);
           background-color: var(--surface);
           color: var(--secondary);
-          font-size: 0.75rem;
-          font-weight: 500;
-          padding: 0.4rem 0;
+          font-size: 0.8125rem;
+          font-weight: 600;
+          padding: 0.5rem 0;
           border-radius: var(--radius-sm);
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
         }
 
         .score-btn:hover {
-          border-color: var(--outline);
+          border-color: var(--primary);
           color: var(--primary);
         }
 
@@ -513,7 +520,7 @@ export default function Browse() {
         .results-directory {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .directory-header-row {
@@ -521,18 +528,21 @@ export default function Browse() {
           align-items: flex-end;
           justify-content: space-between;
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 0.75rem;
+          padding-bottom: 1rem;
         }
 
         .directory-heading {
-          font-size: 1.5rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 1.75rem;
+          font-weight: 800;
           letter-spacing: -0.02em;
+          color: var(--on-background);
         }
 
         .directory-count-summary {
           font-size: 0.875rem;
           color: var(--secondary);
+          margin-top: 0.25rem;
         }
 
         .directory-sorting-controls {
@@ -544,44 +554,52 @@ export default function Browse() {
         .sort-label {
           font-size: 0.75rem;
           color: var(--secondary);
-          font-weight: 500;
+          font-weight: 600;
         }
 
         .sorting-dropdown {
-          border: none;
-          background: none;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
           font-size: 0.8125rem;
-          font-weight: 500;
-          color: var(--tertiary);
+          font-weight: 600;
+          color: var(--primary);
           outline: none;
           cursor: pointer;
+          padding: 0.35rem 0.75rem;
+          border-radius: var(--radius-sm);
+          transition: all 0.2s ease;
+        }
+        .sorting-dropdown:hover {
+          border-color: var(--primary);
         }
 
         .companies-list {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.25rem;
         }
 
         .company-result-card {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 1.75rem 2rem;
           display: flex;
           align-items: center;
-          gap: 1.5rem;
-          transition: all 0.15s ease;
+          gap: 2rem;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: var(--card-shadow);
         }
 
         .company-result-card:hover {
-          background-color: var(--surface-container-low);
-          border-color: var(--outline);
+          transform: translateY(-3px);
+          box-shadow: var(--card-shadow-hover);
+          border-color: rgba(55, 138, 221, 0.2);
         }
 
         .company-logo-avatar {
-          width: 3rem;
-          height: 3rem;
+          width: 3.5rem;
+          height: 3.5rem;
           border-radius: var(--radius-sm);
           border: 1px solid var(--outline-variant);
           display: flex;
@@ -591,28 +609,30 @@ export default function Browse() {
         }
 
         .logo-letter {
-          font-size: 1.25rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 1.5rem;
+          font-weight: 800;
         }
 
         .company-details-block {
           flex: 1;
           display: flex;
           flex-direction: column;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .company-name-row {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 1rem;
           flex-wrap: wrap;
         }
 
         .company-card-name {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-family: var(--font-display);
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--on-background);
         }
 
         .company-category-capsules {
@@ -624,35 +644,36 @@ export default function Browse() {
 
         .capsule-tag {
           font-size: 0.75rem;
-          font-weight: 500;
-          background-color: var(--surface-container);
+          font-weight: 600;
+          background-color: var(--surface-container-low);
           color: var(--secondary);
-          padding: 0.15rem 0.5rem;
+          padding: 0.2rem 0.625rem;
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-sm);
+          letter-spacing: 0.02em;
         }
 
         .capsule-accent {
-          background-color: rgba(0, 142, 191, 0.08);
-          color: var(--tertiary);
-          border-color: rgba(0, 142, 191, 0.15);
+          background-color: rgba(55, 138, 221, 0.08);
+          color: var(--primary);
+          border-color: rgba(55, 138, 221, 0.15);
         }
 
         .company-metrics-summary-row {
           display: flex;
           align-items: center;
           gap: 2rem;
-          font-size: 0.8125rem;
-          color: var(--secondary);
+          font-size: 0.875rem;
+          color: var(--on-surface-variant);
           flex-wrap: wrap;
         }
 
         .card-metric-rating {
-          font-weight: 500;
-          color: var(--primary);
+          font-weight: 600;
+          color: var(--on-background);
           display: flex;
           align-items: center;
-          gap: 0.25rem;
+          gap: 0.35rem;
         }
 
         .star-filled-icon {
@@ -663,15 +684,16 @@ export default function Browse() {
         .score-denominator, .stipend-denominator {
           color: var(--secondary);
           font-size: 0.75rem;
-          font-weight: 400;
-          margin-left: 0.25rem;
+          font-weight: 500;
+          margin-left: 0.15rem;
         }
 
         .card-metric-stipend {
-          color: var(--primary);
+          color: var(--on-background);
           display: flex;
           align-items: center;
-          gap: 0.25rem;
+          gap: 0.35rem;
+          font-weight: 600;
         }
 
         .stipend-icon {
@@ -681,8 +703,9 @@ export default function Browse() {
         .card-metric-location {
           display: flex;
           align-items: center;
-          gap: 0.25rem;
-          font-weight: 400;
+          gap: 0.35rem;
+          font-weight: 500;
+          color: var(--secondary);
         }
 
         .location-icon {
@@ -690,31 +713,32 @@ export default function Browse() {
         }
 
         .view-profile-btn {
-          border: 1px solid var(--outline-variant);
+          border: 1.5px solid var(--outline-variant);
           background-color: var(--surface);
-          color: var(--primary);
+          color: var(--on-background);
           font-size: 0.8125rem;
-          font-weight: 500;
-          padding: 0.5rem 1rem;
+          font-weight: 700;
+          padding: 0.5rem 1.25rem;
           border-radius: var(--radius-sm);
           flex-shrink: 0;
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 2.25rem;
+          height: 2.5rem;
         }
 
         .view-profile-btn:hover {
           background-color: var(--primary);
           color: var(--on-primary);
           border-color: var(--primary);
+          transform: translateY(-1px);
         }
 
         .empty-results-box {
           text-align: center;
-          padding: 3rem 1.5rem;
-          border: 1px dashed var(--outline-variant);
+          padding: 4rem 2rem;
+          border: 2.5px dashed var(--outline-variant);
           border-radius: var(--radius-md);
           background-color: var(--surface);
         }
@@ -724,28 +748,29 @@ export default function Browse() {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 0.35rem;
-          margin-top: 2rem;
+          gap: 0.5rem;
+          margin-top: 3rem;
         }
 
         .pag-nav-btn, .pag-num-btn {
-          width: 2rem;
-          height: 2rem;
+          width: 2.25rem;
+          height: 2.25rem;
           border-radius: var(--radius-sm);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.8125rem;
-          font-weight: 500;
+          font-size: 0.875rem;
+          font-weight: 600;
           color: var(--secondary);
           background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
-          transition: all 0.15s ease;
+          border: 1.5px solid var(--outline-variant);
+          transition: all 0.2s ease;
         }
 
         .pag-nav-btn:hover, .pag-num-btn:hover {
-          border-color: var(--outline);
+          border-color: var(--primary);
           color: var(--primary);
+          background-color: var(--primary-container);
         }
 
         .pag-num-active {
@@ -755,22 +780,22 @@ export default function Browse() {
         }
 
         .pag-ellipsis {
-          font-size: 0.8125rem;
+          font-size: 0.875rem;
           color: var(--secondary);
-          width: 2rem;
+          width: 2.25rem;
           text-align: center;
         }
 
         @media (max-width: 900px) {
           .browse-layout {
             grid-template-columns: 1fr;
-            gap: 1.5rem;
+            gap: 2rem;
           }
           
           .company-result-card {
             flex-direction: column;
             align-items: flex-start;
-            gap: 1.25rem;
+            gap: 1.5rem;
           }
           
           .view-profile-btn {
