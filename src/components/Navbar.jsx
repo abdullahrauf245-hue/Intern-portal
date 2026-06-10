@@ -8,7 +8,7 @@ export default function Navbar() {
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
           <span className="logo-title">InternPulse</span>
-          <span className="logo-caption">Internship Index</span>
+          <span className="logo-caption">Precision Internship Index</span>
         </Link>
         
         <nav className="navbar-links">
@@ -30,15 +30,13 @@ export default function Navbar() {
           >
             Salaries
           </NavLink>
-          <NavLink 
-            to="/resources" 
-            className={({ isActive }) => isActive ? "nav-link nav-active" : "nav-link"}
-          >
-            Resources
-          </NavLink>
         </nav>
 
         <div className="navbar-actions">
+          <Link to="/submit-review" className="btn btn-primary header-cta-btn">
+            Write a Review
+          </Link>
+          
           <button className="notification-btn" aria-label="Notifications">
             <Bell size={18} className="bell-icon" />
             <span className="notification-dot"></span>
@@ -56,12 +54,14 @@ export default function Navbar() {
       
       <style>{`
         .navbar-header {
-          background-color: var(--surface);
+          background-color: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           border-bottom: 1px solid var(--outline-variant);
           position: sticky;
           top: 0;
           z-index: 100;
-          padding: 0.875rem 1.5rem;
+          padding: 0.75rem 1.5rem;
           width: 100%;
         }
 
@@ -71,46 +71,47 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 2.5rem;
+          height: 2.75rem;
         }
 
         .navbar-logo {
-          font-size: 1.25rem;
-          font-weight: 700;
-          color: var(--primary);
-          letter-spacing: -0.03em;
+          color: var(--on-background);
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          line-height: 1.1;
+          line-height: 1;
         }
 
         .logo-title {
-          font-weight: 700;
-          font-size: 1.3rem;
-          letter-spacing: -0.03em;
+          font-family: var(--font-display);
+          font-weight: 800;
+          font-size: 1.4rem;
+          letter-spacing: -0.04em;
+          background: linear-gradient(135deg, #0f172a 0%, #378ADD 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .logo-caption {
-          font-size: 0.6rem;
-          font-weight: 500;
-          letter-spacing: 0.15em;
+          font-size: 0.55rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
           text-transform: uppercase;
           color: var(--secondary);
-          margin-top: 0.1rem;
+          margin-top: 0.15rem;
         }
 
         .navbar-links {
           display: flex;
           align-items: center;
-          gap: 2rem;
+          gap: 2.5rem;
         }
 
         .nav-link {
-          font-size: 0.8125rem;
+          font-size: 0.875rem;
           color: var(--secondary);
           font-weight: 500;
-          transition: color 0.15s ease;
+          transition: all 0.2s ease;
           padding: 0.5rem 0;
         }
 
@@ -124,33 +125,42 @@ export default function Navbar() {
           gap: 1rem;
         }
 
+        .header-cta-btn {
+          font-size: 0.8125rem;
+          height: 2.25rem;
+          padding: 0 1rem;
+          border-radius: var(--radius-sm);
+        }
+
         .notification-btn {
           position: relative;
           color: var(--secondary);
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 0.5rem;
+          width: 2.25rem;
+          height: 2.25rem;
           border-radius: var(--radius-sm);
           border: 1px solid var(--outline-variant);
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           background-color: var(--surface);
         }
 
         .notification-btn:hover {
           color: var(--primary);
           background-color: var(--surface-container-low);
-          border-color: var(--outline);
+          border-color: var(--primary);
         }
 
         .notification-dot {
           position: absolute;
           top: 6px;
           right: 6px;
-          width: 5px;
-          height: 5px;
-          background-color: var(--tertiary);
+          width: 6px;
+          height: 6px;
+          background-color: var(--primary);
           border-radius: var(--radius-full);
+          border: 1.5px solid var(--surface);
         }
 
         .profile-wrapper {
@@ -162,6 +172,11 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: center;
+          transition: all 0.2s ease;
+        }
+
+        .profile-wrapper:hover {
+          border-color: var(--primary);
         }
 
         .user-avatar {
