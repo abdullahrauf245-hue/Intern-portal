@@ -337,23 +337,23 @@ export default function ReviewWizard() {
       <style>{`
         .wizard-layout-container {
           width: 100%;
-          max-width: 34rem;
-          margin: 1.5rem auto 4rem auto;
+          max-width: 36rem;
+          margin: 2rem auto 4rem auto;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         /* PROGRESS TRACKING */
         .progress-monitor {
           display: flex;
           flex-direction: column;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .wizard-category-label {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 700;
           color: var(--secondary);
           letter-spacing: 0.05em;
           text-transform: uppercase;
@@ -366,23 +366,24 @@ export default function ReviewWizard() {
         }
 
         .progress-step-headline {
-          font-size: 1.5rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 1.75rem;
+          font-weight: 800;
           letter-spacing: -0.02em;
-          color: var(--primary);
+          color: var(--on-background);
           line-height: 1.1;
         }
 
         .step-fraction {
-          font-size: 0.8125rem;
-          font-weight: 500;
+          font-size: 0.875rem;
+          font-weight: 600;
           color: var(--secondary);
         }
 
         .progress-track-bar {
           width: 100%;
-          height: 4px;
-          background-color: var(--surface-container);
+          height: 6px;
+          background-color: var(--surface-container-high);
           border-radius: var(--radius-full);
           overflow: hidden;
           margin-top: 0.25rem;
@@ -400,13 +401,14 @@ export default function ReviewWizard() {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 2.25rem 2rem;
+          padding: 2.5rem;
+          box-shadow: var(--card-shadow);
         }
 
         .wizard-step-body {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
         }
 
         /* AUTOCOMPLETE SUGGESTIONS */
@@ -422,20 +424,21 @@ export default function ReviewWizard() {
           margin-top: 0.25rem;
           max-height: 150px;
           overflow-y: auto;
+          box-shadow: var(--card-shadow-hover);
         }
 
         .suggestion-item {
           width: 100%;
           text-align: left;
-          padding: 0.5rem 0.875rem;
-          font-size: 0.8125rem;
-          color: var(--secondary);
-          font-weight: 400;
-          transition: all 0.1s ease;
+          padding: 0.625rem 1rem;
+          font-size: 0.875rem;
+          color: var(--on-surface-variant);
+          font-weight: 500;
+          transition: all 0.15s ease;
         }
 
         .suggestion-item:hover {
-          background-color: var(--surface-container-low);
+          background-color: var(--primary-container);
           color: var(--primary);
         }
 
@@ -448,36 +451,36 @@ export default function ReviewWizard() {
 
         .currency-symbol {
           position: absolute;
-          left: 0.875rem;
-          font-size: 0.875rem;
-          font-weight: 500;
+          left: 1rem;
+          font-size: 0.9rem;
+          font-weight: 600;
           color: var(--secondary);
         }
 
         .currency-input {
-          padding-left: 1.75rem !important;
+          padding-left: 2rem !important;
         }
 
         /* WARNING BOX */
         .verification-warning-box {
-          background-color: var(--surface-container-low);
-          border: 1px solid var(--outline-variant);
+          background-color: var(--primary-container);
+          border: 1px solid rgba(55, 138, 221, 0.15);
           border-radius: var(--radius-sm);
-          padding: 1rem 1.25rem;
+          padding: 1.25rem;
           display: flex;
           align-items: flex-start;
-          gap: 0.75rem;
+          gap: 0.875rem;
         }
 
         .warning-shield-icon {
-          color: var(--secondary);
+          color: var(--primary);
           flex-shrink: 0;
           margin-top: 0.125rem;
         }
 
         .warning-text {
-          font-size: 0.8125rem;
-          color: var(--secondary);
+          font-size: 0.875rem;
+          color: var(--on-primary-container);
           line-height: 1.5;
         }
 
@@ -485,19 +488,19 @@ export default function ReviewWizard() {
         .stars-selector-row {
           display: flex;
           align-items: center;
-          gap: 0.375rem;
-          margin-top: 0.125rem;
+          gap: 0.5rem;
+          margin-top: 0.25rem;
         }
 
         .star-selection-btn {
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: transform 0.1s ease;
+          transition: transform 0.2s ease;
         }
 
         .star-selection-btn:hover {
-          transform: scale(1.1);
+          transform: scale(1.15);
         }
 
         .star-icon-filled {
@@ -511,33 +514,34 @@ export default function ReviewWizard() {
 
         .text-area-input {
           resize: none;
-          min-height: 5.5rem;
-          padding: 0.625rem 0.875rem;
+          min-height: 6rem;
+          padding: 0.75rem 1rem;
         }
 
         .skills-checklist-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
 
         .skill-tag-check-btn {
           border: 1px solid var(--outline-variant);
           background-color: var(--surface);
-          color: var(--secondary);
-          font-size: 0.75rem;
-          font-weight: 500;
-          letter-spacing: 0.05em;
-          padding: 0.4rem 0.75rem;
+          color: var(--on-surface-variant);
+          font-size: 0.8125rem;
+          font-weight: 600;
+          letter-spacing: 0.02em;
+          padding: 0.5rem 1rem;
           border-radius: var(--radius-sm);
           text-align: left;
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           text-transform: uppercase;
         }
 
         .skill-tag-check-btn:hover {
-          border-color: var(--outline);
+          border-color: var(--primary);
           color: var(--primary);
+          background-color: var(--primary-container);
         }
 
         .skill-tag-active {
@@ -552,17 +556,17 @@ export default function ReviewWizard() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 0.5rem;
+          gap: 0.75rem;
           margin-bottom: 1rem;
         }
 
         .auth-mail-icon {
-          color: var(--secondary);
-          background-color: var(--surface-container-low);
-          border: 1px solid var(--outline-variant);
-          padding: 0.5rem;
-          width: 2.75rem;
-          height: 2.75rem;
+          color: var(--primary);
+          background-color: var(--primary-container);
+          border: 1px solid rgba(55, 138, 221, 0.15);
+          padding: 0.625rem;
+          width: 3.5rem;
+          height: 3.5rem;
           border-radius: var(--radius-full);
           display: flex;
           align-items: center;
@@ -570,39 +574,40 @@ export default function ReviewWizard() {
         }
 
         .auth-main-headline {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-family: var(--font-display);
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--on-background);
         }
 
         .auth-sub-narrative {
-          font-size: 0.8125rem;
+          font-size: 0.875rem;
           color: var(--secondary);
-          line-height: 1.5;
-          max-width: 22rem;
+          line-height: 1.6;
+          max-width: 24rem;
         }
 
         .security-notice-callout {
           display: flex;
           align-items: center;
-          gap: 0.375rem;
-          font-size: 0.75rem;
+          gap: 0.5rem;
+          font-size: 0.8125rem;
           color: var(--secondary);
           background-color: var(--surface-container-low);
           border: 1px solid var(--outline-variant);
-          padding: 0.5rem 0.875rem;
+          padding: 0.625rem 1rem;
           border-radius: var(--radius-sm);
         }
 
         .security-sparkle {
-          color: var(--tertiary);
+          color: var(--primary);
         }
 
         /* HELPERS */
         .wizard-actions-row {
           display: flex;
           align-items: center;
-          margin-top: 1rem;
+          margin-top: 1.5rem;
         }
 
         .justify-end { justify-content: flex-end; }

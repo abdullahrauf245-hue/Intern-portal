@@ -387,13 +387,11 @@ export default function Profile() {
 
         </div>
 
-      </div>
-
-      <style>{`
+      </div><style>{`
         .profile-layout-container {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 2.5rem;
           width: 100%;
         }
 
@@ -403,7 +401,7 @@ export default function Profile() {
           align-items: center;
           justify-content: space-between;
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 1.5rem;
+          padding-bottom: 2rem;
           gap: 3rem;
           flex-wrap: wrap;
         }
@@ -411,30 +409,32 @@ export default function Profile() {
         .profile-identity-block {
           display: flex;
           align-items: center;
-          gap: 1.5rem;
+          gap: 1.75rem;
           flex: 1;
         }
 
         .company-profile-logo-avatar {
-          width: 4rem;
-          height: 4rem;
+          width: 4.5rem;
+          height: 4.5rem;
           border-radius: var(--radius-md);
           border: 1px solid var(--outline-variant);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          box-shadow: var(--card-shadow);
         }
 
         .profile-logo-letter {
-          font-size: 1.75rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 2rem;
+          font-weight: 800;
         }
 
         .profile-text-identity {
           display: flex;
           flex-direction: column;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .identity-tags-row {
@@ -444,16 +444,18 @@ export default function Profile() {
         }
 
         .profile-company-name {
-          font-size: 1.75rem;
-          font-weight: 600;
-          letter-spacing: -0.02em;
-          color: var(--primary);
+          font-family: var(--font-display);
+          font-size: 2.25rem;
+          font-weight: 850;
+          letter-spacing: -0.03em;
+          color: var(--on-background);
           line-height: 1.1;
         }
 
         .profile-site-link {
-          font-size: 0.875rem;
+          font-size: 0.95rem;
           color: var(--secondary);
+          line-height: 1.5;
         }
 
         /* Pulse Rating Score Box */
@@ -461,24 +463,25 @@ export default function Profile() {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.25rem;
+          padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
-          width: 16rem;
+          gap: 0.625rem;
+          width: 18rem;
           align-items: center;
+          box-shadow: var(--card-shadow);
         }
 
         .pulse-score-row {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 0.125rem;
+          gap: 0.25rem;
         }
 
         .pulse-label {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: 0.05em;
           color: var(--secondary);
           text-transform: uppercase;
@@ -491,22 +494,25 @@ export default function Profile() {
         }
 
         .score-num {
-          font-size: 1.75rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 2.25rem;
+          font-weight: 800;
           color: var(--primary);
+          letter-spacing: -0.02em;
         }
 
         .score-denom {
-          font-size: 0.8125rem;
+          font-size: 0.875rem;
           color: var(--secondary);
-          margin-bottom: 0.15rem;
-          margin-left: 0.1rem;
+          margin-bottom: 0.25rem;
+          margin-left: 0.15rem;
+          font-weight: 500;
         }
 
         .stars-row {
           display: flex;
           align-items: center;
-          gap: 0.125rem;
+          gap: 0.2rem;
         }
 
         .star-icon-filled {
@@ -522,16 +528,18 @@ export default function Profile() {
           width: 100%;
           background-color: var(--primary);
           color: var(--on-primary);
-          font-size: 0.8125rem;
-          font-weight: 500;
-          padding: 0.5rem 0;
+          font-size: 0.875rem;
+          font-weight: 600;
+          padding: 0.625rem 0;
           border-radius: var(--radius-sm);
           text-align: center;
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
+          box-shadow: var(--card-shadow);
         }
 
         .write-review-hero-btn:hover {
-          background-color: #1f2937;
+          background-color: var(--primary-hover);
+          transform: translateY(-1px);
         }
 
         /* ACTIONS STRIP */
@@ -543,16 +551,16 @@ export default function Profile() {
 
         .strip-action-btn {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           color: var(--secondary);
           display: inline-flex;
           align-items: center;
           gap: 0.375rem;
-          padding: 0.375rem 0.75rem;
+          padding: 0.5rem 1rem;
           border: 1px solid var(--outline-variant);
           background-color: var(--surface);
           border-radius: var(--radius-sm);
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -560,7 +568,7 @@ export default function Profile() {
         .strip-action-btn:hover {
           color: var(--primary);
           background-color: var(--surface-container-low);
-          border-color: var(--outline);
+          border-color: var(--primary);
         }
 
         /* STATS deck */
@@ -571,14 +579,15 @@ export default function Profile() {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           color: var(--primary);
+          box-shadow: var(--card-shadow);
         }
 
         .deck-card {
           display: flex;
           flex-direction: column;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .deck-card-header {
@@ -590,102 +599,105 @@ export default function Profile() {
 
         .deck-card-label {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: 0.05em;
           text-transform: uppercase;
         }
 
         .deck-card-icon {
           color: var(--secondary);
-          opacity: 0.7;
         }
 
         .deck-card-val {
-          font-size: 1.5rem;
-          font-weight: 600;
+          font-family: var(--font-display);
+          font-size: 1.75rem;
+          font-weight: 800;
           letter-spacing: -0.01em;
+          color: var(--on-background);
         }
 
         .val-mo {
-          font-size: 0.8125rem;
+          font-size: 0.875rem;
           color: var(--secondary);
-          font-weight: 400;
-          margin-left: 0.125rem;
+          font-weight: 500;
+          margin-left: 0.15rem;
         }
 
         .deck-card-context-badge {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
 
         .text-green { color: var(--success); }
         .text-amber { color: #d97706; }
-        .text-blue { color: var(--tertiary); }
+        .text-blue { color: var(--primary); }
         .text-muted { color: var(--secondary); }
 
         /* GRID MAIN */
         .profile-main-grid {
           display: grid;
           grid-template-columns: 1.6fr 1fr;
-          gap: 2rem;
+          gap: 2.5rem;
         }
 
         .profile-details-column {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .details-card-block {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
+          box-shadow: var(--card-shadow);
         }
 
         .details-card-title {
-          font-size: 1.125rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-family: var(--font-display);
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--on-background);
         }
 
         .culture-stats-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .culture-bar-row {
           display: flex;
           flex-direction: column;
-          gap: 0.375rem;
+          gap: 0.5rem;
         }
 
         .culture-labels {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          font-size: 0.8125rem;
-          font-weight: 500;
+          font-size: 0.875rem;
+          font-weight: 600;
         }
 
         .culture-name {
-          color: var(--primary);
+          color: var(--on-background);
         }
 
         .culture-val {
           color: var(--primary);
-          font-weight: 600;
+          font-weight: 700;
         }
 
         .culture-track {
           width: 100%;
-          height: 6px;
+          height: 8px;
           background-color: var(--surface-container-low);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-full);
@@ -698,45 +710,45 @@ export default function Profile() {
         }
 
         .bg-green-fill { background-color: var(--success); }
-        .bg-blue-fill { background-color: var(--tertiary); }
+        .bg-blue-fill { background-color: var(--primary); }
         .bg-amber-fill { background-color: #fbbf24; }
 
         .culture-desc-text {
-          font-size: 0.75rem;
+          font-size: 0.8125rem;
           color: var(--secondary);
-          line-height: 1.4;
+          line-height: 1.5;
         }
 
         /* Smart insight card */
         .smart-insight-callout {
-          background-color: var(--surface-container-low);
-          border: 1px solid var(--outline-variant);
+          background-color: var(--primary-container);
+          border: 1px solid rgba(55, 138, 221, 0.15);
           border-radius: var(--radius-sm);
-          padding: 1rem 1.25rem;
+          padding: 1.25rem;
           display: flex;
           align-items: flex-start;
-          gap: 0.75rem;
+          gap: 0.875rem;
         }
 
         .insight-sparkle-icon {
-          color: var(--tertiary);
+          color: var(--primary);
           flex-shrink: 0;
           margin-top: 0.125rem;
         }
 
         .insight-title {
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: 700;
           letter-spacing: 0.05em;
           color: var(--primary);
-          margin-bottom: 0.125rem;
+          margin-bottom: 0.25rem;
           text-transform: uppercase;
         }
 
         .insight-text-body {
-          font-size: 0.8125rem;
-          color: var(--secondary);
-          line-height: 1.5;
+          font-size: 0.875rem;
+          color: var(--on-primary-container);
+          line-height: 1.6;
         }
 
         /* REVIEWS TIMELINE */
@@ -744,10 +756,11 @@ export default function Profile() {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
+          box-shadow: var(--card-shadow);
         }
 
         .reviews-header-row {
@@ -755,31 +768,33 @@ export default function Profile() {
           align-items: center;
           justify-content: space-between;
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 0.5rem;
+          padding-bottom: 1rem;
         }
 
         .reviews-sorting-dropdown {
-          border: none;
-          background: none;
+          border: 1px solid var(--outline-variant);
+          background-color: var(--surface);
           font-size: 0.8125rem;
-          font-weight: 500;
-          color: var(--tertiary);
+          font-weight: 600;
+          color: var(--primary);
           outline: none;
           cursor: pointer;
+          padding: 0.3rem 0.6rem;
+          border-radius: var(--radius-sm);
         }
 
         .reviews-feed-list {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
         }
 
         .review-feed-card {
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 1.25rem;
+          padding-bottom: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 0.875rem;
+          gap: 1rem;
         }
 
         .review-feed-card:last-child {
@@ -790,18 +805,18 @@ export default function Profile() {
         .review-card-header {
           display: flex;
           align-items: center;
-          gap: 0.75rem;
+          gap: 1rem;
         }
 
         .reviewer-avatar {
-          width: 2rem;
-          height: 2rem;
+          width: 2.25rem;
+          height: 2.25rem;
           border-radius: var(--radius-full);
-          background-color: var(--surface-container);
-          border: 1px solid var(--outline-variant);
-          color: var(--secondary);
-          font-weight: 600;
-          font-size: 0.75rem;
+          background-color: var(--primary-container);
+          border: 1px solid rgba(55, 138, 221, 0.15);
+          color: var(--primary);
+          font-weight: 700;
+          font-size: 0.875rem;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -811,7 +826,7 @@ export default function Profile() {
           flex: 1;
           display: flex;
           flex-direction: column;
-          gap: 0.125rem;
+          gap: 0.15rem;
         }
 
         .reviewer-role-row {
@@ -821,18 +836,18 @@ export default function Profile() {
         }
 
         .reviewer-role-title {
-          font-size: 0.875rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: var(--on-background);
         }
 
         .review-rating-label {
-          font-size: 0.8125rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-size: 0.875rem;
+          font-weight: 700;
+          color: var(--on-background);
           display: flex;
           align-items: center;
-          gap: 0.125rem;
+          gap: 0.15rem;
         }
 
         .inline-star {
@@ -843,9 +858,10 @@ export default function Profile() {
         .reviewer-details-row {
           display: flex;
           align-items: center;
-          gap: 0.375rem;
+          gap: 0.5rem;
           font-size: 0.75rem;
           color: var(--secondary);
+          font-weight: 500;
         }
 
         .verified-badge {
@@ -853,30 +869,30 @@ export default function Profile() {
           display: inline-flex;
           align-items: center;
           gap: 0.25rem;
-          font-weight: 500;
+          font-weight: 600;
         }
 
         .review-pros-cons-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .block-label {
           display: block;
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: 0.05em;
-          margin-bottom: 0.25rem;
+          margin-bottom: 0.35rem;
         }
 
         .pros-color-label { color: var(--success); }
         .cons-color-label { color: #d97706; }
 
         .block-body {
-          font-size: 0.8125rem;
-          color: var(--secondary);
-          line-height: 1.5;
+          font-size: 0.875rem;
+          color: var(--on-surface-variant);
+          line-height: 1.6;
         }
 
         .review-skill-tags {
@@ -888,54 +904,56 @@ export default function Profile() {
 
         .skill-badge-tag {
           font-size: 0.75rem;
-          font-weight: 500;
-          background-color: var(--surface-container);
+          font-weight: 600;
+          background-color: var(--surface-container-low);
           color: var(--secondary);
           border: 1px solid var(--outline-variant);
-          padding: 0.15rem 0.5rem;
+          padding: 0.2rem 0.625rem;
           border-radius: var(--radius-sm);
         }
 
         .load-more-reviews-btn {
           width: 100%;
-          border: 1px solid var(--outline-variant);
+          border: 1.5px solid var(--outline-variant);
           background-color: var(--surface);
-          color: var(--secondary);
-          font-size: 0.75rem;
-          font-weight: 500;
+          color: var(--on-background);
+          font-size: 0.8125rem;
+          font-weight: 700;
           letter-spacing: 0.05em;
           padding: 0.5rem 0;
           border-radius: var(--radius-sm);
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           text-transform: uppercase;
-          height: 2.25rem;
+          height: 2.5rem;
         }
 
         .load-more-reviews-btn:hover {
-          background-color: var(--surface-container-low);
-          color: var(--primary);
-          border-color: var(--outline);
+          background-color: var(--primary);
+          color: var(--on-primary);
+          border-color: var(--primary);
+          transform: translateY(-1px);
         }
 
         /* RIGHT WIDGETS COLUMN */
         .profile-widgets-column {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 2rem;
         }
 
         .widget-card {
           background-color: var(--surface);
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-md);
-          padding: 1.5rem;
+          padding: 2rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.5rem;
+          box-shadow: var(--card-shadow);
         }
 
         .bg-emerald-light-card {
-          background-color: rgba(16, 185, 129, 0.05);
+          background-color: rgba(16, 185, 129, 0.04);
           border-color: rgba(16, 185, 129, 0.15);
         }
 
@@ -950,12 +968,12 @@ export default function Profile() {
           height: 6px;
           background-color: var(--success);
           border-radius: var(--radius-full);
-          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
         }
 
         .hiring-status-label {
           font-size: 0.75rem;
-          font-weight: 600;
+          font-weight: 700;
           color: var(--success);
           letter-spacing: 0.05em;
           text-transform: uppercase;
@@ -964,13 +982,13 @@ export default function Profile() {
         .hiring-details {
           display: flex;
           flex-direction: column;
-          gap: 0.75rem;
+          gap: 1rem;
         }
 
         .detail-item {
           display: flex;
           align-items: flex-start;
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
 
         .detail-icon {
@@ -980,46 +998,50 @@ export default function Profile() {
 
         .detail-label {
           font-size: 0.75rem;
-          font-weight: 500;
+          font-weight: 600;
           color: var(--secondary);
           text-transform: uppercase;
+          letter-spacing: 0.03em;
         }
 
         .detail-val {
-          font-size: 0.8125rem;
-          font-weight: 500;
-          color: var(--primary);
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--on-background);
           line-height: 1.4;
+          margin-top: 0.1rem;
         }
 
         .apply-company-site-btn {
           width: 100%;
-          background-color: var(--primary);
-          color: var(--on-primary);
+          background-color: var(--on-background);
+          color: var(--surface);
           font-size: 0.8125rem;
-          font-weight: 500;
+          font-weight: 700;
           letter-spacing: 0.05em;
           padding: 0.5rem 0;
           border-radius: var(--radius-sm);
           text-align: center;
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
           text-transform: uppercase;
-          height: 2.25rem;
+          height: 2.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
         .apply-company-site-btn:hover {
-          background-color: #1f2937;
+          background-color: var(--primary);
+          transform: translateY(-1px);
         }
 
         .widget-card-title {
-          font-size: 0.75rem;
-          font-weight: 600;
-          color: var(--primary);
+          font-family: var(--font-display);
+          font-size: 0.875rem;
+          font-weight: 700;
+          color: var(--on-background);
           border-bottom: 1px solid var(--outline-variant);
-          padding-bottom: 0.5rem;
+          padding-bottom: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -1027,39 +1049,40 @@ export default function Profile() {
         .peers-comparison-list {
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          gap: 0.75rem;
         }
 
         .peer-compare-item {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0.5rem 0.75rem;
+          padding: 0.75rem 1rem;
           border: 1px solid var(--outline-variant);
           border-radius: var(--radius-sm);
-          transition: all 0.15s ease;
+          transition: all 0.2s ease;
         }
 
         .peer-compare-item:hover {
-          border-color: var(--outline);
-          background-color: var(--surface-container-low);
+          border-color: var(--primary);
+          background-color: var(--primary-container);
         }
 
         .peer-details {
           display: flex;
           flex-direction: column;
-          gap: 0.125rem;
+          gap: 0.25rem;
         }
 
         .peer-name {
-          font-size: 0.8125rem;
-          font-weight: 500;
-          color: var(--primary);
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--on-background);
         }
 
         .peer-meta {
           font-size: 0.75rem;
           color: var(--secondary);
+          font-weight: 500;
         }
 
         .peer-arrow {
@@ -1067,7 +1090,7 @@ export default function Profile() {
         }
 
         .pulse-graph-box {
-          padding-top: 0.25rem;
+          padding-top: 0.5rem;
         }
 
         @media (max-width: 900px) {
