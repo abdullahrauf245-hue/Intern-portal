@@ -239,11 +239,22 @@ export default function Browse() {
                 {/* Logo Placeholder */}
                 <div 
                   className="company-logo-avatar"
-                  style={{ backgroundColor: `${company.logoColor}15` }}
+                  style={{ 
+                    backgroundColor: company.name.toLowerCase().includes("seecs") ? "transparent" : `${company.logoColor}15`,
+                    overflow: "hidden"
+                  }}
                 >
-                  <span className="logo-letter" style={{ color: company.logoColor }}>
-                    {company.name.charAt(0)}
-                  </span>
+                  {company.name.toLowerCase().includes("seecs") ? (
+                    <img 
+                      src="/src/assets/seecs_logo.png" 
+                      alt="SEECS Logo" 
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  ) : (
+                    <span className="logo-letter" style={{ color: company.logoColor }}>
+                      {company.name.charAt(0)}
+                    </span>
+                  )}
                 </div>
 
                 {/* Company Specs */}
