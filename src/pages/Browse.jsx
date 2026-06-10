@@ -1,4 +1,4 @@
-import React, { useContext, useState, useMemo } from "react";
+import React, { useContext, useState, useMemo, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import { Search, Star, MapPin, DollarSign, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
@@ -14,15 +14,24 @@ export default function Browse() {
   // React State for filters
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [industries, setIndustries] = useState({
-    Technology: initialCategoryFilter === "remote" || initialCategoryFilter === "stipend" || initialCategoryFilter === "rating" || !initialCategoryFilter ? true : false,
-    Finance: false,
-    Consulting: false,
-    Media: false
+    "Tech & AI": true,
+    "Research Labs": true,
+    "Software Services": true,
+    "Engineering & Science": true
   });
-  const [stipendLimit, setStipendLimit] = useState(5000);
+  const [stipendLimit, setStipendLimit] = useState(80000);
   const [locationQuery, setLocationQuery] = useState("");
-  const [pulseScoreMin, setPulseScoreMin] = useState(4); // 4+ is default in Stitch UI
+  const [pulseScoreMin, setPulseScoreMin] = useState(0); // Show all by default so user sees everything
   const [sortBy, setSortBy] = useState("pulse"); // default sorting
+
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 5;
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, industries, stipendLimit, locationQuery, pulseScoreMin, sortBy]);
 
   // Handle category checklist triggers
   const handleIndustryChange = (key) => {
@@ -33,12 +42,12 @@ export default function Browse() {
   const handleClearAll = () => {
     setSearchQuery("");
     setIndustries({
-      Technology: true,
-      Finance: false,
-      Consulting: false,
-      Media: false
+      "Tech & AI": true,
+      "Research Labs": true,
+      "Software Services": true,
+      "Engineering & Science": true
     });
-    setStipendLimit(5000);
+    setStipendLimit(80000);
     setLocationQuery("");
     setPulseScoreMin(0);
     setSortBy("pulse");
@@ -62,17 +71,26 @@ export default function Browse() {
         const activeIndustries = Object.keys(industries).filter(k => industries[k]);
         if (activeIndustries.length > 0) {
           const matchesIndustry = activeIndustries.some(ind => {
-            if (ind === "Technology") return company.category.toLowerCase().includes("tech") || company.category.toLowerCase().includes("saas") || company.category.toLowerCase().includes("ai");
-            if (ind === "Finance") return company.category.toLowerCase().includes("fintech") || company.category.toLowerCase().includes("finance");
-            if (ind === "Consulting") return company.category.toLowerCase().includes("consulting");
-            if (ind === "Media") return company.category.toLowerCase().includes("media") || company.category.toLowerCase().includes("travel");
+            const cat = company.category.toLowerCase();
+            if (ind === "Tech & AI") {
+              return cat.includes("tech") || cat.includes("saas") || cat.includes("ai") || cat.includes("analytics") || cat.includes("gaming");
+            }
+            if (ind === "Research Labs") {
+              return cat.includes("research") || cat.includes("lab");
+            }
+            if (ind === "Software Services") {
+              return cat.includes("services") || cat.includes("development") || cat.includes("edtech");
+            }
+            if (ind === "Engineering & Science") {
+              return cat.includes("deftech") || cat.includes("agritech") || cat.includes("cleantech") || cat.includes("construction") || cat.includes("healthtech");
+            }
             return false;
           });
           if (!matchesIndustry) return false;
         }
 
         // Stipend Filter
-        if (stipendLimit < 5000) {
+        if (stipendLimit < 80000) {
           if (company.stipend > stipendLimit) return false;
         }
 
@@ -95,6 +113,14 @@ export default function Browse() {
         return 0;
       });
   }, [companies, searchQuery, industries, stipendLimit, locationQuery, pulseScoreMin, sortBy]);
+
+  // Paginated Slicing
+  const totalItems = filteredCompanies.length;
+  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
+  const paginatedCompanies = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredCompanies.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredCompanies, currentPage]);
 
   return (
     <div className="browse-layout">
@@ -130,21 +156,21 @@ export default function Browse() {
         {/* Stipend Range Slider */}
         <div className="filter-group">
           <div className="slider-label-row">
-            <label className="filter-group-label">Monthly Stipend</label>
+            <label className="filter-group-label">Monthly Stipend (PKR)</label>
           </div>
           <input 
             type="range" 
             min="0" 
-            max="5000" 
-            step="500"
+            max="80000" 
+            step="5000"
             value={stipendLimit}
             onChange={(e) => setStipendLimit(parseInt(e.target.value))}
             className="stipend-slider"
           />
           <div className="slider-limits-row">
-            <span>$0</span>
+            <span>PKR 0</span>
             <span className="active-slider-val">
-              {stipendLimit === 5000 ? "$5,000+" : `$${stipendLimit.toLocaleString()}`}
+              {stipendLimit === 80000 ? "PKR 80,000+" : `PKR ${stipendLimit.toLocaleString()}`}
             </span>
           </div>
         </div>
@@ -168,7 +194,7 @@ export default function Browse() {
         <div className="filter-group">
           <label className="filter-group-label">Pulse Score (Min)</label>
           <div className="score-selector-buttons">
-            {[3, 4, 4.5].map((val) => (
+            {[0, 3, 4, 4.5].map((val) => (
               <button 
                 key={val}
                 onClick={() => setPulseScoreMin(val)}
@@ -206,8 +232,8 @@ export default function Browse() {
 
         {/* Dynamic Company Card Grid */}
         <div className="companies-list">
-          {filteredCompanies.length > 0 ? (
-            filteredCompanies.map((company) => (
+          {paginatedCompanies.length > 0 ? (
+            paginatedCompanies.map((company) => (
               <div key={company.id} className="company-result-card">
                 
                 {/* Logo Placeholder */}
@@ -241,7 +267,7 @@ export default function Browse() {
 
                     <span className="card-metric-stipend">
                       <DollarSign size={14} className="stipend-icon" />
-                      <strong>${company.stipend.toLocaleString()}</strong> <span className="stipend-denominator">AVG. MONTHLY</span>
+                      <strong>PKR {company.stipend.toLocaleString()}</strong> <span className="stipend-denominator">AVG. MONTHLY</span>
                     </span>
 
                     <span className="card-metric-location">
@@ -270,17 +296,33 @@ export default function Browse() {
         </div>
 
         {/* PAGINATION COMPONENT */}
-        {filteredCompanies.length > 0 && (
+        {totalPages > 1 && (
           <nav className="pagination-wrapper" aria-label="Pagination">
-            <button className="pag-nav-btn" aria-label="Previous page">
+            <button 
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`pag-nav-btn ${currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""}`}
+              aria-label="Previous page"
+            >
               <ChevronLeft size={16} />
             </button>
-            <button className="pag-num-btn pag-num-active">1</button>
-            <button className="pag-num-btn">2</button>
-            <button className="pag-num-btn">3</button>
-            <span className="pag-ellipsis">...</span>
-            <button className="pag-num-btn">12</button>
-            <button className="pag-nav-btn" aria-label="Next page">
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
+              <button 
+                key={pageNum}
+                onClick={() => setCurrentPage(pageNum)}
+                className={`pag-num-btn ${currentPage === pageNum ? "pag-num-active" : ""}`}
+              >
+                {pageNum}
+              </button>
+            ))}
+            
+            <button 
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`pag-nav-btn ${currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""}`}
+              aria-label="Next page"
+            >
               <ChevronRight size={16} />
             </button>
           </nav>
