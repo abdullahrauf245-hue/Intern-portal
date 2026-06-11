@@ -1,10 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, ArrowRight, Star, Shield, Cpu, Compass, Users } from "lucide-react";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  // 3D Tilt calculations
+  const handleMouseMove = (e) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const xc = rect.width / 2;
+    const yc = rect.height / 2;
+    const dx = x - xc;
+    const dy = y - yc;
+    // Rotate maximum of 10 degrees for elegant perspective feel
+    const tiltX = -(dy / yc) * 10;
+    const tiltY = (dx / xc) * 10;
+    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+  };
+
+  const handleMouseLeave = (e) => {
+    const card = e.currentTarget;
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+  };
+
+  // IntersectionObserver for scroll-triggered entrance animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -22,29 +60,29 @@ export default function Home() {
       <section className="hero-section">
         <div className="hero-grid">
           <div className="hero-left">
-            <div className="hero-stamp">
+            <div className="hero-stamp animate-fade-up" style={{ animationDelay: "50ms" }}>
               <span className="stamp-dot"></span>
               LIVE REPORTS FROM 2,400+ FIRMS
             </div>
             
-            <h1 className="hero-headline">
+            <h1 className="hero-headline hero-depth-text animate-fade-up" style={{ animationDelay: "150ms" }}>
               Precision Analytics for Modern Careers
             </h1>
             
-            <p className="hero-subheadline">
+            <p className="hero-subheadline animate-fade-up" style={{ animationDelay: "250ms" }}>
               Discover verified compensation, culture indicators, and conversion rates from internships.
             </p>
 
-            <div className="hero-ctas">
-              <Link to="/browse" className="btn btn-primary hero-btn-main">
+            <div className="hero-ctas animate-fade-up" style={{ animationDelay: "350ms" }}>
+              <Link to="/browse" className="btn btn-primary hero-btn-main btn-premium">
                 Explore Directory
               </Link>
-              <Link to="/submit-review" className="btn btn-outline hero-btn-sub">
+              <Link to="/submit-review" className="btn btn-outline hero-btn-sub btn-premium">
                 Submit Review
               </Link>
             </div>
 
-            <form onSubmit={handleSearchSubmit} className="search-form-wrapper">
+            <form onSubmit={handleSearchSubmit} className="search-form-wrapper animate-fade-up" style={{ animationDelay: "450ms" }}>
               <div className="search-input-box">
                 <Search className="search-input-icon" size={18} />
                 <input 
@@ -55,12 +93,12 @@ export default function Home() {
                   className="hero-search-input"
                 />
               </div>
-              <button type="submit" className="hero-search-btn">
+              <button type="submit" className="hero-search-btn btn-premium">
                 SEARCH DATA
               </button>
             </form>
 
-            <div className="trending-queries-bar">
+            <div className="trending-queries-bar animate-fade-up" style={{ animationDelay: "550ms" }}>
               <span className="trending-label">TRENDING</span>
               <Link to="/browse?q=Quant" className="trend-tag">Quant Research</Link>
               <Link to="/browse?q=Product" className="trend-tag">Product Design</Link>
@@ -68,7 +106,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="hero-right">
+          <div className="hero-right animate-fade-up levitate" style={{ animationDelay: "300ms" }}>
             {/* Browser Frame Mockup */}
             <div className="browser-mockup">
               <div className="browser-header">
@@ -106,7 +144,7 @@ export default function Home() {
       </section>
 
       {/* 🃏 FEATURE / CURATED CARDS */}
-      <section className="curated-sectors-section">
+      <section className="curated-sectors-section reveal-on-scroll">
         <div className="section-intro">
           <h2 className="section-title">Curated Internship Intelligence</h2>
           <p className="section-subtitle">Curated segments based on high-fidelity user reports.</p>
@@ -114,7 +152,13 @@ export default function Home() {
 
         <div className="cards-grid">
           {/* Card 1: Top Rated */}
-          <Link to="/browse?filter=rating" className="feature-card">
+          <Link 
+            to="/browse?filter=rating" 
+            className="feature-card"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
+          >
             <div className="card-icon-container icon-soft-blue">
               <Star size={20} className="icon-blue" />
             </div>
@@ -125,7 +169,13 @@ export default function Home() {
           </Link>
 
           {/* Card 2: High Stipends */}
-          <Link to="/browse?filter=stipend" className="feature-card">
+          <Link 
+            to="/browse?filter=stipend" 
+            className="feature-card"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
+          >
             <div className="card-icon-container icon-soft-teal">
               <Shield size={20} className="icon-teal" />
             </div>
@@ -136,7 +186,13 @@ export default function Home() {
           </Link>
 
           {/* Card 3: Remote Friendly */}
-          <Link to="/browse?filter=remote" className="feature-card">
+          <Link 
+            to="/browse?filter=remote" 
+            className="feature-card"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
+          >
             <div className="card-icon-container icon-soft-purple">
               <Cpu size={20} className="icon-purple" />
             </div>
@@ -149,7 +205,7 @@ export default function Home() {
       </section>
 
       {/* ⭐ TESTIMONIALS SECTION */}
-      <section className="testimonials-section">
+      <section className="testimonials-section reveal-on-scroll">
         <div className="trusted-strip">
           <h3 className="trusted-heading">Trusted by 500+ companies</h3>
           <div className="partners-logo-strip">
@@ -163,7 +219,12 @@ export default function Home() {
 
         <div className="testimonials-grid">
           {/* Testimonial 1 */}
-          <div className="testimonial-card">
+          <div 
+            className="testimonial-card"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
+          >
             <div className="stars-row">
               <Star size={14} className="star-filled" />
               <Star size={14} className="star-filled" />
@@ -184,7 +245,12 @@ export default function Home() {
           </div>
 
           {/* Testimonial 2 */}
-          <div className="testimonial-card">
+          <div 
+            className="testimonial-card"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
+          >
             <div className="stars-row">
               <Star size={14} className="star-filled" />
               <Star size={14} className="star-filled" />
@@ -205,7 +271,12 @@ export default function Home() {
           </div>
 
           {/* Testimonial 3 */}
-          <div className="testimonial-card">
+          <div 
+            className="testimonial-card"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
+          >
             <div className="stars-row">
               <Star size={14} className="star-filled" />
               <Star size={14} className="star-filled" />
@@ -228,7 +299,7 @@ export default function Home() {
       </section>
 
       {/* METHODOLOGY & DATA ACCURACY */}
-      <section className="methodology-section">
+      <section className="methodology-section reveal-on-scroll">
         <div className="methodology-container">
           <div className="methodology-text-column">
             <h2 className="methodology-title">Rigorous Data Integrity</h2>

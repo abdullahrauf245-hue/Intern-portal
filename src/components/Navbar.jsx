@@ -33,7 +33,7 @@ export default function Navbar() {
         </nav>
 
         <div className="navbar-actions">
-          <Link to="/submit-review" className="btn btn-primary header-cta-btn">
+          <Link to="/submit-review" className="btn btn-primary header-cta-btn btn-premium">
             Write a Review
           </Link>
           
@@ -82,12 +82,18 @@ export default function Navbar() {
           line-height: 1;
         }
 
-        .logo-title {
+              .logo-title {
           font-family: var(--font-display);
           font-weight: 800;
           font-size: 1.4rem;
           letter-spacing: -0.04em;
           background: linear-gradient(135deg, #0f172a 0%, #378ADD 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .dark .logo-title {
+          background: linear-gradient(135deg, #ffffff 0%, #10b981 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }
@@ -183,6 +189,11 @@ export default function Navbar() {
           width: 100%;
           height: 100%;
           object-fit: cover;
+        }
+
+        .dark .navbar-header {
+          background-color: rgba(5, 5, 5, 0.7);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         @media (max-width: 768px) {

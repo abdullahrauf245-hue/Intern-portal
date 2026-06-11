@@ -70,6 +70,145 @@
   --card-shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 16px -6px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(55, 138, 221, 0.08);
 }
 
+/* 🌌 Dark Glassmorphism Theme Overrides */
+.dark {
+  --background: #050505;
+  --on-background: #f8fafc;
+  
+  --surface: rgba(15, 23, 42, 0.45);
+  --surface-dim: #020202;
+  --surface-bright: rgba(30, 41, 59, 0.55);
+  --surface-container-lowest: #050505;
+  --surface-container-low: #0a0a0a;
+  --surface-container: rgba(15, 23, 42, 0.6);
+  --surface-container-high: rgba(30, 41, 59, 0.7);
+  --surface-container-highest: rgba(51, 65, 85, 0.8);
+  --on-surface: #f8fafc;
+  --on-surface-variant: #94a3b8;
+  
+  --primary: #10b981;
+  --primary-hover: #34d399;
+  --on-primary: #050505;
+  --primary-container: rgba(16, 185, 129, 0.1);
+  --on-primary-container: #34d399;
+  
+  --secondary: #94a3b8;
+  --on-secondary: #050505;
+  --secondary-container: rgba(51, 65, 85, 0.4);
+  --on-secondary-container: #cbd5e1;
+  
+  --tertiary: #10b981;
+  --on-tertiary: #050505;
+  --tertiary-container: rgba(16, 185, 129, 0.1);
+  --on-tertiary-container: #34d399;
+  
+  --outline: rgba(255, 255, 255, 0.08);
+  --outline-variant: rgba(255, 255, 255, 0.05);
+  
+  --error: #ef4444;
+  --on-error: #ffffff;
+  --error-container: rgba(239, 68, 68, 0.15);
+  --on-error-container: #fca5a5;
+  
+  --success: #10b981;
+  --on-success: #050505;
+
+  --focus-ring: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  --card-shadow-hover: 0 8px 32px 0 rgba(16, 185, 129, 0.15), 0 0 0 1px rgba(16, 185, 129, 0.25);
+}
+
+/* Glassmorphism Styles (Only active/noticeable on dark mode) */
+.dark .card, 
+.dark .browser-mockup, 
+.dark .feature-card, 
+.dark .testimonial-card, 
+.dark .stats-cards-wrapper, 
+.dark .navbar,
+.dark .search-form-wrapper {
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  background: rgba(10, 10, 10, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 🌀 Premium Animations & Interactions */
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.levitate {
+  animation: levitate 6s ease-in-out infinite;
+}
+
+@keyframes fadeUpBlur {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUpBlur 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Scroll reveal engine */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(8px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Premium Button Glows & Scale */
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-premium:hover {
+  transform: scale(1.05) translateY(-1px) !important;
+}
+
+.dark .btn-premium:hover {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.btn-premium:active {
+  transform: scale(0.97) !important;
+}
+
+/* 3D Headings layered text-shadow depth */
+.dark .hero-depth-text {
+  text-shadow: 
+    0 1px 0 #0d9488,
+    0 2px 0 #0f766e,
+    0 3px 0 #115e59,
+    0 4px 0 #134e4a,
+    0 10px 20px rgba(0, 0, 0, 0.6);
+}
+
 /* Reset & Base Styles */
 * {
   box-sizing: border-box;
