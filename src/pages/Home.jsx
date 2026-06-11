@@ -1,999 +1,1043 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, ArrowRight, Star, Shield, Cpu, Compass, Users } from "lucide-react";
+import { Search, Star, Shield, Cpu, Compass, Users, ArrowRight } from "lucide-react";
 
+/* ───────────────────────────────────────────────────────────
+   ANIMATED COUNTER HOOK
+   ─────────────────────────────────────────────────────────── */
+function useCountUp(end, duration = 2000, startOnView = true) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!startOnView) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          let startTime = null;
+          const animate = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.round(eased * end));
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end, duration, startOnView]);
+
+  return [count, ref];
+}
+
+/* ───────────────────────────────────────────────────────────
+   HOME PAGE
+   ─────────────────────────────────────────────────────────── */
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  // 3D Tilt calculations
-  const handleMouseMove = (e) => {
+  /* ── 3D Tilt Effect ── */
+  const handleMouseMove = useCallback((e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const xc = rect.width / 2;
-    const yc = rect.height / 2;
-    const dx = x - xc;
-    const dy = y - yc;
-    // Rotate maximum of 10 degrees for elegant perspective feel
-    const tiltX = -(dy / yc) * 10;
-    const tiltY = (dx / xc) * 10;
-    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
-  };
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const tiltX = -((y - centerY) / centerY) * 8;
+    const tiltY = ((x - centerX) / centerX) * 8;
+    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(10px)`;
+  }, []);
 
-  const handleMouseLeave = (e) => {
-    const card = e.currentTarget;
-    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-  };
+  const handleMouseLeave = useCallback((e) => {
+    e.currentTarget.style.transform = `perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0px)`;
+  }, []);
 
-  // IntersectionObserver for scroll-triggered entrance animations
+  /* ── Scroll reveal ── */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("revealed");
-          }
+          if (entry.isIntersecting) entry.target.classList.add("revealed");
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
-    const elements = document.querySelectorAll(".reveal-on-scroll");
-    elements.forEach((el) => observer.observe(el));
+    document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
+  /* ── Animated counters for hero card ── */
+  const [stipendCount, stipendRef] = useCountUp(6400, 1800);
+  const [offerCount, offerRef] = useCountUp(81, 1500);
+
+  /* ── Stats section counters ── */
+  const [accuracy, accuracyRef] = useCountUp(98, 1600);
+  const [reports, reportsRef] = useCountUp(15, 1600);
+  const [metrics, metricsRef] = useCountUp(240, 1800);
+  const [trust, trustRef] = useCountUp(49, 1600);
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/browse?q=${encodeURIComponent(searchQuery)}`);
-    } else {
-      navigate("/browse");
-    }
+    navigate(searchQuery.trim() ? `/browse?q=${encodeURIComponent(searchQuery)}` : "/browse");
   };
 
   return (
-    <div className="home-page-container">
-      
-      {/* 🎨 HERO SECTION */}
-      <section className="hero-section">
-        <div className="hero-grid">
-          <div className="hero-left">
-            <div className="hero-stamp animate-fade-up" style={{ animationDelay: "50ms" }}>
-              <span className="stamp-dot"></span>
-              LIVE REPORTS FROM 2,400+ FIRMS
+    <div className="home-root">
+
+      {/* ═══ HERO ═══ */}
+      <section className="hero">
+        {/* BG effects */}
+        <div className="hero-glow" aria-hidden="true"></div>
+        <div className="hero-grid-pattern" aria-hidden="true"></div>
+
+        <div className="hero-layout">
+          {/* Left Column */}
+          <div className="hero-content">
+            <div className="hero-badge animate-fade-up" style={{ animationDelay: "0ms" }}>
+              <span className="pulse-dot"></span>
+              LIVE · 2,400+ FIRMS
             </div>
-            
-            <h1 className="hero-headline hero-depth-text animate-fade-up" style={{ animationDelay: "150ms" }}>
-              Precision Analytics for Modern Careers
+
+            <h1 className="hero-h1 animate-fade-up" style={{ animationDelay: "80ms" }}>
+              Precision Analytics<br />
+              for <span className="hero-h1-accent">Next-Gen</span> Careers
             </h1>
-            
-            <p className="hero-subheadline animate-fade-up" style={{ animationDelay: "250ms" }}>
-              Discover verified compensation, culture indicators, and conversion rates from internships.
+
+            <p className="hero-sub animate-fade-up" style={{ animationDelay: "160ms" }}>
+              Transparent, data-driven insights into the world's leading internship programs. Make your next move with total confidence.
             </p>
 
-            <div className="hero-ctas animate-fade-up" style={{ animationDelay: "350ms" }}>
-              <Link to="/browse" className="btn btn-primary hero-btn-main btn-premium">
+            <div className="hero-btns animate-fade-up" style={{ animationDelay: "240ms" }}>
+              <Link to="/browse" className="btn btn-primary hero-cta-primary">
                 Explore Directory
               </Link>
-              <Link to="/submit-review" className="btn btn-outline hero-btn-sub btn-premium">
+              <Link to="/submit-review" className="btn btn-ghost hero-cta-ghost">
                 Submit Review
               </Link>
             </div>
 
-            <form onSubmit={handleSearchSubmit} className="search-form-wrapper animate-fade-up" style={{ animationDelay: "450ms" }}>
-              <div className="search-input-box">
-                <Search className="search-input-icon" size={18} />
-                <input 
-                  type="text" 
-                  placeholder="Search by company, role, or location"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="hero-search-input"
-                />
-              </div>
-              <button type="submit" className="hero-search-btn btn-premium">
-                SEARCH DATA
-              </button>
+            <form onSubmit={handleSearchSubmit} className="hero-search animate-fade-up" style={{ animationDelay: "320ms" }}>
+              <Search className="hero-search-icon" size={16} />
+              <input
+                type="text"
+                placeholder="Search by company, role, or location..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="hero-search-input"
+              />
+              <button type="submit" className="hero-search-submit">SEARCH</button>
             </form>
 
-            <div className="trending-queries-bar animate-fade-up" style={{ animationDelay: "550ms" }}>
+            <div className="hero-trending animate-fade-up" style={{ animationDelay: "400ms" }}>
               <span className="trending-label">TRENDING</span>
-              <Link to="/browse?q=Quant" className="trend-tag">Quant Research</Link>
-              <Link to="/browse?q=Product" className="trend-tag">Product Design</Link>
-              <Link to="/browse?q=AI" className="trend-tag">AI Ethics</Link>
+              <Link to="/browse?q=Quant" className="trending-pill">Quant Research</Link>
+              <Link to="/browse?q=Product" className="trending-pill">Product Design</Link>
+              <Link to="/browse?q=AI" className="trending-pill">AI Ethics</Link>
             </div>
           </div>
 
-          <div className="hero-right animate-fade-up levitate" style={{ animationDelay: "300ms" }}>
-            {/* Browser Frame Mockup */}
-            <div className="browser-mockup">
-              <div className="browser-header">
-                <span className="dot dot-red"></span>
-                <span className="dot dot-yellow"></span>
-                <span className="dot dot-green"></span>
-                <span className="browser-address">internpulse.com/index-brief</span>
+          {/* Right Column — Floating Intelligence Card */}
+          <div className="hero-visual animate-fade-up" style={{ animationDelay: "200ms" }}>
+            <div className="intel-card">
+              <div className="intel-header">
+                <span className="intel-eyebrow">MARKET INTELLIGENCE</span>
+                <span className="intel-live-badge">
+                  <span className="live-dot"></span>
+                  LIVE
+                </span>
               </div>
-              <div className="browser-body">
-                <div className="brief-title">Market Intelligence Brief</div>
-                <div className="brief-metric-row">
-                  <div className="brief-metric">
-                    <span className="metric-num">$6.4k</span>
-                    <span className="metric-label">Median Stipend</span>
-                  </div>
-                  <div className="brief-metric">
-                    <span className="metric-num">81%</span>
-                    <span className="metric-label">Return Offers</span>
-                  </div>
+
+              <div className="intel-metrics" ref={stipendRef}>
+                <div className="intel-metric">
+                  <span className="intel-metric-value">${(stipendCount / 1000).toFixed(1)}k</span>
+                  <span className="intel-metric-label">Median Stipend</span>
                 </div>
-                <div className="brief-chart-placeholder">
-                  <div className="bar bar-1"></div>
-                  <div className="bar bar-2"></div>
-                  <div className="bar bar-3"></div>
-                  <div className="bar bar-4"></div>
-                  <div className="bar bar-5"></div>
-                </div>
-                <div className="brief-footer">
-                  <span className="indicator-live"></span> Live Pulse: Updated 2 mins ago
+                <div className="intel-metric" ref={offerRef}>
+                  <span className="intel-metric-value">{offerCount}%</span>
+                  <span className="intel-metric-label">Return Offers</span>
                 </div>
               </div>
+
+              <div className="intel-bars">
+                <div className="intel-bar" style={{ height: '35%' }}></div>
+                <div className="intel-bar" style={{ height: '62%' }}></div>
+                <div className="intel-bar intel-bar-accent" style={{ height: '85%' }}></div>
+                <div className="intel-bar" style={{ height: '50%' }}></div>
+                <div className="intel-bar" style={{ height: '73%' }}></div>
+                <div className="intel-bar" style={{ height: '45%' }}></div>
+                <div className="intel-bar intel-bar-accent" style={{ height: '92%' }}></div>
+                <div className="intel-bar" style={{ height: '58%' }}></div>
+              </div>
+
+              <div className="intel-footer">
+                <span>Updated 2 minutes ago</span>
+              </div>
+            </div>
+
+            {/* Floating overlay badge */}
+            <div className="floating-badge">
+              <span className="floating-badge-arrow">↑</span>
+              <span>12% this quarter</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 🃏 FEATURE / CURATED CARDS */}
-      <section className="curated-sectors-section reveal-on-scroll">
-        <div className="section-intro">
-          <h2 className="section-title">Curated Internship Intelligence</h2>
-          <p className="section-subtitle">Curated segments based on high-fidelity user reports.</p>
+      {/* ═══ CURATED INTELLIGENCE CARDS ═══ */}
+      <section className="cards-section reveal-on-scroll">
+        <div className="section-header">
+          <div className="section-divider"></div>
+          <h2 className="section-title">Curated Intelligence</h2>
+          <p className="section-sub">High-fidelity segments from verified intern reports.</p>
         </div>
 
-        <div className="cards-grid">
-          {/* Card 1: Top Rated */}
-          <Link 
-            to="/browse?filter=rating" 
-            className="feature-card"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
-          >
-            <div className="card-icon-container icon-soft-blue">
-              <Star size={20} className="icon-blue" />
-            </div>
-            <h3 className="card-title">Highest Rated Internships</h3>
-            <p className="card-desc">
-              Programs with 4.8+ ratings and exceptional workplace culture feedback.
-            </p>
-          </Link>
-
-          {/* Card 2: High Stipends */}
-          <Link 
-            to="/browse?filter=stipend" 
-            className="feature-card"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
-          >
-            <div className="card-icon-container icon-soft-teal">
-              <Shield size={20} className="icon-teal" />
-            </div>
-            <h3 className="card-title">Top Compensation Packages</h3>
-            <p className="card-desc">
-              Verified monthly stipends clearing the upper quartile across major sectors.
-            </p>
-          </Link>
-
-          {/* Card 3: Remote Friendly */}
-          <Link 
-            to="/browse?filter=remote" 
-            className="feature-card"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
-          >
-            <div className="card-icon-container icon-soft-purple">
-              <Cpu size={20} className="icon-purple" />
-            </div>
-            <h3 className="card-title">Remote Digital Careers</h3>
-            <p className="card-desc">
-              Opportunities offering full flexibility, digital workflows, and global access.
-            </p>
-          </Link>
+        <div className="cards-row">
+          {[
+            { icon: Star, title: "Highest Rated", desc: "Programs with 4.8+ ratings and exceptional workplace culture scores.", link: "/browse?filter=rating", color: "var(--accent)" },
+            { icon: Shield, title: "Top Compensation", desc: "Verified stipends clearing upper-quartile benchmarks across sectors.", link: "/browse?filter=stipend", color: "var(--success)" },
+            { icon: Cpu, title: "Remote-First", desc: "Fully distributed opportunities with global access and digital workflows.", link: "/browse?filter=remote", color: "var(--cyan)" },
+          ].map((card, i) => (
+            <Link
+              key={i}
+              to={card.link}
+              className="intel-feature-card"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="feature-icon" style={{ color: card.color }}>
+                <card.icon size={20} />
+              </div>
+              <h3 className="feature-title">{card.title}</h3>
+              <p className="feature-desc">{card.desc}</p>
+              <span className="feature-arrow"><ArrowRight size={14} /></span>
+            </Link>
+          ))}
         </div>
       </section>
 
-      {/* ⭐ TESTIMONIALS SECTION */}
-      <section className="testimonials-section reveal-on-scroll">
-        <div className="trusted-strip">
-          <h3 className="trusted-heading">Trusted by 500+ companies</h3>
-          <div className="partners-logo-strip">
-            <span className="partner-logo">Stanford</span>
-            <span className="partner-logo">MIT</span>
-            <span className="partner-logo">CMU</span>
-            <span className="partner-logo">INSEAD</span>
-            <span className="partner-logo">TUM</span>
+      {/* ═══ SOCIAL PROOF ═══ */}
+      <section className="proof-section reveal-on-scroll">
+        <div className="proof-bar">
+          <span className="proof-label">TRUSTED BY LEADING INSTITUTIONS</span>
+          <div className="proof-logos">
+            {["Stanford", "MIT", "CMU", "INSEAD", "TUM"].map((name) => (
+              <span key={name} className="proof-logo">{name}</span>
+            ))}
           </div>
         </div>
 
-        <div className="testimonials-grid">
-          {/* Testimonial 1 */}
-          <div 
-            className="testimonial-card"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
-          >
-            <div className="stars-row">
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-            </div>
-            <p className="testimonial-quote">
-              "InternPulse gave me the transparency I needed to verify stipend metrics. I signed with total confidence."
-            </p>
-            <div className="testimonial-user">
-              <div className="user-avatar-circle circle-blue">AR</div>
-              <div className="user-info">
-                <span className="user-name">Abdullah Rauf</span>
-                <span className="user-title">Software Engineer Intern</span>
+        <div className="testimonials-row">
+          {[
+            { q: "InternPulse gave me the transparency I needed to verify stipend metrics. I signed with total confidence.", name: "Abdullah Rauf", role: "Software Engineer Intern", initials: "AR", grad: "linear-gradient(135deg, #3b82f6, #06b6d4)" },
+            { q: "The conversion statistics and return-offer tracking helped me choose the right path for my return conversion.", name: "Baqer Hussain", role: "Product Design Intern", initials: "BH", grad: "linear-gradient(135deg, #10b981, #06b6d4)" },
+            { q: "Outstanding platform interface. The analytics dashboards are clean, modern, and extremely data-rich.", name: "Sarah Lin", role: "Quant Research Intern", initials: "SL", grad: "linear-gradient(135deg, #8b5cf6, #3b82f6)" },
+          ].map((t, i) => (
+            <div
+              key={i}
+              className="testimonial-card"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              <span className="testimonial-quote-mark">"</span>
+              <div className="testimonial-stars">
+                {[...Array(5)].map((_, j) => (
+                  <Star key={j} size={14} className="star-gold" />
+                ))}
               </div>
-            </div>
-          </div>
-
-          {/* Testimonial 2 */}
-          <div 
-            className="testimonial-card"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
-          >
-            <div className="stars-row">
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-            </div>
-            <p className="testimonial-quote">
-              "The conversion statistics and return-offer tracking helped me choose the right path for my return conversion."
-            </p>
-            <div className="testimonial-user">
-              <div className="user-avatar-circle circle-teal">BH</div>
-              <div className="user-info">
-                <span className="user-name">Baqer Hussain</span>
-                <span className="user-title">Product Design Intern</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonial 3 */}
-          <div 
-            className="testimonial-card"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ transition: "transform 0.1s ease, box-shadow 0.25s ease" }}
-          >
-            <div className="stars-row">
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-              <Star size={14} className="star-filled" />
-            </div>
-            <p className="testimonial-quote">
-              "Outstanding platform interface. The analytics dashboards are clean, modern, and extremely data-rich."
-            </p>
-            <div className="testimonial-user">
-              <div className="user-avatar-circle circle-purple">SL</div>
-              <div className="user-info">
-                <span className="user-name">Sarah Lin</span>
-                <span className="user-title">Quant Research Intern</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* METHODOLOGY & DATA ACCURACY */}
-      <section className="methodology-section reveal-on-scroll">
-        <div className="methodology-container">
-          <div className="methodology-text-column">
-            <h2 className="methodology-title">Rigorous Data Integrity</h2>
-            <p className="methodology-desc">
-              We compile and verify every data submission to maintain the highest quality index in the market.
-            </p>
-            
-            <div className="methodology-points">
-              <div className="methodology-point">
-                <div className="point-icon-wrapper">
-                  <Compass size={18} />
+              <p className="testimonial-text">{t.q}</p>
+              <div className="testimonial-author">
+                <div className="author-avatar" style={{ background: t.grad }}>{t.initials}</div>
+                <div className="author-info">
+                  <span className="author-name">{t.name}</span>
+                  <span className="author-role">{t.role}</span>
                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══ DATA INTEGRITY / STATS ═══ */}
+      <section className="stats-section reveal-on-scroll">
+        <div className="stats-layout">
+          <div className="stats-text-col">
+            <div className="stats-accent-line"></div>
+            <h2 className="stats-heading">Rigorous Data<br />Integrity</h2>
+            <p className="stats-desc">
+              Every submission is compiled and verified to maintain the highest quality index in the market.
+            </p>
+
+            <div className="stats-points">
+              <div className="stats-point">
+                <div className="stats-point-icon"><Compass size={16} /></div>
                 <div>
-                  <h4 className="point-title">VERIFIED COMP</h4>
-                  <p className="point-desc">Direct verification of stipend logs and corporate pay details.</p>
+                  <h4 className="stats-point-title">VERIFIED COMPENSATION</h4>
+                  <p className="stats-point-desc">Direct verification of stipend logs and corporate pay details.</p>
                 </div>
               </div>
-
-              <div className="methodology-point">
-                <div className="point-icon-wrapper">
-                  <Users size={18} />
-                </div>
+              <div className="stats-point">
+                <div className="stats-point-icon"><Users size={16} /></div>
                 <div>
-                  <h4 className="point-title">CULTURE SIGNALS</h4>
-                  <p className="point-desc">Candid ratings on supportiveness, learning rates, and WLB.</p>
+                  <h4 className="stats-point-title">CULTURE SIGNALS</h4>
+                  <p className="stats-point-desc">Candid ratings on supportiveness, learning rates, and WLB.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="stats-dashboard-column">
-            <div className="stats-cards-wrapper">
-              <div className="stats-grid-card">
-                <div className="stat-value text-blue">98%</div>
-                <div className="stat-label">DATA ACCURACY</div>
+          <div className="stats-numbers-col">
+            <div className="stats-grid">
+              <div className="stat-card" ref={accuracyRef}>
+                <span className="stat-big-num">{accuracy}%</span>
+                <span className="stat-card-label">DATA ACCURACY</span>
+                <div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${accuracy}%` }}></div></div>
               </div>
-              
-              <div className="stats-grid-card">
-                <div className="stat-value text-blue">15k+</div>
-                <div className="stat-label">REPORTS ANNUALLY</div>
+              <div className="stat-card" ref={reportsRef}>
+                <span className="stat-big-num">{reports}k+</span>
+                <span className="stat-card-label">REPORTS ANNUALLY</span>
+                <div className="stat-bar"><div className="stat-bar-fill" style={{ width: '75%' }}></div></div>
               </div>
-
-              <div className="stats-grid-card">
-                <div className="stat-value text-blue">240</div>
-                <div className="stat-label">METRICS TRACKED</div>
+              <div className="stat-card" ref={metricsRef}>
+                <span className="stat-big-num">{metrics}</span>
+                <span className="stat-card-label">METRICS TRACKED</span>
+                <div className="stat-bar"><div className="stat-bar-fill" style={{ width: '60%' }}></div></div>
               </div>
-
-              <div className="stats-grid-card">
-                <div className="stat-value text-blue">4.9/5</div>
-                <div className="stat-label">USER TRUST SCORE</div>
+              <div className="stat-card" ref={trustRef}>
+                <span className="stat-big-num">{(trust / 10).toFixed(1)}/5</span>
+                <span className="stat-card-label">USER TRUST SCORE</span>
+                <div className="stat-bar"><div className="stat-bar-fill" style={{ width: '98%' }}></div></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ═══ STYLES ═══ */}
       <style>{`
-        .home-page-container {
+        .home-root {
           display: flex;
           flex-direction: column;
-          gap: 6rem;
-          background-color: var(--background);
+          gap: 8rem;
         }
 
-        /* HERO SECTION */
-        .hero-section {
-          padding: 2rem 0;
+        /* ── HERO ── */
+        .hero {
+          position: relative;
+          padding: 3rem 0 4rem;
+          overflow: hidden;
         }
 
-        .hero-grid {
+        .hero-glow {
+          position: absolute;
+          top: -40%;
+          left: -10%;
+          width: 60%;
+          height: 120%;
+          background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .hero-grid-pattern {
+          position: absolute;
+          inset: 0;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+          background-size: 60px 60px;
+          animation: gridPulse 8s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .hero-layout {
+          position: relative;
+          z-index: 1;
           display: grid;
-          grid-template-columns: 1.1fr 0.9fr;
+          grid-template-columns: 1.15fr 0.85fr;
           gap: 4rem;
           align-items: center;
         }
 
-        .hero-left {
+        .hero-content {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
         }
 
-        .hero-stamp {
+        .hero-badge {
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          border: 1px solid var(--outline-variant);
-          background-color: var(--surface);
-          padding: 0.375rem 0.75rem;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-          color: var(--secondary);
+          padding: 0.3rem 0.8rem;
+          border: 1px solid var(--border);
           border-radius: var(--radius-full);
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          color: var(--text-muted);
           width: fit-content;
-          box-shadow: var(--card-shadow);
+          background-color: rgba(255, 255, 255, 0.02);
         }
 
-        .stamp-dot {
+        .pulse-dot {
           width: 6px;
           height: 6px;
-          border-radius: var(--radius-full);
-          background-color: var(--primary);
-          box-shadow: 0 0 0 4px rgba(55, 138, 221, 0.2);
+          border-radius: 50%;
+          background-color: var(--success);
+          animation: pulseGlow 2s ease-in-out infinite;
         }
 
-        .hero-headline {
-          font-family: var(--font-display);
-          font-size: 3rem;
+        .hero-h1 {
+          font-size: clamp(2.5rem, 5vw, 4.5rem);
           font-weight: 800;
-          line-height: 1.15;
-          letter-spacing: -0.03em;
-          color: var(--on-background);
+          line-height: 1.05;
+          letter-spacing: -0.035em;
+          color: var(--text-primary);
         }
 
-        .hero-subheadline {
-          font-size: 1.125rem;
-          color: var(--on-surface-variant);
-          line-height: 1.6;
-          max-width: 34rem;
+        .hero-h1-accent {
+          background: linear-gradient(135deg, var(--accent), var(--cyan));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
-        .hero-ctas {
+        .hero-sub {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          line-height: 1.65;
+          max-width: 480px;
+        }
+
+        .hero-btns {
           display: flex;
-          align-items: center;
-          gap: 1rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .hero-btn-main {
-          height: 2.75rem;
-          padding: 0 1.75rem;
-          border-radius: var(--radius-sm);
-        }
-
-        .hero-btn-sub {
-          height: 2.75rem;
-          padding: 0 1.75rem;
-          border-radius: var(--radius-sm);
-        }
-
-        .search-form-wrapper {
-          display: flex;
-          align-items: center;
-          background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
-          border-radius: var(--radius-sm);
-          overflow: hidden;
-          width: 100%;
-          max-width: 36rem;
-          height: 3rem;
-          transition: all 0.2s ease;
-          box-shadow: var(--card-shadow);
-        }
-
-        .search-form-wrapper:focus-within {
-          border-color: var(--primary);
-          box-shadow: var(--focus-ring);
-        }
-
-        .search-input-box {
-          display: flex;
-          align-items: center;
-          flex: 1;
-          padding: 0 1.25rem;
           gap: 0.75rem;
-          height: 100%;
         }
 
-        .search-input-icon {
-          color: var(--secondary);
+        .hero-cta-primary {
+          height: 2.75rem;
+          padding: 0 1.5rem;
+          font-weight: 600;
+        }
+
+        .hero-cta-ghost {
+          height: 2.75rem;
+          padding: 0 1.5rem;
+          font-weight: 500;
+        }
+
+        /* Search */
+        .hero-search {
+          display: flex;
+          align-items: center;
+          background-color: var(--bg-surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-sm);
+          height: 2.75rem;
+          max-width: 480px;
+          transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .hero-search:focus-within {
+          border-color: var(--accent);
+          box-shadow: var(--accent-glow-sm);
+        }
+
+        .hero-search-icon {
+          margin-left: 1rem;
+          color: var(--text-muted);
+          flex-shrink: 0;
         }
 
         .hero-search-input {
+          flex: 1;
+          background: transparent;
           border: none;
           outline: none;
-          width: 100%;
-          font-size: 0.9rem;
-          color: var(--on-background);
-          background-color: transparent;
+          padding: 0 0.75rem;
+          color: var(--text-primary);
+          font-size: 0.85rem;
         }
 
-        .hero-search-btn {
-          background-color: var(--on-background);
-          color: var(--surface);
-          font-weight: 600;
-          font-size: 0.8125rem;
-          letter-spacing: 0.05em;
-          padding: 0 1.5rem;
+        .hero-search-input::placeholder {
+          color: var(--text-muted);
+        }
+
+        .hero-search-submit {
           height: 100%;
+          padding: 0 1.25rem;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          color: var(--text-primary);
+          background-color: rgba(255, 255, 255, 0.05);
           transition: all 0.2s ease;
-          border-radius: 0;
+          border-left: 1px solid var(--border);
         }
 
-        .hero-search-btn:hover {
-          background-color: var(--primary);
+        .hero-search-submit:hover {
+          background-color: var(--accent);
+          color: #ffffff;
         }
 
-        .trending-queries-bar {
+        /* Trending */
+        .hero-trending {
           display: flex;
           align-items: center;
-          flex-wrap: wrap;
           gap: 0.5rem;
-          font-size: 0.75rem;
+          flex-wrap: wrap;
         }
 
         .trending-label {
-          color: var(--secondary);
-          font-weight: 600;
-          margin-right: 0.25rem;
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          color: var(--text-muted);
         }
 
-        .trend-tag {
-          color: var(--on-surface-variant);
-          border: 1px solid var(--outline-variant);
-          background-color: var(--surface);
-          padding: 0.3rem 0.75rem;
-          border-radius: var(--radius-sm);
-          font-weight: 500;
-          transition: all 0.2s ease;
-        }
-
-        .trend-tag:hover {
-          border-color: var(--primary);
-          color: var(--primary);
-          background-color: var(--primary-container);
-        }
-
-        /* Browser Mockup styling */
-        .browser-mockup {
-          background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
-          border-radius: var(--radius-md);
-          overflow: hidden;
-          box-shadow: 0 20px 40px -10px rgba(0,0,0,0.06);
-          aspect-ratio: 4/3;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .browser-header {
-          background-color: #f1f5f9;
-          border-bottom: 1px solid var(--outline-variant);
-          padding: 0.75rem 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .dot {
-          width: 9px;
-          height: 9px;
-          border-radius: var(--radius-full);
-          display: inline-block;
-        }
-        .dot-red { background-color: #ef4444; }
-        .dot-yellow { background-color: #f59e0b; }
-        .dot-green { background-color: #10b981; }
-
-        .browser-address {
+        .trending-pill {
           font-size: 0.7rem;
-          color: var(--secondary);
-          background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
-          padding: 0.15rem 2rem;
-          border-radius: var(--radius-sm);
-          margin-left: auto;
-          margin-right: auto;
-          font-family: var(--font-mono);
+          font-weight: 500;
+          padding: 0.25rem 0.65rem;
+          border: 1px solid var(--border);
+          border-radius: var(--radius-full);
+          color: var(--text-secondary);
+          transition: all 0.2s ease;
+          background: transparent;
         }
 
-        .browser-body {
-          flex: 1;
+        .trending-pill:hover {
+          border-color: var(--accent);
+          color: var(--accent);
+          box-shadow: var(--accent-glow-sm);
+        }
+
+        /* ── Intel Card (right side) ── */
+        .hero-visual {
+          position: relative;
+          display: flex;
+          justify-content: center;
+        }
+
+        .intel-card {
+          background: rgba(17, 19, 24, 0.85);
+          backdrop-filter: blur(20px) saturate(150%);
+          -webkit-backdrop-filter: blur(20px) saturate(150%);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: var(--radius-lg);
           padding: 2rem;
+          width: 100%;
+          max-width: 380px;
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
-          background: linear-gradient(180deg, #ffffff 0%, #eff6ff 100%);
+          box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+          transform: rotate(-2deg);
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: subtleFloat 6s ease-in-out infinite;
         }
 
-        .brief-title {
-          font-family: var(--font-display);
-          font-size: 1.15rem;
+        .intel-card:hover {
+          transform: rotate(0deg);
+        }
+
+        .intel-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .intel-eyebrow {
+          font-size: 0.65rem;
           font-weight: 700;
-          color: var(--on-background);
+          letter-spacing: 0.1em;
+          color: var(--text-muted);
         }
 
-        .brief-metric-row {
+        .intel-live-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          color: var(--cyan);
+          padding: 0.2rem 0.5rem;
+          border: 1px solid rgba(6, 182, 212, 0.2);
+          border-radius: var(--radius-full);
+          background: var(--cyan-muted);
+        }
+
+        .live-dot {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: var(--cyan);
+          animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .intel-metrics {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
+          gap: 1rem;
         }
 
-        .brief-metric {
-          background-color: rgba(255, 255, 255, 0.8);
-          border: 1px solid var(--outline-variant);
-          border-radius: var(--radius-sm);
-          padding: 1rem;
+        .intel-metric {
           display: flex;
           flex-direction: column;
-          gap: 0.25rem;
-          backdrop-filter: blur(4px);
+          gap: 0.2rem;
         }
 
-        .metric-num {
-          font-size: 1.75rem;
-          font-weight: 700;
-          color: var(--primary);
-          letter-spacing: -0.02em;
+        .intel-metric-value {
+          font-size: 2rem;
+          font-weight: 800;
+          color: var(--text-primary);
+          letter-spacing: -0.03em;
         }
 
-        .metric-label {
-          font-size: 0.75rem;
+        .intel-metric-label {
+          font-size: 0.7rem;
           font-weight: 500;
-          color: var(--secondary);
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
         }
 
-        .brief-chart-placeholder {
-          height: 4rem;
+        .intel-bars {
+          height: 3.5rem;
           display: flex;
           align-items: flex-end;
-          gap: 0.5rem;
-          padding: 0 0.5rem;
+          gap: 0.35rem;
         }
 
-        .bar {
+        .intel-bar {
           flex: 1;
-          background-color: var(--primary);
-          opacity: 0.15;
-          border-top-left-radius: 2px;
-          border-top-right-radius: 2px;
-          transition: opacity 0.3s ease;
+          background-color: rgba(255, 255, 255, 0.06);
+          border-radius: 2px 2px 0 0;
+          transition: background-color 0.3s ease;
         }
 
-        .bar-1 { height: 40%; }
-        .bar-2 { height: 75%; }
-        .bar-3 { height: 50%; opacity: 0.85; background-color: var(--primary); }
-        .bar-4 { height: 90%; }
-        .bar-5 { height: 65%; }
+        .intel-bar-accent {
+          background-color: var(--accent) !important;
+          opacity: 0.8;
+        }
 
-        .brief-footer {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.75rem;
-          color: var(--secondary);
-          margin-top: auto;
-          border-top: 1px solid var(--outline-variant);
+        .intel-footer {
+          font-size: 0.65rem;
+          color: var(--text-muted);
+          border-top: 1px solid var(--border);
           padding-top: 0.75rem;
         }
 
-        .indicator-live {
-          width: 6px;
-          height: 6px;
-          background-color: var(--success);
-          border-radius: var(--radius-full);
-          display: inline-block;
-          box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+        .floating-badge {
+          position: absolute;
+          bottom: -10px;
+          right: -10px;
+          background: var(--bg-surface);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          border-radius: var(--radius-md);
+          padding: 0.5rem 0.85rem;
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: var(--success);
+          display: flex;
+          align-items: center;
+          gap: 0.35rem;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+          animation: subtleFloat 5s ease-in-out infinite;
+          animation-delay: 1s;
         }
 
-        /* FEATURE / CURATED SECTORS */
-        .curated-sectors-section {
+        .floating-badge-arrow {
+          font-size: 0.9rem;
+        }
+
+        /* ── CARDS SECTION ── */
+        .cards-section {
           display: flex;
           flex-direction: column;
-          gap: 2.5rem;
+          gap: 3rem;
         }
 
-        .section-intro {
+        .section-header {
           text-align: center;
           display: flex;
           flex-direction: column;
-          gap: 0.5rem;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .section-divider {
+          width: 40px;
+          height: 2px;
+          background: var(--accent);
+          border-radius: 1px;
         }
 
         .section-title {
-          font-family: var(--font-display);
-          font-size: 2rem;
+          font-size: 2.5rem;
           font-weight: 700;
-          letter-spacing: -0.02em;
-          color: var(--on-background);
+          letter-spacing: -0.03em;
         }
 
-        .section-subtitle {
+        .section-sub {
           font-size: 1rem;
-          color: var(--secondary);
+          color: var(--text-secondary);
+          max-width: 420px;
         }
 
-        .cards-grid {
+        .cards-row {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
-        .feature-card {
-          background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
+        .intel-feature-card {
+          background: var(--bg-surface);
+          border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 2.5rem 2rem;
+          padding: 2rem 1.75rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: var(--card-shadow);
+          gap: 1rem;
+          transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          transform-style: preserve-3d;
         }
 
-        .feature-card:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--card-shadow-hover);
-          border-color: rgba(55, 138, 221, 0.2);
+        .intel-feature-card:hover {
+          border-color: var(--border-accent);
+          box-shadow: var(--shadow-card-hover);
         }
 
-        .card-icon-container {
-          width: 3rem;
-          height: 3rem;
-          border-radius: var(--radius-sm);
+        .intel-feature-card:hover .feature-arrow {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .feature-icon {
+          width: 2.5rem;
+          height: 2.5rem;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: 0.25rem;
         }
 
-        .icon-soft-blue { background-color: rgba(55, 138, 221, 0.1); }
-        .icon-soft-teal { background-color: rgba(16, 185, 129, 0.1); }
-        .icon-soft-purple { background-color: rgba(139, 92, 246, 0.1); }
-
-        .icon-blue { color: var(--primary); }
-        .icon-teal { color: var(--success); }
-        .icon-purple { color: #8b5cf6; }
-
-        .card-title {
-          font-family: var(--font-display);
-          font-size: 1.25rem;
+        .feature-title {
+          font-size: 1.15rem;
           font-weight: 700;
-          color: var(--on-background);
+          color: var(--text-primary);
         }
 
-        .card-desc {
-          font-size: 0.9rem;
-          color: var(--secondary);
-          line-height: 1.5;
+        .feature-desc {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          line-height: 1.55;
         }
 
-        /* TESTIMONIALS & TRUST STRIP */
-        .testimonials-section {
-          background-color: #f8fafc;
-          border-top: 1px solid var(--outline-variant);
-          border-bottom: 1px solid var(--outline-variant);
-          padding: 5rem 2rem;
-          margin: 0 calc(-50vw + 50%);
-          width: 100vw;
+        .feature-arrow {
+          color: var(--accent);
+          opacity: 0;
+          transform: translateX(-8px);
+          transition: all 0.3s ease;
+          margin-top: auto;
+        }
+
+        /* ── SOCIAL PROOF ── */
+        .proof-section {
           display: flex;
           flex-direction: column;
           gap: 4rem;
         }
 
-        .trusted-strip {
-          max-width: var(--max-width);
-          margin: 0 auto;
-          width: 100%;
+        .proof-bar {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1.5rem;
         }
 
-        .trusted-heading {
-          font-size: 0.8125rem;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
-          color: var(--secondary);
+        .proof-label {
+          font-size: 0.65rem;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          color: var(--text-muted);
         }
 
-        .partners-logo-strip {
+        .proof-logos {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 4rem;
+          gap: 3.5rem;
           flex-wrap: wrap;
         }
 
-        .partner-logo {
-          font-size: 1.15rem;
+        .proof-logo {
+          font-size: 1.1rem;
           font-weight: 700;
-          color: #94a3b8;
-          font-family: var(--font-display);
+          color: rgba(255, 255, 255, 0.12);
           letter-spacing: -0.02em;
+          transition: color 0.3s ease;
         }
 
-        .testimonials-grid {
-          max-width: var(--max-width);
-          margin: 0 auto;
-          width: 100%;
+        .proof-logo:hover {
+          color: rgba(255, 255, 255, 0.3);
+        }
+
+        .testimonials-row {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          gap: 1.5rem;
         }
 
         .testimonial-card {
-          background-color: var(--surface);
-          border: 1px solid var(--outline-variant);
+          background: var(--bg-surface);
+          border: 1px solid var(--border);
           border-radius: var(--radius-md);
-          padding: 2rem;
+          padding: 2rem 1.75rem;
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
-          box-shadow: var(--card-shadow);
+          gap: 1rem;
+          position: relative;
+          overflow: hidden;
+          transition: transform 0.15s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+          transform-style: preserve-3d;
         }
 
-        .stars-row {
+        .testimonial-card:hover {
+          border-color: var(--border-accent);
+          box-shadow: var(--shadow-card-hover);
+        }
+
+        .testimonial-quote-mark {
+          position: absolute;
+          top: 12px;
+          right: 20px;
+          font-size: 5rem;
+          font-weight: 900;
+          color: rgba(255, 255, 255, 0.03);
+          line-height: 1;
+          pointer-events: none;
+        }
+
+        .testimonial-stars {
           display: flex;
-          gap: 0.25rem;
+          gap: 0.2rem;
         }
 
-        .star-filled {
+        .star-gold {
           fill: #fbbf24;
           color: #fbbf24;
         }
 
-        .testimonial-quote {
+        .testimonial-text {
+          font-size: 0.9rem;
           font-style: italic;
-          font-size: 0.9375rem;
-          line-height: 1.6;
-          color: var(--on-surface-variant);
+          color: var(--text-secondary);
+          line-height: 1.65;
           flex: 1;
         }
 
-        .testimonial-user {
+        .testimonial-author {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-          margin-top: 0.5rem;
+          padding-top: 0.5rem;
+          border-top: 1px solid var(--border);
         }
 
-        .user-avatar-circle {
-          width: 2.5rem;
-          height: 2.5rem;
+        .author-avatar {
+          width: 2.25rem;
+          height: 2.25rem;
           border-radius: var(--radius-full);
           display: flex;
           align-items: center;
           justify-content: center;
           font-weight: 700;
-          font-size: 0.875rem;
+          font-size: 0.75rem;
+          color: #fff;
+          flex-shrink: 0;
         }
 
-        .circle-blue {
-          background-color: rgba(55, 138, 221, 0.1);
-          color: var(--primary);
-        }
-        .circle-teal {
-          background-color: rgba(16, 185, 129, 0.1);
-          color: var(--success);
-        }
-        .circle-purple {
-          background-color: rgba(139, 92, 246, 0.1);
-          color: #8b5cf6;
-        }
-
-        .user-info {
+        .author-info {
           display: flex;
           flex-direction: column;
         }
 
-        .user-name {
+        .author-name {
           font-weight: 600;
-          font-size: 0.9rem;
-          color: var(--on-background);
+          font-size: 0.85rem;
+          color: var(--text-primary);
         }
 
-        .user-title {
-          font-size: 0.75rem;
-          color: var(--secondary);
+        .author-role {
+          font-size: 0.7rem;
+          color: var(--text-muted);
         }
 
-        /* METHODOLOGY & DATA GRID */
-        .methodology-container {
+        /* ── STATS SECTION ── */
+        .stats-section {
+          padding: 4rem 0;
+        }
+
+        .stats-layout {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 4rem;
+          gap: 5rem;
           align-items: center;
         }
 
-        .methodology-text-column {
-          display: flex;
-          flex-direction: column;
-          gap: 1.75rem;
-        }
-
-        .methodology-title {
-          font-family: var(--font-display);
-          font-size: 2rem;
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          color: var(--on-background);
-        }
-
-        .methodology-desc {
-          font-size: 1rem;
-          color: var(--on-surface-variant);
-          line-height: 1.6;
-        }
-
-        .methodology-points {
+        .stats-text-col {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
         }
 
-        .methodology-point {
-          display: flex;
-          align-items: flex-start;
-          gap: 1rem;
+        .stats-accent-line {
+          width: 4px;
+          height: 3rem;
+          background: linear-gradient(180deg, var(--accent), transparent);
+          border-radius: 2px;
         }
 
-        .point-icon-wrapper {
-          width: 2.5rem;
-          height: 2.5rem;
+        .stats-heading {
+          font-size: 2.5rem;
+          font-weight: 700;
+          letter-spacing: -0.03em;
+        }
+
+        .stats-desc {
+          font-size: 1rem;
+          color: var(--text-secondary);
+          line-height: 1.65;
+          max-width: 380px;
+        }
+
+        .stats-points {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          margin-top: 0.5rem;
+        }
+
+        .stats-point {
+          display: flex;
+          gap: 0.75rem;
+        }
+
+        .stats-point-icon {
+          width: 2.25rem;
+          height: 2.25rem;
           border-radius: var(--radius-sm);
-          background-color: var(--primary-container);
-          color: var(--primary);
+          background: var(--accent-muted);
+          color: var(--accent);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
         }
 
-        .point-title {
-          font-size: 0.8125rem;
+        .stats-point-title {
+          font-size: 0.7rem;
           font-weight: 700;
-          letter-spacing: 0.05em;
-          color: var(--on-background);
+          letter-spacing: 0.06em;
+          color: var(--text-primary);
           margin-bottom: 0.25rem;
         }
 
-        .point-desc {
-          font-size: 0.875rem;
-          color: var(--secondary);
+        .stats-point-desc {
+          font-size: 0.8rem;
+          color: var(--text-secondary);
           line-height: 1.5;
         }
 
-        .stats-dashboard-column {
+        .stats-numbers-col {
           display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
         }
 
-        .stats-cards-wrapper {
+        .stats-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1.5rem;
-          border: 1px solid var(--outline-variant);
-          border-radius: var(--radius-md);
-          background-color: var(--surface);
-          padding: 2.5rem;
-          box-shadow: var(--card-shadow);
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+          width: 100%;
         }
 
-        .stats-grid-card {
+        .stat-card {
+          background: var(--bg-surface);
+          border: 1px solid var(--border);
+          border-radius: var(--radius-md);
+          padding: 1.75rem;
           display: flex;
           flex-direction: column;
-          gap: 0.35rem;
+          gap: 0.5rem;
+          transition: border-color 0.3s ease;
         }
 
-        .stat-value {
-          font-family: var(--font-display);
-          font-size: 2.25rem;
-          font-weight: 800;
-          color: var(--primary);
-          letter-spacing: -0.02em;
+        .stat-card:hover {
+          border-color: var(--border-accent);
         }
 
-        .stat-label {
-          font-size: 0.75rem;
+        .stat-big-num {
+          font-size: 2.5rem;
+          font-weight: 900;
+          color: var(--accent);
+          letter-spacing: -0.03em;
+          line-height: 1;
+        }
+
+        .stat-card-label {
+          font-size: 0.65rem;
           font-weight: 600;
-          color: var(--secondary);
+          letter-spacing: 0.06em;
+          color: var(--text-muted);
           text-transform: uppercase;
-          letter-spacing: 0.05em;
         }
 
+        .stat-bar {
+          height: 3px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 2px;
+          margin-top: 0.5rem;
+          overflow: hidden;
+        }
+
+        .stat-bar-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--accent), var(--cyan));
+          border-radius: 2px;
+          transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 900px) {
-          .hero-grid {
+          .hero-layout {
             grid-template-columns: 1fr;
             gap: 3rem;
           }
-          .browser-mockup {
-            aspect-ratio: 16/10;
+          .hero-visual {
+            justify-content: flex-start;
           }
-          .cards-grid {
+          .intel-card {
+            transform: rotate(0deg);
+            max-width: 100%;
+          }
+          .cards-row {
             grid-template-columns: 1fr;
           }
-          .testimonials-grid {
+          .testimonials-row {
             grid-template-columns: 1fr;
           }
-          .methodology-container {
+          .stats-layout {
             grid-template-columns: 1fr;
             gap: 3rem;
           }

@@ -7,8 +7,8 @@ export default function Navbar() {
     <header className="navbar-header">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <span className="logo-title">InternPulse</span>
-          <span className="logo-caption">Precision Internship Index</span>
+          <span className="logo-text">Intern<span className="logo-accent">Pulse</span></span>
+          <span className="logo-caption">PRECISION INTERNSHIP INDEX</span>
         </Link>
         
         <nav className="navbar-links">
@@ -33,20 +33,20 @@ export default function Navbar() {
         </nav>
 
         <div className="navbar-actions">
-          <Link to="/submit-review" className="btn btn-primary header-cta-btn btn-premium">
+          <Link to="/submit-review" className="nav-cta-btn">
             Write a Review
           </Link>
           
-          <button className="notification-btn" aria-label="Notifications">
-            <Bell size={18} className="bell-icon" />
+          <button className="nav-icon-btn" aria-label="Notifications">
+            <Bell size={16} />
             <span className="notification-dot"></span>
           </button>
           
-          <div className="profile-wrapper">
+          <div className="nav-avatar-wrapper">
             <img 
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop" 
               alt="User avatar" 
-              className="user-avatar" 
+              className="nav-avatar-img" 
             />
           </div>
         </div>
@@ -54,14 +54,14 @@ export default function Navbar() {
       
       <style>{`
         .navbar-header {
-          background-color: rgba(255, 255, 255, 0.85);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          border-bottom: 1px solid var(--outline-variant);
+          background-color: rgba(8, 9, 10, 0.8);
+          backdrop-filter: blur(16px) saturate(180%);
+          -webkit-backdrop-filter: blur(16px) saturate(180%);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           position: sticky;
           top: 0;
           z-index: 100;
-          padding: 0.75rem 1.5rem;
+          padding: 0 1.5rem;
           width: 100%;
         }
 
@@ -71,40 +71,32 @@ export default function Navbar() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          height: 2.75rem;
+          height: 3.5rem;
         }
 
         .navbar-logo {
-          color: var(--on-background);
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
           line-height: 1;
+          gap: 0.2rem;
         }
 
-              .logo-title {
-          font-family: var(--font-display);
+        .logo-text {
+          font-size: 1.25rem;
           font-weight: 800;
-          font-size: 1.4rem;
           letter-spacing: -0.04em;
-          background: linear-gradient(135deg, #0f172a 0%, #378ADD 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          color: var(--text-primary);
         }
 
-        .dark .logo-title {
-          background: linear-gradient(135deg, #ffffff 0%, #10b981 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+        .logo-accent {
+          color: var(--accent);
         }
 
         .logo-caption {
-          font-size: 0.55rem;
+          font-size: 0.5rem;
           font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: var(--secondary);
-          margin-top: 0.15rem;
+          letter-spacing: 0.14em;
+          color: var(--text-muted);
         }
 
         .navbar-links {
@@ -114,90 +106,128 @@ export default function Navbar() {
         }
 
         .nav-link {
-          font-size: 0.875rem;
-          color: var(--secondary);
+          font-size: 0.8125rem;
+          color: var(--text-muted);
           font-weight: 500;
-          transition: all 0.2s ease;
+          transition: color 0.25s ease;
           padding: 0.5rem 0;
+          position: relative;
         }
 
         .nav-link:hover {
-          color: var(--primary);
+          color: var(--text-primary);
+        }
+
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          width: 0;
+          height: 1.5px;
+          background-color: var(--accent);
+          transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link:hover::after {
+          width: 100%;
+        }
+
+        .nav-active {
+          color: var(--text-primary) !important;
+          font-weight: 600;
+        }
+
+        .nav-active::after {
+          width: 100% !important;
+          bottom: -14px;
         }
 
         .navbar-actions {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.75rem;
         }
 
-        .header-cta-btn {
+        .nav-cta-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
           font-size: 0.8125rem;
-          height: 2.25rem;
+          font-weight: 600;
+          height: 2rem;
           padding: 0 1rem;
           border-radius: var(--radius-sm);
+          background-color: var(--accent);
+          color: #ffffff;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .notification-btn {
+        .nav-cta-btn:hover {
+          background-color: var(--accent-hover);
+          box-shadow: var(--accent-glow);
+          transform: translateY(-1px);
+        }
+
+        .nav-cta-btn:active {
+          transform: scale(0.97);
+        }
+
+        .nav-icon-btn {
           position: relative;
-          color: var(--secondary);
+          color: var(--text-muted);
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 2.25rem;
-          height: 2.25rem;
+          width: 2rem;
+          height: 2rem;
           border-radius: var(--radius-sm);
-          border: 1px solid var(--outline-variant);
+          border: 1px solid var(--border);
           transition: all 0.2s ease;
-          background-color: var(--surface);
+          background-color: transparent;
         }
 
-        .notification-btn:hover {
-          color: var(--primary);
-          background-color: var(--surface-container-low);
-          border-color: var(--primary);
+        .nav-icon-btn:hover {
+          color: var(--text-primary);
+          border-color: var(--border-hover);
+          background-color: rgba(255, 255, 255, 0.03);
         }
 
         .notification-dot {
           position: absolute;
-          top: 6px;
-          right: 6px;
-          width: 6px;
-          height: 6px;
-          background-color: var(--primary);
+          top: 4px;
+          right: 4px;
+          width: 5px;
+          height: 5px;
+          background-color: var(--accent);
           border-radius: var(--radius-full);
-          border: 1.5px solid var(--surface);
+          animation: pulseGlow 2s ease-in-out infinite;
         }
 
-        .profile-wrapper {
-          width: 2.25rem;
-          height: 2.25rem;
+        .nav-avatar-wrapper {
+          width: 2rem;
+          height: 2rem;
           border-radius: var(--radius-sm);
           overflow: hidden;
-          border: 1px solid var(--outline-variant);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.2s ease;
+          border: 1px solid var(--border);
+          transition: border-color 0.2s ease;
         }
 
-        .profile-wrapper:hover {
-          border-color: var(--primary);
+        .nav-avatar-wrapper:hover {
+          border-color: var(--accent);
         }
 
-        .user-avatar {
+        .nav-avatar-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
 
-        .dark .navbar-header {
-          background-color: rgba(5, 5, 5, 0.7);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
         @media (max-width: 768px) {
           .navbar-links {
+            display: none;
+          }
+          .nav-cta-btn {
             display: none;
           }
         }
