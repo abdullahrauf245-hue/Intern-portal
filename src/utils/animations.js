@@ -22,3 +22,10 @@ export const itemVariants = {
     },
   },
 };
+
+// Subtle hover scale animation variant
+export const hoverScaleVariant = {
+  scale: 1.02,
+  transition: { duration: 0.2, ease: "easeOut" }
+};
+
