@@ -109,9 +109,10 @@ export default function Navbar() {
           font-size: 0.8125rem;
           color: var(--text-muted);
           font-weight: 500;
-          transition: color 0.25s ease;
+          transition: color 0.25s ease, transform 0.2s ease;
           padding: 0.5rem 0;
           position: relative;
+          display: inline-block;
         }
 
         .nav-link:hover {
@@ -121,12 +122,13 @@ export default function Navbar() {
         .nav-link::after {
           content: '';
           position: absolute;
-          bottom: -1px;
+          bottom: -12px;
           left: 0;
           width: 0;
-          height: 1.5px;
-          background-color: var(--accent);
+          height: 2px;
+          background: linear-gradient(90deg, var(--accent), var(--cyan));
           transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          border-radius: var(--radius-full);
         }
 
         .nav-link:hover::after {
@@ -140,7 +142,7 @@ export default function Navbar() {
 
         .nav-active::after {
           width: 100% !important;
-          bottom: -14px;
+          bottom: -12px;
         }
 
         .navbar-actions {
@@ -155,18 +157,19 @@ export default function Navbar() {
           justify-content: center;
           font-size: 0.8125rem;
           font-weight: 600;
-          height: 2rem;
-          padding: 0 1rem;
+          height: 2.15rem;
+          padding: 0 1.25rem;
           border-radius: var(--radius-sm);
-          background-color: var(--accent);
+          background: linear-gradient(135deg, var(--accent), var(--accent-hover));
           color: #ffffff;
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
 
         .nav-cta-btn:hover {
-          background-color: var(--accent-hover);
+          background: linear-gradient(135deg, var(--accent-hover), var(--accent));
           box-shadow: var(--accent-glow);
-          transform: translateY(-1px);
+          transform: translateY(-1.5px);
         }
 
         .nav-cta-btn:active {
