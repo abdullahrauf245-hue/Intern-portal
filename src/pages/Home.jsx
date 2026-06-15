@@ -43,6 +43,67 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
+  /* ── Typewriter Placeholder Effect ── */
+  const placeholders = [
+    "Search by company (e.g., Google, Arbitsoft)...",
+    "Search for roles (e.g., Quant Research, Frontend)...",
+    "Search for locations (e.g., Remote, Islamabad)...",
+    "Search for technologies (e.g., Python, React)..."
+  ];
+  const [placeholderIdx, setPlaceholderIdx] = useState(0);
+  const [placeholderText, setPlaceholderText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const currentFullText = placeholders[placeholderIdx];
+    
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setPlaceholderText(prev => prev.slice(0, -1));
+      }, 20);
+    } else {
+      timer = setTimeout(() => {
+        setPlaceholderText(currentFullText.slice(0, placeholderText.length + 1));
+      }, 45);
+    }
+
+    if (!isDeleting && placeholderText === currentFullText) {
+      timer = setTimeout(() => setIsDeleting(true), 2500);
+    } else if (isDeleting && placeholderText === "") {
+      setIsDeleting(false);
+      setPlaceholderIdx((prev) => (prev + 1) % placeholders.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [placeholderText, isDeleting, placeholderIdx]);
+
+  /* ── Real-time Chart Bars Simulation ── */
+  const targetBarHeights = [35, 62, 85, 50, 73, 45, 92, 58];
+  const [barHeights, setBarHeights] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+
+  useEffect(() => {
+    const introTimer = setTimeout(() => {
+      setBarHeights(targetBarHeights);
+    }, 300);
+
+    const fluctuationInterval = setInterval(() => {
+      setBarHeights(prevHeights => 
+        prevHeights.map((h, i) => {
+          const target = targetBarHeights[i];
+          const delta = (Math.random() - 0.5) * 8; // +/- 4%
+          const next = Math.max(15, Math.min(100, target + delta));
+          return Math.round(next);
+        })
+      );
+    }, 2000);
+
+    return () => {
+      clearTimeout(introTimer);
+      clearInterval(fluctuationInterval);
+    };
+  }, []);
+
   /* ── 3D Tilt Effect ── */
   const handleMouseMove = useCallback((e) => {
     const card = e.currentTarget;
@@ -128,7 +189,7 @@ export default function Home() {
               <Search className="hero-search-icon" size={16} />
               <input
                 type="text"
-                placeholder="Search by company, role, or location..."
+                placeholder={placeholderText}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="hero-search-input"
@@ -167,14 +228,16 @@ export default function Home() {
               </div>
 
               <div className="intel-bars">
-                <div className="intel-bar" style={{ height: '35%' }}></div>
-                <div className="intel-bar" style={{ height: '62%' }}></div>
-                <div className="intel-bar intel-bar-accent" style={{ height: '85%' }}></div>
-                <div className="intel-bar" style={{ height: '50%' }}></div>
-                <div className="intel-bar" style={{ height: '73%' }}></div>
-                <div className="intel-bar" style={{ height: '45%' }}></div>
-                <div className="intel-bar intel-bar-accent" style={{ height: '92%' }}></div>
-                <div className="intel-bar" style={{ height: '58%' }}></div>
+                {barHeights.map((height, idx) => (
+                  <div
+                    key={idx}
+                    className={`intel-bar ${idx === 2 || idx === 6 ? 'intel-bar-accent' : ''}`}
+                    style={{ 
+                      height: `${height}%`,
+                      transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                    }}
+                  ></div>
+                ))}
               </div>
 
               <div className="intel-footer">
