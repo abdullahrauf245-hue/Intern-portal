@@ -124,5 +124,5 @@ sequenceDiagram
     P-->>U: Renders new metrics cards, charts, and review card
     deactivate P
 
-    Everythinf isnt workinf for now byt now it will work
+    Everything isnt working for now bye now it will work
 ```
