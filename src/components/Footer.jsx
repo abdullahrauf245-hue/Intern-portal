@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const hrs = String(now.getHours()).padStart(2, "0");
+      const mins = String(now.getMinutes()).padStart(2, "0");
+      const secs = String(now.getSeconds()).padStart(2, "0");
+      setTime(`${hrs}.${mins}.${secs}`);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <footer className="footer-section">
       <div className="footer-container">
@@ -59,7 +74,7 @@ export default function Footer() {
           <div className="system-status-indicators">
             <span className="status-label">STATUS: <span className="status-val">OPERATIONAL</span></span>
             <span className="divider"></span>
-            <span className="refresh-label">REFRESH: <span className="refresh-val">03.11.36</span></span>
+            <span className="refresh-label">REFRESH: <span className="refresh-val">{time || "03.11.36"}</span></span>
           </div>
         </div>
       </div>
