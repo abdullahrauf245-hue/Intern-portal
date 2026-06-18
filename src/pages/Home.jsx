@@ -1,40 +1,7 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Star, Shield, Cpu, Compass, Users, ArrowRight } from "lucide-react";
-
-/* ───────────────────────────────────────────────────────────
-   ANIMATED COUNTER HOOK
-   ─────────────────────────────────────────────────────────── */
-function useCountUp(end, duration = 2000, startOnView = true) {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    if (!startOnView) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          let startTime = null;
-          const animate = (timestamp) => {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.round(eased * end));
-            if (progress < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end, duration, startOnView]);
-
-  return [count, ref];
-}
+import { useScrollReveal, useTilt3D, useTypewriter, useBarFluctuation, useCountUp } from "../utils/animations";
 
 /* ───────────────────────────────────────────────────────────
    HOME PAGE
@@ -43,97 +10,24 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  /* ── Typewriter Placeholder Effect ── */
+  /* ── Typewriter Placeholder Effect (using custom hook) ── */
   const placeholders = [
     "Search by company (e.g., Google, Arbitsoft)...",
     "Search for roles (e.g., Quant Research, Frontend)...",
     "Search for locations (e.g., Remote, Islamabad)...",
     "Search for technologies (e.g., Python, React)..."
   ];
-  const [placeholderIdx, setPlaceholderIdx] = useState(0);
-  const [placeholderText, setPlaceholderText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const placeholderText = useTypewriter(placeholders);
 
-  useEffect(() => {
-    let timer;
-    const currentFullText = placeholders[placeholderIdx];
-    
-    if (isDeleting) {
-      timer = setTimeout(() => {
-        setPlaceholderText(prev => prev.slice(0, -1));
-      }, 20);
-    } else {
-      timer = setTimeout(() => {
-        setPlaceholderText(currentFullText.slice(0, placeholderText.length + 1));
-      }, 45);
-    }
-
-    if (!isDeleting && placeholderText === currentFullText) {
-      timer = setTimeout(() => setIsDeleting(true), 2500);
-    } else if (isDeleting && placeholderText === "") {
-      setIsDeleting(false);
-      setPlaceholderIdx((prev) => (prev + 1) % placeholders.length);
-    }
-
-    return () => clearTimeout(timer);
-  }, [placeholderText, isDeleting, placeholderIdx]);
-
-  /* ── Real-time Chart Bars Simulation ── */
+  /* ── Real-time Chart Bars Simulation (using custom hook) ── */
   const targetBarHeights = [35, 62, 85, 50, 73, 45, 92, 58];
-  const [barHeights, setBarHeights] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+  const barHeights = useBarFluctuation(targetBarHeights);
 
-  useEffect(() => {
-    const introTimer = setTimeout(() => {
-      setBarHeights(targetBarHeights);
-    }, 300);
+  /* ── 3D Tilt Effect (using custom hook) ── */
+  const { handleMouseMove, handleMouseLeave } = useTilt3D(8);
 
-    const fluctuationInterval = setInterval(() => {
-      setBarHeights(prevHeights => 
-        prevHeights.map((h, i) => {
-          const target = targetBarHeights[i];
-          const delta = (Math.random() - 0.5) * 8; // +/- 4%
-          const next = Math.max(15, Math.min(100, target + delta));
-          return Math.round(next);
-        })
-      );
-    }, 2000);
-
-    return () => {
-      clearTimeout(introTimer);
-      clearInterval(fluctuationInterval);
-    };
-  }, []);
-
-  /* ── 3D Tilt Effect ── */
-  const handleMouseMove = useCallback((e) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const tiltX = -((y - centerY) / centerY) * 8;
-    const tiltY = ((x - centerX) / centerX) * 8;
-    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(10px)`;
-  }, []);
-
-  const handleMouseLeave = useCallback((e) => {
-    e.currentTarget.style.transform = `perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0px)`;
-  }, []);
-
-  /* ── Scroll reveal ── */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("revealed");
-        });
-      },
-      { threshold: 0.08 }
-    );
-    document.querySelectorAll(".reveal-on-scroll").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  /* ── Scroll reveal (using custom hook — handles all reveal-* variants) ── */
+  useScrollReveal({ threshold: 0.08 });
 
   /* ── Animated counters for hero card ── */
   const [stipendCount, stipendRef] = useCountUp(6400, 1800);
@@ -158,18 +52,25 @@ export default function Home() {
         {/* BG effects */}
         <div className="hero-glow" aria-hidden="true"></div>
         <div className="hero-grid-pattern" aria-hidden="true"></div>
+        
+        {/* Orbital rotating decoration rings */}
+        <div className="hero-orbital-ring" aria-hidden="true">
+          <div className="orbital-dot" style={{ top: 0, left: '50%' }}></div>
+          <div className="orbital-dot" style={{ bottom: 0, left: '50%' }}></div>
+          <div className="orbital-dot" style={{ top: '50%', right: 0 }}></div>
+        </div>
 
         <div className="hero-layout">
           {/* Left Column */}
           <div className="hero-content">
-            <div className="hero-badge animate-fade-up" style={{ animationDelay: "0ms" }}>
+            <div className="hero-badge animate-fade-up animate-breathe" style={{ animationDelay: "0ms" }}>
               <span className="pulse-dot"></span>
               LIVE · 2,400+ FIRMS
             </div>
 
             <h1 className="hero-h1 animate-fade-up" style={{ animationDelay: "80ms" }}>
               Precision Analytics<br />
-              for <span className="hero-h1-accent">Next-Gen</span> Careers
+              for <span className="hero-h1-accent animate-neon-pulse">Next-Gen</span> Careers
             </h1>
 
             <p className="hero-sub animate-fade-up" style={{ animationDelay: "160ms" }}>
@@ -198,16 +99,16 @@ export default function Home() {
             </form>
 
             <div className="hero-trending animate-fade-up" style={{ animationDelay: "400ms" }}>
-              <span className="trending-label">TRENDING</span>
-              <Link to="/browse?q=Quant" className="trending-pill">Quant Research</Link>
-              <Link to="/browse?q=Product" className="trending-pill">Product Design</Link>
-              <Link to="/browse?q=AI" className="trending-pill">AI Ethics</Link>
+              <span className="trending-label animate-wiggle">TRENDING</span>
+              <Link to="/browse?q=Quant" className="trending-pill hover-scale click-squish">Quant Research</Link>
+              <Link to="/browse?q=Product" className="trending-pill hover-scale click-squish">Product Design</Link>
+              <Link to="/browse?q=AI" className="trending-pill hover-scale click-squish">AI Ethics</Link>
             </div>
           </div>
 
           {/* Right Column — Floating Intelligence Card */}
           <div className="hero-visual animate-fade-up" style={{ animationDelay: "200ms" }}>
-            <div className="intel-card">
+            <div className="intel-card animate-shimmer">
               <div className="intel-header">
                 <span className="intel-eyebrow">MARKET INTELLIGENCE</span>
                 <span className="intel-live-badge">
@@ -234,7 +135,8 @@ export default function Home() {
                     className={`intel-bar ${idx === 2 || idx === 6 ? 'intel-bar-accent' : ''}`}
                     style={{ 
                       height: `${height}%`,
-                      transition: 'height 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                      transition: 'height 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                      transitionDelay: `${idx * 50}ms`
                     }}
                   ></div>
                 ))}
@@ -257,7 +159,7 @@ export default function Home() {
       {/* ═══ CURATED INTELLIGENCE CARDS ═══ */}
       <section className="cards-section reveal-on-scroll">
         <div className="section-header">
-          <div className="section-divider"></div>
+          <div className="section-divider animate-gradient-shift" style={{ background: 'linear-gradient(90deg, var(--accent), var(--cyan), var(--accent))', backgroundSize: '200% 200%' }}></div>
           <h2 className="section-title">Curated Intelligence</h2>
           <p className="section-sub">High-fidelity segments from verified intern reports.</p>
         </div>
@@ -271,11 +173,12 @@ export default function Home() {
             <Link
               key={i}
               to={card.link}
-              className="intel-feature-card"
+              className={`intel-feature-card animate-cascade ripple-effect`}
+              style={{ animationDelay: `${200 + i * 120}ms` }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
-              <div className="feature-icon" style={{ color: card.color }}>
+              <div className="feature-icon hover-rubber" style={{ color: card.color }}>
                 <card.icon size={20} />
               </div>
               <h3 className="feature-title">{card.title}</h3>
@@ -287,7 +190,7 @@ export default function Home() {
       </section>
 
       {/* ═══ SOCIAL PROOF ═══ */}
-      <section className="proof-section reveal-on-scroll">
+      <section className="proof-section reveal-on-scroll" style={{ transitionDelay: '100ms' }}>
         <div className="proof-bar">
           <span className="proof-label">TRUSTED BY LEADING INSTITUTIONS</span>
           <div className="proof-logos">
@@ -305,19 +208,20 @@ export default function Home() {
           ].map((t, i) => (
             <div
               key={i}
-              className="testimonial-card"
+              className={`testimonial-card animate-stagger-slide hover-lift`}
+              style={{ animationDelay: `${300 + i * 150}ms` }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
             >
               <span className="testimonial-quote-mark">"</span>
               <div className="testimonial-stars">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} size={14} className="star-gold" />
+                  <Star key={j} size={14} className="star-gold animate-scale-in" style={{ animationDelay: `${500 + j * 80}ms` }} />
                 ))}
               </div>
               <p className="testimonial-text">{t.q}</p>
               <div className="testimonial-author">
-                <div className="author-avatar" style={{ background: t.grad }}>{t.initials}</div>
+                <div className="author-avatar animate-morph-blob" style={{ background: t.grad }}>{t.initials}</div>
                 <div className="author-info">
                   <span className="author-name">{t.name}</span>
                   <span className="author-role">{t.role}</span>
@@ -329,10 +233,10 @@ export default function Home() {
       </section>
 
       {/* ═══ DATA INTEGRITY / STATS ═══ */}
-      <section className="stats-section reveal-on-scroll">
+      <section className="stats-section reveal-on-scroll" style={{ transitionDelay: '150ms' }}>
         <div className="stats-layout">
-          <div className="stats-text-col">
-            <div className="stats-accent-line"></div>
+          <div className="stats-text-col reveal-left">
+            <div className="stats-accent-line animate-gradient-shift" style={{ background: 'linear-gradient(180deg, var(--accent), var(--cyan), transparent)', backgroundSize: '100% 200%' }}></div>
             <h2 className="stats-heading">Rigorous Data<br />Integrity</h2>
             <p className="stats-desc">
               Every submission is compiled and verified to maintain the highest quality index in the market.
@@ -356,24 +260,24 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="stats-numbers-col">
+          <div className="stats-numbers-col reveal-right">
             <div className="stats-grid">
-              <div className="stat-card" ref={accuracyRef}>
+              <div className="stat-card hover-glow animate-cascade" style={{ animationDelay: '200ms' }} ref={accuracyRef}>
                 <span className="stat-big-num">{accuracy}%</span>
                 <span className="stat-card-label">DATA ACCURACY</span>
                 <div className="stat-bar"><div className="stat-bar-fill" style={{ width: `${accuracy}%` }}></div></div>
               </div>
-              <div className="stat-card" ref={reportsRef}>
+              <div className="stat-card hover-glow animate-cascade" style={{ animationDelay: '320ms' }} ref={reportsRef}>
                 <span className="stat-big-num">{reports}k+</span>
                 <span className="stat-card-label">REPORTS ANNUALLY</span>
                 <div className="stat-bar"><div className="stat-bar-fill" style={{ width: '75%' }}></div></div>
               </div>
-              <div className="stat-card" ref={metricsRef}>
+              <div className="stat-card hover-glow animate-cascade" style={{ animationDelay: '440ms' }} ref={metricsRef}>
                 <span className="stat-big-num">{metrics}</span>
                 <span className="stat-card-label">METRICS TRACKED</span>
                 <div className="stat-bar"><div className="stat-bar-fill" style={{ width: '60%' }}></div></div>
               </div>
-              <div className="stat-card" ref={trustRef}>
+              <div className="stat-card hover-glow animate-cascade" style={{ animationDelay: '560ms' }} ref={trustRef}>
                 <span className="stat-big-num">{(trust / 10).toFixed(1)}/5</span>
                 <span className="stat-card-label">USER TRUST SCORE</span>
                 <div className="stat-bar"><div className="stat-bar-fill" style={{ width: '98%' }}></div></div>
@@ -600,13 +504,13 @@ export default function Home() {
           padding: 2rem;
           width: 100%;
           max-width: 380px;
+          animation: glowBorderPulse 4s ease-in-out infinite, subtleFloat 6s ease-in-out infinite;
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
           box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
           transform: rotate(-2deg);
           transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-          animation: subtleFloat 6s ease-in-out infinite;
         }
 
         .intel-card:hover {
@@ -1104,6 +1008,58 @@ export default function Home() {
             grid-template-columns: 1fr;
             gap: 3rem;
           }
+        }
+
+        /* ── Orbital ring decoration ── */
+        .hero-orbital-ring {
+          position: absolute;
+          top: 10%;
+          right: -5%;
+          width: 300px;
+          height: 300px;
+          border: 1px solid rgba(59, 130, 246, 0.06);
+          border-radius: 50%;
+          animation: orbitalRotate 20s linear infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .orbital-dot {
+          position: absolute;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: rgba(59, 130, 246, 0.3);
+          box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+        }
+
+        /* ── Particle float decoration ── */
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: 20%;
+          right: 15%;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: rgba(6, 182, 212, 0.3);
+          animation: particleFloat 6s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .hero::after {
+          content: '';
+          position: absolute;
+          bottom: 30%;
+          left: 20%;
+          width: 4px;
+          height: 4px;
+          border-radius: 50%;
+          background: rgba(139, 92, 246, 0.25);
+          animation: particleFloat 8s ease-in-out infinite 2s;
+          pointer-events: none;
+          z-index: 0;
         }
       `}</style>
     </div>

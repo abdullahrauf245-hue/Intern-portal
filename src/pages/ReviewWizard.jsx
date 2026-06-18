@@ -110,7 +110,7 @@ export default function ReviewWizard() {
         {/* Visual tracking line */}
         <div className="progress-track-bar">
           <div 
-            className="progress-track-fill" 
+            className="progress-track-fill animate-shimmer" 
             style={{ width: `${(step / 3) * 100}%` }}
           ></div>
         </div>
@@ -207,7 +207,7 @@ export default function ReviewWizard() {
             </div>
 
             <div className="wizard-actions-row justify-end">
-              <button onClick={handleNextStep} className="btn btn-primary btn-icon-right">
+              <button onClick={handleNextStep} className="btn btn-primary btn-icon-right ripple-effect click-squish">
                 Continue <ArrowRight size={16} />
               </button>
             </div>
@@ -231,7 +231,8 @@ export default function ReviewWizard() {
                   >
                     <Star 
                       size={24} 
-                      className={val <= rating ? "star-icon-filled" : "star-icon-empty"}
+                      className={val <= rating ? "star-icon-filled animate-scale-bounce" : "star-icon-empty"}
+                      style={{ animationDelay: `${val * 60}ms` }}
                     />
                   </button>
                 ))}
@@ -271,7 +272,7 @@ export default function ReviewWizard() {
                     key={tag}
                     type="button"
                     onClick={() => handleTagToggle(tag)}
-                    className={`skill-tag-check-btn ${selectedTags.includes(tag) ? "skill-tag-active" : ""}`}
+                    className={`skill-tag-check-btn hover-scale click-squish ${selectedTags.includes(tag) ? "skill-tag-active" : ""}`}
                   >
                     {tag}
                   </button>
@@ -324,7 +325,7 @@ export default function ReviewWizard() {
               <button onClick={handlePrevStep} className="btn btn-outline">
                 <ArrowLeft size={16} /> Back
               </button>
-              <button onClick={handleSubmit} className="btn btn-success">
+              <button onClick={handleSubmit} className="btn btn-success ripple-effect click-squish">
                 Submit Review <CheckCircle2 size={16} />
               </button>
             </div>
@@ -618,17 +619,17 @@ export default function ReviewWizard() {
         }
 
         .animate-fade {
-          animation: fadeTransition 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          animation: cascadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeTransition {
           from {
             opacity: 0;
-            transform: translateY(4px);
+            transform: translateY(8px) scale(0.98);
           }
           to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
           }
         }
       `}</style>

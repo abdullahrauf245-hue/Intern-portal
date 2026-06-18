@@ -2,6 +2,7 @@ import React, { useContext, useState, useMemo, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 import { Search, Star, MapPin, DollarSign, RotateCcw, ChevronLeft, ChevronRight } from "lucide-react";
+import { useScrollReveal } from "../utils/animations";
 
 const CompanyLogo = ({ company, className, letterClassName }) => {
   const [imgError, setImgError] = React.useState(false);
@@ -48,6 +49,9 @@ const CompanyLogo = ({ company, className, letterClassName }) => {
 export default function Browse() {
   const { companies } = useContext(StoreContext);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  /* Scroll reveal for filter/results sections */
+  useScrollReveal({ threshold: 0.05 });
 
   // URL search params
   const initialQuery = searchParams.get("q") || "";
@@ -168,7 +172,7 @@ export default function Browse() {
     <div className="browse-layout">
       
       {/* SIDEBAR FILTERS */}
-      <aside className="filters-sidebar">
+      <aside className="filters-sidebar animate-fade-in-left" style={{ animationDelay: '100ms' }}>
         <div className="sidebar-header">
           <span className="filters-title">FILTERS</span>
           <button onClick={handleClearAll} className="clear-filters-btn">
@@ -275,8 +279,8 @@ export default function Browse() {
         {/* Dynamic Company Card Grid */}
         <div className="companies-list">
           {paginatedCompanies.length > 0 ? (
-            paginatedCompanies.map((company) => (
-              <div key={company.id} className="company-result-card">
+            paginatedCompanies.map((company, i) => (
+              <div key={company.id} className="company-result-card animate-stagger-slide hover-lift" style={{ animationDelay: `${i * 80}ms` }}>
                 
                 {/* Logo Placeholder */}
                 <div 
@@ -325,7 +329,7 @@ export default function Browse() {
                 </div>
 
                 {/* Direct Action Link */}
-                <Link to={`/profile/${company.id}`} className="view-profile-btn">
+                <Link to={`/profile/${company.id}`} className="view-profile-btn ripple-effect click-squish">
                   OPEN DOSSIER
                 </Link>
 

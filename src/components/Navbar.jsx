@@ -6,7 +6,7 @@ export default function Navbar() {
   return (
     <header className="navbar-header">
       <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo hover-scale">
           <span className="logo-text">Intern<span className="logo-accent">Pulse</span></span>
           <span className="logo-caption">PRECISION INTERNSHIP INDEX</span>
         </Link>
@@ -33,7 +33,7 @@ export default function Navbar() {
         </nav>
 
         <div className="navbar-actions">
-          <Link to="/submit-review" className="nav-cta-btn">
+          <Link to="/submit-review" className="nav-cta-btn click-squish ripple-effect">
             Write a Review
           </Link>
           
@@ -63,6 +63,7 @@ export default function Navbar() {
           z-index: 100;
           padding: 0 1.5rem;
           width: 100%;
+          animation: slideInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .navbar-container {

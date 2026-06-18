@@ -3,10 +3,12 @@ import { StoreContext } from "../context/StoreContext";
 import WorldMap from "../components/WorldMap";
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { ArrowUpRight, Award, Compass, FileText, BarChart2 } from "lucide-react";
+import { useScrollReveal } from "../utils/animations";
 
 export default function Analytics() {
   const { analytics } = useContext(StoreContext);
   const [isGlobal, setIsGlobal] = useState(true);
+  useScrollReveal({ threshold: 0.08 });
 
   // Formatting helper for currency values
   const formatCurrency = (val) => `$${val.toLocaleString()}`;
@@ -23,7 +25,7 @@ export default function Analytics() {
       </section>
 
       {/* MAP & SATURATION SEGMENT */}
-      <section className="map-analytics-section">
+      <section className="map-analytics-section reveal-on-scroll">
         
         {/* Hotspots World Map Container */}
         <div className="map-visualizer-container">
@@ -57,7 +59,7 @@ export default function Analytics() {
         <div className="market-side-panel">
           
           {/* Health Score Card */}
-          <div className="health-score-card">
+          <div className="health-score-card animate-fade-in-right hover-lift" style={{ animationDelay: '200ms' }}>
             <span className="health-tag">MARKET HEALTH INDEX</span>
             <div className="health-value-block">
               <span className="health-score-num">{analytics.marketHealthScore}</span>
@@ -95,7 +97,7 @@ export default function Analytics() {
               ))}
             </div>
 
-            <button className="download-report-btn">
+            <button className="download-report-btn ripple-effect click-squish">
               <FileText size={16} /> DOWNLOAD REPORT
             </button>
           </div>
@@ -105,7 +107,7 @@ export default function Analytics() {
       </section>
 
       {/* TRENDS & BAR COMPARISONS GRID */}
-      <section className="charts-trends-grid">
+      <section className="charts-trends-grid reveal-on-scroll" style={{ transitionDelay: '100ms' }}>
         
         {/* Stipend Trend Area Chart */}
         <div className="trend-chart-card">
