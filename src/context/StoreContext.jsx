@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-import { INITIAL_ANALYTICS } from "../data/mockData";
+import { INITIAL_ANALYTICS, INITIAL_COMPANIES } from "../data/mockData";
 
 export const StoreContext = createContext();
 
@@ -104,13 +104,18 @@ export const StoreProvider = ({ children }) => {
       if (error) {
         console.error("Error fetching companies from Supabase:", error);
       } else if (data) {
-        // Sort reviews descending by date/creation inside map
-        const mappedData = data.map(mapCompanyFromDb);
-        // Sort reviews to have latest reviews first
-        mappedData.forEach(comp => {
-          comp.reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
-        });
-        setCompanies(mappedData);
+        // If database is empty, fall back to mock data so the app isn't empty
+        if (data.length === 0) {
+          setCompanies(INITIAL_COMPANIES);
+        } else {
+          // Sort reviews descending by date/creation inside map
+          const mappedData = data.map(mapCompanyFromDb);
+          // Sort reviews to have latest reviews first
+          mappedData.forEach(comp => {
+            comp.reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+          });
+          setCompanies(mappedData);
+        }
       }
     } catch (err) {
       console.error("Fetch companies failed:", err);
