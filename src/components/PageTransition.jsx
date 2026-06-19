@@ -25,7 +25,9 @@ export default function PageTransition({ children }) {
 
   return (
     <div ref={wrapperRef} className="page-enter">
-      {children}
+      <div className="page-content-wrapper">
+        {children}
+      </div>
     </div>
   );
 }

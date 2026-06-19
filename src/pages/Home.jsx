@@ -78,7 +78,7 @@ export default function Home() {
 
             <h1 className="hero-h1 animate-fade-up" style={{ animationDelay: "80ms" }}>
               Precision Analytics<br />
-              for <span className="hero-h1-accent animate-neon-pulse">Next-Gen</span> Careers
+              for <span className="hero-h1-accent animate-neon-pulse hover-rubber">Next-Gen</span> Careers
             </h1>
 
             <p className="hero-sub animate-fade-up" style={{ animationDelay: "160ms" }}>
@@ -86,10 +86,10 @@ export default function Home() {
             </p>
 
             <div className="hero-btns animate-fade-up" style={{ animationDelay: "240ms" }}>
-              <Link to="/browse" className="btn btn-primary hero-cta-primary">
+              <Link to="/browse" className="btn btn-primary hero-cta-primary magnetic-glow" ref={primaryCtaGlow.ref} onMouseMove={primaryCtaGlow.handleMouseMove}>
                 Explore Directory
               </Link>
-              <Link to="/submit-review" className="btn btn-ghost hero-cta-ghost">
+              <Link to="/submit-review" className="btn btn-ghost hero-cta-ghost magnetic-glow" ref={ghostCtaGlow.ref} onMouseMove={ghostCtaGlow.handleMouseMove}>
                 Submit Review
               </Link>
             </div>
@@ -108,9 +108,9 @@ export default function Home() {
 
             <div className="hero-trending animate-fade-up" style={{ animationDelay: "400ms" }}>
               <span className="trending-label animate-wiggle">TRENDING</span>
-              <Link to="/browse?q=Quant" className="trending-pill hover-scale click-squish">Quant Research</Link>
-              <Link to="/browse?q=Product" className="trending-pill hover-scale click-squish">Product Design</Link>
-              <Link to="/browse?q=AI" className="trending-pill hover-scale click-squish">AI Ethics</Link>
+              <Link to="/browse?q=Quant" className="trending-pill hover-jello click-squish">Quant Research</Link>
+              <Link to="/browse?q=Product" className="trending-pill hover-jello click-squish">Product Design</Link>
+              <Link to="/browse?q=AI" className="trending-pill hover-jello click-squish">AI Ethics</Link>
             </div>
           </div>
 
