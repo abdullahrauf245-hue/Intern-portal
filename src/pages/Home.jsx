@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, Star, Shield, Cpu, Compass, Users, ArrowRight } from "lucide-react";
-import { useScrollReveal, useTilt3D, useTypewriter, useBarFluctuation, useCountUp } from "../utils/animations";
+import { useScrollReveal, useTilt3D, useTypewriter, useBarFluctuation, useCountUp, useMouseTrail, useMagneticGlow } from "../utils/animations";
 
 /* ───────────────────────────────────────────────────────────
    HOME PAGE
@@ -9,6 +9,13 @@ import { useScrollReveal, useTilt3D, useTypewriter, useBarFluctuation, useCountU
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  /* ── Refs for animations ── */
+  const rootRef = useRef(null);
+  useMouseTrail(rootRef);
+
+  const primaryCtaGlow = useMagneticGlow();
+  const ghostCtaGlow = useMagneticGlow();
 
   /* ── Typewriter Placeholder Effect (using custom hook) ── */
   const placeholders = [
@@ -18,6 +25,7 @@ export default function Home() {
     "Search for technologies (e.g., Python, React)..."
   ];
   const placeholderText = useTypewriter(placeholders);
+
 
   /* ── Real-time Chart Bars Simulation (using custom hook) ── */
   const targetBarHeights = [35, 62, 85, 50, 73, 45, 92, 58];
@@ -45,7 +53,7 @@ export default function Home() {
   };
 
   return (
-    <div className="home-root">
+    <div className="home-root" ref={rootRef}>
 
       {/* ═══ HERO ═══ */}
       <section className="hero">
