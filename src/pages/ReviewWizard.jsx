@@ -64,7 +64,7 @@ export default function ReviewWizard() {
     setStep(prev => prev - 1);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) {
       alert("Please provide an authentication email.");
@@ -72,7 +72,12 @@ export default function ReviewWizard() {
     }
 
     // Register company if it's new, otherwise retrieve existing ID
-    const targetCompanyId = registerNewCompany(companyName, "Technology");
+    const targetCompanyId = await registerNewCompany(companyName, "Technology");
+
+    if (!targetCompanyId) {
+      alert("Failed to register company.");
+      return;
+    }
 
     // Build review payload
     const reviewPayload = {
@@ -86,7 +91,7 @@ export default function ReviewWizard() {
     };
 
     // Commit to context
-    addReview(targetCompanyId, reviewPayload);
+    await addReview(targetCompanyId, reviewPayload);
 
     // Redirect to the newly updated profile page!
     navigate(`/profile/${targetCompanyId}`);

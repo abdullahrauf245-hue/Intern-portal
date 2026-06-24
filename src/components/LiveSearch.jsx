@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import React, { useState, useEffect, useContext } from "react";
+import { StoreContext } from "../context/StoreContext";
 import { Search, Loader2, Building, Briefcase } from "lucide-react";
 
 export default function LiveSearch() {
+  const { companies } = useContext(StoreContext);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -15,28 +16,38 @@ export default function LiveSearch() {
       return;
     }
 
-    const delayDebounce = setTimeout(async () => {
-      setLoading(true);
-      try {
-        // Query the 'internships' table as the user types
-        const { data, error } = await supabase
-          .from("internships")
-          .select("id, company_name, role")
-          .or(`company_name.ilike.%${query}%,role.ilike.%${query}%`)
-          .limit(6);
+    setLoading(true);
+    const delayDebounce = setTimeout(() => {
+      const lowerQuery = query.toLowerCase();
+      const filtered = companies
+        .filter((c) => {
+          const matchName = c.name.toLowerCase().includes(lowerQuery);
+          const matchCategory = c.category.toLowerCase().includes(lowerQuery);
+          const matchTag = c.tags.some(tag => tag.toLowerCase().includes(lowerQuery));
+          const matchRole = c.reviews.some((r) =>
+            r.role.toLowerCase().includes(lowerQuery)
+          );
+          return matchName || matchCategory || matchTag || matchRole;
+        })
+        .slice(0, 6)
+        .map((c) => {
+          const matchingReview = c.reviews.find((r) =>
+            r.role.toLowerCase().includes(lowerQuery)
+          );
+          return {
+            id: c.id,
+            company_name: c.name,
+            role: matchingReview ? matchingReview.role : (c.reviews[0]?.role || "Internship Program")
+          };
+        });
 
-        if (error) throw error;
-        setResults(data || []);
-        setIsOpen(true);
-      } catch (err) {
-        console.error("Error fetching live search results:", err);
-      } finally {
-        setLoading(false);
-      }
-    }, 300);
+      setResults(filtered);
+      setIsOpen(true);
+      setLoading(false);
+    }, 150);
 
     return () => clearTimeout(delayDebounce);
-  }, [query]);
+  }, [query, companies]);
 
   return (
     <div className="relative w-full max-w-md mx-auto z-50">
@@ -60,7 +71,7 @@ export default function LiveSearch() {
             {results.map((item) => (
               <li key={item.id}>
                 <a
-                  href={`/profile/${item.company_name.toLowerCase().replace(/\s+/g, '-')}`}
+                  href={`/profile/${item.id}`}
                   className="flex items-center gap-3 px-4 py-3 hover:bg-slate-100/50 dark:hover:bg-slate-900/50 transition-colors"
                 >
                   <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900">

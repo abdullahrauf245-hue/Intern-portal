@@ -102,7 +102,8 @@ export const StoreProvider = ({ children }) => {
         `);
 
       if (error) {
-        console.error("Error fetching companies from Supabase:", error);
+        console.error("Error fetching companies from Supabase, falling back to mock data:", error);
+        setCompanies(INITIAL_COMPANIES);
       } else if (data) {
         // If database is empty, fall back to mock data so the app isn't empty
         if (data.length === 0) {
@@ -118,7 +119,8 @@ export const StoreProvider = ({ children }) => {
         }
       }
     } catch (err) {
-      console.error("Fetch companies failed:", err);
+      console.error("Fetch companies failed, falling back to mock data:", err);
+      setCompanies(INITIAL_COMPANIES);
     } finally {
       setLoading(false);
     }
